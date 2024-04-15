@@ -1,0 +1,63 @@
+To achieve this, we will create a Python program that recursively traverses all files in a given directory and writes their names and contents to an `out.txt` file. We will use the `os` module to traverse the directory and the `pathlib` module to handle file paths.
+
+Here are the core classes and functions that will be necessary:
+
+- `FileReader`: A class to encapsulate the logic for reading files and directories.
+  - `__init__(self, root_dir)`: Constructor to initialize the FileReader with the root directory.
+  - `traverse_and_write(self, output_file)`: Method to traverse the directory and write file names and contents to the output file.
+
+- `main.py`: The entry point of the program that uses the `FileReader` class.
+
+Let's start with the entry point file:
+
+main.py
+```python
+import sys
+from file_reader import FileReader
+
+def main():
+    if len(sys.argv) != 2:
+        print("Usage: python main.py <root_directory>")
+        sys.exit(1)
+
+    root_directory = sys.argv[1]
+    output_file = 'out.txt'
+
+    file_reader = FileReader(root_directory)
+    file_reader.traverse_and_write(output_file)
+
+if __name__ == "__main__":
+    main()
+```
+
+Now, let's implement the `FileReader` class in a separate file:
+
+file_reader.py
+```python
+import os
+from pathlib import Path
+
+class FileReader:
+    def __init__(self, root_dir):
+        self.root_dir = root_dir
+
+    def traverse_and_write(self, output_file):
+        with open(output_file, 'w') as out:
+            for root, dirs, files in os.walk(self.root_dir):
+                for file in files:
+                    file_path = Path(root) / file
+                    out.write(f"File path: {file_path}\n")
+                    with open(file_path, 'r') as f:
+                        out.write(f.read())
+                    out.write("\n\n")
+
+```
+
+Lastly, we need a `requirements.txt` file to specify the dependencies, although for this simple script, we are only using the Python standard library, so the `requirements.txt` file will be empty:
+
+requirements.txt
+```
+# No external dependencies required
+```
+
+This concludes a fully working implementation.

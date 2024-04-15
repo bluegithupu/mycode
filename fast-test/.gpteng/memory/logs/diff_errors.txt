@@ -1,0 +1,16 @@
+
+2024-04-15T15:47:33.289943
+In @@ -10,4 +10,8 @@
+ @app.get("/get-all-cookie", response_model=dict)
+ def get_all_cookies(request: Request):
+     print("in ------------")
+     cookies = request.cookies
+     print(cookies)
+ 
+     # all_cookies = {cookie_name: cookie_value for cookie_name, cookie_value in cookies.items()}
+     return cookies
++
++@app.get("/hi")
++def say_hi():
++    return {"message": "ok"}
+:Hunk validation stopped before the lines  were validated. The diff is incorrect
