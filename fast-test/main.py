@@ -15,3 +15,12 @@ def get_all_cookies(request: Request):
 
     # all_cookies = {cookie_name: cookie_value for cookie_name, cookie_value in cookies.items()}
     return cookies
+
+@app.get("/hi")
+def say_hi():
+    return "ok"
+@app.get("/healthz")
+def health_check():
+    return "ok"
+
+
