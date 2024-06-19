@@ -1,0 +1,5 @@
+appmap_dir: tmp/appmap
+language: python
+name: crew_test
+packages:
+  - path: crew_test
