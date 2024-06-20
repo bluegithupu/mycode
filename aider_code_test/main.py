@@ -31,3 +31,7 @@ app = FastAPI()
 @app.get("/hello")
 async def hello_world():
     return hello()
+
+@app.get("/healthz")
+async def healthz():
+    return "ok"
