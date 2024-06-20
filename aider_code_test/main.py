@@ -22,3 +22,11 @@ coder = Coder.create(main_model=model, fnames=fnames, io=io)
 
 
 coder.run("make it fastapi, /hello should return 'hello world'")
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/hello")
+async def hello_world():
+    return "hello world"
