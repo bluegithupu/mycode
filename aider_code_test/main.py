@@ -21,12 +21,6 @@ coder = Coder.create(main_model=model, fnames=fnames, io=io)
 # coder.run("make it say goodbye")
 
 
-coder.run("make it fastapi, /hello should return 'hello world'")
-from fastapi import FastAPI
+coder.run("修改greeting.py文件，使用 fastapi, 添加端点 /hello should return 'hello world'")
 
-app = FastAPI()
-
-
-@app.get("/hello")
-async def hello_world():
-    return "hello world"
+coder.run("修改greeting.py文件， 添加端点 /healthz should return 'ok'")
