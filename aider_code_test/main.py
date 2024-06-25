@@ -4,7 +4,7 @@ from aider.io import InputOutput
 
 
 # This is a list of files to add to the chat
-fnames = ["greeting.py"]
+fnames = ["./../aider_auto_code_test/main.py"]
 
 model = Model("gemini/gemini-1.5-pro-latest",
               weak_model="gemini/gemini-1.5-pro-latest")
@@ -21,22 +21,14 @@ coder = Coder.create(main_model=model, fnames=fnames, io=io)
 # coder.run("make it say goodbye")
 
 
-coder.run("修改greeting.py文件，使用 fastapi, 添加端点 /hello should return 'hello world'")
+tasks = [
+    "使用 fastapi, 添加端点 /hello should return 'hello world'",
+    "添加端点 /healthz should return 'ok'"
+]
 
-coder.run("修改greeting.py文件， 添加端点 /healthz should return 'ok'")
-from fastapi import FastAPI
-from .greeting import hello
+for task in tasks:
+    coder.run(task)
+    # Add completion flag after running the task
+    print(f"Task '{task}' completed.")
 
-app = FastAPI()
 
-@app.get("/hello")
-async def hello_world():
-    return hello()
-
-@app.get("/healthz")
-async def healthz():
-    return "ok"
-
-@app.get("/healthz")
-async def healthz():
-    return "ok"
