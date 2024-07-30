@@ -6,4 +6,8 @@ app = FastAPI()
 def health_check():
     return {"status": "ok"}
 
+@app.get("/print")
+def print_endpoint():
+    return "it is my print"
+
 
