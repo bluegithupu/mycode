@@ -4,7 +4,7 @@ app = FastAPI()
 
 @app.get("/healthz")
 def health_check():
-    return {"status": "ok"}
+    return "ok"
 
 @app.get("/print")
 def print_endpoint():
