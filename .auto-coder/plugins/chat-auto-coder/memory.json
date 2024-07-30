@@ -1,0 +1,13 @@
+{
+  "conversation": [
+    {
+      "role": "user",
+      "content": "在 src 目录下创建app.py, 在该文件中实现一个计算器，使用 gradio 来实现。"
+    }
+  ],
+  "current_files": {
+    "files": []
+  },
+  "conf": {},
+  "exclude_dirs": []
+}

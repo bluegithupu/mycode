@@ -1,0 +1,116 @@
+{
+  "/Users/mac/Desktop/gpt_test/langchain-test/server.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/langchain-test/server.py",
+    "symbols": "用途：主要用于创建一个基于LangChain的API服务器，实现代码搜索和信息检索功能。\n函数：\n变量：repo_path, loader, docs, text_splitter, documents, embeddings, vector, retriever, retriever_tool, search, tools, prompt, llm, agent, agent_executor\n类：Input, Output\n导入语句：#!/usr/bin/env python^^from typing import List^^from fastapi import FastAPI^^from langchain_core.prompts import ChatPromptTemplate^^from langchain_openai import ChatOpenAI^^from langchain_community.document_loaders import WebBaseLoader^^from langchain_openai import OpenAIEmbeddings^^from langchain_community.vectorstores import FAISS^^from langchain_text_splitters import RecursiveCharacterTextSplitter^^from langchain.tools.retriever import create_retriever_tool^^from langchain_community.tools.tavily_search import TavilySearchResults^^from langchain import hub^^from langchain.agents import create_openai_functions_agent^^from langchain.agents import AgentExecutor^^from langchain.pydantic_v1 import BaseModel, Field^^from langchain_core.messages import BaseMessage^^from langserve import add_routes^^import os^^from langchain_community.document_loaders.generic import GenericLoader^^from langchain_community.document_loaders.parsers import LanguageParser^^from langchain_text_splitters import Language^^from langchain_text_splitters.python import PythonCodeTextSplitter^^import uvicorn",
+    "last_modified": 1714274075.4796002,
+    "md5": "75b5f19729d6dbb886fe596f9eed60bf"
+  },
+  "/Users/mac/Desktop/gpt_test/langchain-test/code_load.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/langchain-test/code_load.py",
+    "symbols": "用途：主要用于加载和处理文档，以及使用语言模型进行问答。\n函数：\n变量：docs, texts, db, retriever\n类：GenericLoader, LanguageParser, RecursiveCharacterTextSplitter, Chroma, OpenAIEmbeddings, ChatOpenAI\n导入语句：import warnings^^from langchain.globals import set_debug^^from langchain.globals import set_verbose^^from pprint import pprint^^from langchain_community.document_loaders.generic import GenericLoader^^from langchain_community.document_loaders.parsers import LanguageParser^^from langchain_text_splitters import Language^^from langchain_text_splitters import RecursiveCharacterTextSplitter^^from langchain_chroma import Chroma^^from langchain_openai import OpenAIEmbeddings^^from langchain.chains import create_history_aware_retriever^^create_retrieval_chain^^from langchain.chains.combine_documents import create_stuff_documents_chain^^from langchain_core.prompts import ChatPromptTemplate^^from langsmith import traceable^^from langsmith.wrappers import wrap_openai",
+    "last_modified": 1714465207.7714732,
+    "md5": "476a71dfb972d382936eb6a702c2b6ec"
+  },
+  "/Users/mac/Desktop/gpt_test/langchain-test/toolsx.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/langchain-test/toolsx.py",
+    "symbols": "用途：主要用于实现工具调用和人工智能模型交互的功能。\n函数：multiply, add, exponentiate, call_tools, human_approval\n变量：llm, tools, llm_with_tools, tool_map\n类：\n导入语句：from langchain_openai import ChatOpenAI^^from operator import itemgetter^^from typing import Dict, List, Union^^from langchain_core.messages import AIMessage^^from langchain_core.runnables import Runnable, RunnableLambda, RunnableMap, RunnablePassthrough^^from langchain_core.tools import tool^^import json",
+    "last_modified": 1714469146.4278903,
+    "md5": "f08ac88043d9064634db9a2c41765989"
+  },
+  "/Users/mac/Desktop/gpt_test/langchain-test/scarp.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/langchain-test/scarp.py",
+    "symbols": "用途：主要用于网络数据抓取和内容提取。\n函数：extract, scrape_with_playwright\n变量：llm, schema, urls, extracted_content\n类：\n导入语句：from langchain_openai import ChatOpenAI^^from langchain.chains import create_extraction_chain^^import pprint^^from langchain_community.document_loaders import AsyncChromiumLoader^^from langchain_community.document_transformers import BeautifulSoupTransformer^^from langchain_text_splitters import RecursiveCharacterTextSplitter",
+    "last_modified": 1714964012.3785543,
+    "md5": "baccc8a64b21c8c194ef9725bf094887"
+  },
+  "/Users/mac/Desktop/gpt_test/langchain-test/main.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/langchain-test/main.py",
+    "symbols": "用途：主要用于测试和演示langchain库的功能，包括模型调用、代理初始化和链式调用。\n函数：\n变量：fstring_template, prompt, messages\n类：PromptTemplate, ChatPromptTemplate, FakeListLLM, LLMChain\n导入语句：from langchain.prompts import PromptTemplate^^from langchain.prompts import ChatPromptTemplate^^from langchain.llms import OpenAI^^from langchain.llms.fake import FakeListLLM^^from langchain.agents import load_tools^^from langchain.agents import initialize_agent^^from langchain.agents import AgentType^^from langchain import PromptTemplate, OpenAI, LLMChain",
+    "last_modified": 1711358129.2768152,
+    "md5": "97ff6ea1a06708810885ce51dc9d1ee2"
+  },
+  "/Users/mac/Desktop/gpt_test/crew_test/src/crew_test/crew.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/crew_test/src/crew_test/crew.py",
+    "symbols": "用途：主要用于定义CrewTestCrew类及其相关的代理和任务。\n函数：researcher, reporting_analyst, research_task, reporting_task, crew\n类：CrewTestCrew\n变量：agents_config, tasks_config\n导入语句：from crewai import Agent, Crew, Process, Task^^from crewai.project import CrewBase, agent, crew, task",
+    "last_modified": 1715933462.904573,
+    "md5": "1c157d5e9ef24d5e083eba1481638a24"
+  },
+  "/Users/mac/Desktop/gpt_test/crew_test/src/crew_test/main.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/crew_test/src/crew_test/main.py",
+    "symbols": "用途：主要用于运行CrewTestCrew类的kickoff方法，处理特定主题的任务。\n函数：run\n类：CrewTestCrew\n变量：inputs\n导入语句：from crew_test.crew import CrewTestCrew",
+    "last_modified": 1715933462.9042244,
+    "md5": "69ac5b0badd766641663b71e8778cf58"
+  },
+  "/Users/mac/Desktop/gpt_test/crew_test/src/crew_test/tools/custom_tool.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/crew_test/src/crew_test/tools/custom_tool.py",
+    "symbols": "用途：主要用于定义一个自定义工具类，提供工具的名称和描述，并实现其运行方法。\n函数：_run\n类：MyCustomTool\n变量：name, description\n导入语句：from crewai_tools import BaseTool",
+    "last_modified": 1715933462.9049077,
+    "md5": "47f03c4e2e6ce7e75ba1b88cb2728878"
+  },
+  "/Users/mac/Desktop/gpt_test/fast-test/main.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/fast-test/main.py",
+    "symbols": "用途：主要用于实现一个使用FastAPI框架的Web服务，包括获取所有Cookie、问候和健康检查功能。\n函数：get_all_cookies, say_hi, health_check\n类：Cookie\n变量：app\n导入语句：from fastapi import FastAPI, Request^^from pydantic import BaseModel",
+    "last_modified": 1716186754.7847667,
+    "md5": "7fc287d52aeb1e8aadf0941e572d6965"
+  },
+  "/Users/mac/Desktop/gpt_test/aider_code_test/main.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/aider_code_test/main.py",
+    "symbols": "用途：主要用于执行代码任务并管理模型和输入输出。\n函数：\n变量：fnames, model, io\n类：Coder, Model, InputOutput\n导入语句：from aider.coders import Coder^^from aider.models import Model^^from aider.io import InputOutput",
+    "last_modified": 1718876074.0313115,
+    "md5": "aa4fb0ab4b74589206ca5ea3666440fc"
+  },
+  "/Users/mac/Desktop/gpt_test/aider_auto_code_test/main.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/aider_auto_code_test/main.py",
+    "symbols": "用途：主要用于创建一个FastAPI应用，提供\"/hello\"和\"/healthz\"两个路由服务。\n函数：hello, healthz\n类：\n变量：app\n导入语句：from fastapi import FastAPI",
+    "last_modified": 1718876716.046703,
+    "md5": "6b7b055fed12752b4e1e5b7b22bdf30d"
+  },
+  "/Users/mac/Desktop/gpt_test/my_test/douban_scraper.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/my_test/douban_scraper.py",
+    "symbols": "用途：主要用于爬取豆瓣电影Top250的数据并保存为JSON文件。\n函数：scrape_douban_top250\n变量：url, headers, movie_list\n类：\n导入语句：import requests^^from bs4 import BeautifulSoup^^import json",
+    "last_modified": 1715138250.4986267,
+    "md5": "33c903591341351e638a2b0306baea6b"
+  },
+  "/Users/mac/Desktop/gpt_test/my_test/main.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/my_test/main.py",
+    "symbols": "用途：主要用于创建一个文本输入框和按钮，并在按钮被点击时显示用户输入的内容。\n函数：\n变量：user_input\n类：\n导入语句：import streamlit as st",
+    "last_modified": 1715158255.4116266,
+    "md5": "7d3357ff8d5e594898934ca736fd56d3"
+  },
+  "/Users/mac/Desktop/gpt_test/crew_agents/game/main.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/crew_agents/game/main.py",
+    "symbols": "用途：主要用于模拟游戏开发过程中的任务分配和代码审查。\n函数：senior_engineer_agent, qa_engineer_agent, chief_qa_engineer_agent, code_task, review_task, evaluate_task\n变量：tasks, agents, game, senior_engineer_agent, qa_engineer_agent, chief_qa_engineer_agent, code_game, review_game, approve_game, crew\n类：GameAgents, GameTasks\n导入语句：from textwrap import dedent^^from crewai import Agent^^from crewai import Task^^from dotenv import load_dotenv^^from crewai import Crew",
+    "last_modified": 1716889283.3254693,
+    "md5": "163784e7f5f7ebbc652179bde466a4b4"
+  },
+  "/Users/mac/Desktop/gpt_test/crew_agents/writer/main.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/crew_agents/writer/main.py",
+    "symbols": "用途：主要用于模拟和管理AI代理执行任务的过程。\n函数：\n变量：search_tool\n类：Agent, Task, Crew, Process\n导入语句：from dotenv import load_dotenv^^from crewai import Agent^^from crewai_tools import SerperDevTool^^from crewai import Task^^from crewai import Crew, Process",
+    "last_modified": 1715939370.1588986,
+    "md5": "7ef3d9f533fcaee3eb927cde5cd91483"
+  },
+  "/Users/mac/Desktop/gpt_test/crew_agents/coder/coder_agent.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/crew_agents/coder/coder_agent.py",
+    "symbols": "用途：主要用于定义一个软件开发者的角色，并创建一个网络爬虫任务。\n函数：web_scraping_task\n类：CoderAgent\n变量：\n导入语句：from crewai import Agent, Task^^from textwrap import dedent",
+    "last_modified": 1716889480.6727993,
+    "md5": "18ad279363cd580b0ee359b30319b0b2"
+  },
+  "/Users/mac/Desktop/gpt_test/crew_agents/coder/main.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/crew_agents/coder/main.py",
+    "symbols": "用途：主要用于执行网络爬虫任务并管理代理。\n函数：web_scraping_task\n变量：agent, task\n类：CoderAgent, Crew\n导入语句：from coder_agent import CoderAgent, web_scraping_task^^from crewai import Crew",
+    "last_modified": 1716889863.0356922,
+    "md5": "cf7b83bd7e6d5f33bb5079bcabaee606"
+  },
+  "/Users/mac/Desktop/gpt_test/mycode/file_reader.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/mycode/file_reader.py",
+    "symbols": "用途：主要用于读取指定目录下的文件，并根据文件扩展名识别语言，将文件内容写入输出文件。\n函数：traverse_and_write\n变量：extension_to_language\n类：FileReader\n导入语句：import os^^from pathlib import Path",
+    "last_modified": 1711335164.5234108,
+    "md5": "1f25b8ad71c15669f1a225e4ff0805f2"
+  },
+  "/Users/mac/Desktop/gpt_test/mycode/main.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/mycode/main.py",
+    "symbols": "用途：主要用于读取指定目录下的文件并写入到输出文件中。\n函数：main\n变量：root_directory, output_file, current_path\n类：FileReader\n导入语句：import sys^^import os^^from file_reader import FileReader",
+    "last_modified": 1712823205.1148539,
+    "md5": "40884d73517eaac92b5cf7448f41753a"
+  }
+}
