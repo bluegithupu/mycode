@@ -27,11 +27,16 @@ def process_task(model, io, task_info):
         print(f"Task '{task}' already completed. Skipping.")
         return
 
-    coder = Coder.create(main_model=model, fnames=fnames, io=io)
+    coder = Coder.create(main_model=model, fnames=fnames, io=io, auto_commits=True, test_cmd="python /Users/mac/Desktop/tmp/code_test/main.py")
 
     try:
-        result = coder.run(task)
-        if "Commit" in result:
+        coder.run(task)
+        result = coder.done_messages
+        print(f"Task '{task}' result: {result}")
+        ### print coder.test_outcome
+        test_result = coder.test_outcome
+        print(f"test outcome '{test_result}'")
+        if any(msg.get('role') == 'assistant' and msg.get('content') == 'Ok.' for msg in result) and test_result is None:
             task_info["status"] = "completed"
             print(f"Task '{task}' completed.")
         else:
@@ -45,9 +50,9 @@ def process_task(model, io, task_info):
 def main():
     tasks_file = "tasks.json"
     data = load_tasks(tasks_file)
+    print(f"Loaded {len(data)} tasks.")
 
-    model = Model("deepseek/deepseek-coder",
-                  weak_model="deepseek/deepseek-coder")
+    model = Model("deepseek/deepseek-coder")
     io = InputOutput(yes=True)
 
     for task_id, task_info in data.items():
