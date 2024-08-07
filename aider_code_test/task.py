@@ -55,8 +55,6 @@ class TaskManager:
         print(f"Task '{task.task}'  start !!!!!!!!!!!!!!!!!!!!!!!!!.")
         coder = Coder.create(main_model=model, fnames=task.fnames,
                              io=io, auto_commits=True, test_cmd=test_cmd, auto_test=True)
-
-        repo = git.Repo(search_parent_directories=True)
         try:
             coder.run(task.task)
             result = coder.done_messages
@@ -72,9 +70,9 @@ class TaskManager:
                     task.status = "completed"
                     print(f"Task '{task.task}' completed.")
                 else:
-                    # Rollback the commit
-                    aider_commit = coder.last_aider_commit_hash
-                    repo.git.reset('--hard', aider_commit)
+                    # 代码结果ok，但是测试结果失败，回滚代码commit
+                    Commands = coder.commands
+                    Commands.cmd_undo("")
                     task.status = f"error: test failed, changes rolled back"
                     print(f"Task '{task.task}' failed: test failed, changes rolled back")
             else:
