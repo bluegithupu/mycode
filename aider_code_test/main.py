@@ -1,63 +1,19 @@
-import json
-import os
-from aider.coders import Coder
 from aider.models import Model
 from aider.io import InputOutput
+from task import TaskManager
 
-# Load tasks and their statuses from a JSON file
-def load_tasks(filename):
-    if os.path.exists(filename):
-        with open(filename, 'r') as file:
-            data = json.load(file)
-            return {int(k): v for k, v in data.items()}
-    return {}
-
-# Save tasks and their statuses to a JSON file
-def save_tasks(filename, data):
-    with open(filename, 'w') as file:
-        json.dump(data, file, ensure_ascii=False, indent=4)
-
-# Process a single task
-def process_task(model, io, task_info):
-    task = task_info["task"]
-    status = task_info["status"]
-    fnames = task_info.get("fnames", [])
-
-    if status == "completed":
-        print(f"Task '{task}' already completed. Skipping.")
-        return
-
-    coder = Coder.create(main_model=model, fnames=fnames, io=io, auto_commits=True, test_cmd="python /Users/mac/Desktop/tmp/code_test/main.py")
-
-    try:
-        coder.run(task)
-        result = coder.done_messages
-        print(f"Task '{task}' result: {result}")
-        ### print coder.test_outcome
-        test_result = coder.test_outcome
-        print(f"test outcome '{test_result}'")
-        if any(msg.get('role') == 'assistant' and msg.get('content') == 'Ok.' for msg in result) and test_result is None:
-            task_info["status"] = "completed"
-            print(f"Task '{task}' completed.")
-        else:
-            task_info["status"] = f"error: {result}"
-            print(f"Task '{task}' failed with error: {result}")
-    except Exception as e:
-        task_info["status"] = f"failed: {str(e)}"
-        print(f"Task '{task}' failed with error: {str(e)}")
-
-# Main function to execute tasks
 def main():
     tasks_file = "tasks.json"
-    data = load_tasks(tasks_file)
-    print(f"Loaded {len(data)} tasks.")
+    task_manager = TaskManager(tasks_file)
+    print(f"Loaded {len(task_manager.tasks)} tasks.")
 
-    model = Model("deepseek/deepseek-coder")
-    io = InputOutput(yes=True)
+    model = Model(task_manager.metadata.get("model", "deepseek/deepseek-coder"))
+    io = InputOutput(yes=task_manager.metadata.get("io_yes", True))
+    test_cmd = task_manager.metadata.get("test_cmd", "")
 
-    for task_id, task_info in data.items():
-        process_task(model, io, task_info)
-        save_tasks(tasks_file, data)
+    for task in task_manager.tasks.values():
+        task_manager.process_task(task, model, io, test_cmd)
+        task_manager.save_tasks()
 
     print("All tasks completed.")
 
