@@ -1,6 +1,7 @@
 import json
 import os
 from aider.coders import Coder
+import git
 
 
 class Task:
@@ -55,18 +56,30 @@ class TaskManager:
         coder = Coder.create(main_model=model, fnames=task.fnames,
                              io=io, auto_commits=True, test_cmd=test_cmd, auto_test=True)
 
+        repo = git.Repo(search_parent_directories=True)
         try:
             coder.run(task.task)
             result = coder.done_messages
             print(f"Task '{task.task}' result: {result}")
             test_result = coder.test_outcome
             print(f"test outcome '{test_result}'")
-            if any(msg.get('role') == 'assistant' and msg.get('content') == 'Ok.' for msg in result) and (test_result is None or test_result is True):
-                task.status = "completed"
-                print(f"Task '{task.task}' completed.")
+            
+            result_ok = any(msg.get('role') == 'assistant' and msg.get('content') == 'Ok.' for msg in result)
+            test_ok = test_result is None or test_result is True
+            
+            if result_ok:
+                if test_ok:
+                    task.status = "completed"
+                    print(f"Task '{task.task}' completed.")
+                else:
+                    # Rollback the commit
+                    aider_commit = coder.last_aider_commit_hash
+                    repo.git.reset('--hard', aider_commit)
+                    task.status = f"error: test failed, changes rolled back"
+                    print(f"Task '{task.task}' failed: test failed, changes rolled back")
             else:
-                task.status = f"error: {result}"
-                print(f"Task '{task.task}' failed with error: {result}")
+                task.status = f"error: result not OK"
+                print(f"Task '{task.task}' failed: result not OK")
         except Exception as e:
             task.status = f"failed: {str(e)}"
             print(f"Task '{task.task}' failed with error: {str(e)}")
