@@ -58,9 +58,9 @@ class TaskManager:
         try:
             coder.run(task.task)
             result = coder.done_messages
-            print(f"Task '{task.task}' result: {result}")
+            # print(f"Task '{task.task}' result: {result}")
             test_result = coder.test_outcome
-            print(f"test outcome '{test_result}'")
+            # print(f"test outcome '{test_result}'")
             
             result_ok = any(msg.get('role') == 'assistant' and msg.get('content') == 'Ok.' for msg in result)
             test_ok = test_result is None or test_result is True
@@ -71,10 +71,11 @@ class TaskManager:
                     print(f"Task '{task.task}' completed.")
                 else:
                     # 代码结果ok，但是测试结果失败，回滚代码commit
+                    
                     Commands = coder.commands
                     Commands.cmd_undo("")
-                    task.status = f"error: test failed, changes rolled back"
-                    print(f"Task '{task.task}' failed: test failed, changes rolled back")
+                    task.status = f"error: test failed, changes rolled back : '{coder.cur_messages}'"
+                    print(f"Task '{task.task}' failed: test failed, changes rolled back : '{coder.cur_messages}'")
             else:
                 task.status = f"error: result not OK"
                 print(f"Task '{task.task}' failed: result not OK")

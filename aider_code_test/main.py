@@ -8,7 +8,7 @@ def main():
     print(f"Loaded {len(task_manager.tasks)} tasks.")
 
     model = Model(task_manager.metadata.get("model", "deepseek/deepseek-coder"))
-    io = InputOutput(yes=task_manager.metadata.get("io_yes", True))
+    io = InputOutput(yes=True, chat_history_file="/Users/mac/Desktop/tmp/code_test/.aider.chat.history.md")
     test_cmd = task_manager.metadata.get("test_cmd", "")
 
     for task in task_manager.tasks.values():
