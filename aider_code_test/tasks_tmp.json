@@ -1,8 +1,9 @@
 {
     "MetaData": {
         "model": "deepseek/deepseek-coder",
-        "io_yes": true,
-        "test_cmd": "python /Users/mac/Desktop/tmp/code_test/main.py"
+        "test_cmd": "python /Users/mac/Desktop/tmp/code_test/main.py",
+        "repo_path": "./../aider_auto_code_test/main.py"
+
     },
     "Tasks": {
         "1": {

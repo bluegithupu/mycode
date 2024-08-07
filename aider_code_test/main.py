@@ -1,3 +1,4 @@
+import os
 from aider.models import Model
 from aider.io import InputOutput
 from task import TaskManager
@@ -7,9 +8,10 @@ def main():
     task_manager = TaskManager(tasks_file)
     print(f"Loaded {len(task_manager.tasks)} tasks.")
 
-    model = Model(task_manager.metadata.get("model", "deepseek/deepseek-coder"))
-    io = InputOutput(yes=True, chat_history_file="/Users/mac/Desktop/tmp/code_test/.aider.chat.history.md")
-    test_cmd = task_manager.metadata.get("test_cmd", "")
+    model = Model(task_manager.metadata.model or "deepseek/deepseek-coder")
+    chat_history_file = os.path.join(task_manager.metadata.repo_path ,".aider.chat.history.md")
+    io = InputOutput(yes=True, chat_history_file=chat_history_file)
+    test_cmd = task_manager.metadata.test_cmd or ""
 
     for task in task_manager.tasks.values():
         task_manager.process_task(task, model, io, test_cmd)

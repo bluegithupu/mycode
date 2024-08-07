@@ -1,8 +1,8 @@
 {
     "MetaData": {
         "model": "deepseek/deepseek-coder",
-        "io_yes": true,
-        "test_cmd": "python /Users/mac/Desktop/tmp/code_test/main.py"
+        "test_cmd": "python /Users/mac/Desktop/tmp/code_test/main.py",
+        "repo_path": "/Users/mac/Desktop/tmp/code_test"
     },
     "Tasks": {
         "1": {
@@ -31,7 +31,7 @@
             "status": "completed"
         },
         "4": {
-            "task": "/hello 返回值修改为 'hello world777777777",
+            "task": "/hello 返回值修改为 'hello world777776667",
             "fnames": [
                 "/Users/mac/Desktop/tmp/code_test/main.py"
             ],
