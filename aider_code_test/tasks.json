@@ -31,11 +31,11 @@
             "status": "completed"
         },
         "4": {
-            "task": "/hello 返回值修改为 'hello world777776667",
+            "task": "/hello 返回值修改为 'hello world778888667",
             "fnames": [
                 "/Users/mac/Desktop/tmp/code_test/main.py"
             ],
-            "status": "completed"
+            "status": "error: result not OK"
         }
     }
 }

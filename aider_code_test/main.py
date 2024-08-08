@@ -2,6 +2,7 @@ import os
 from aider.models import Model
 from aider.io import InputOutput
 from task import TaskManager
+from aider.coders import Coder
 
 def main():
     tasks_file = "tasks.json"
@@ -13,8 +14,10 @@ def main():
     io = InputOutput(yes=True, chat_history_file=chat_history_file)
     test_cmd = task_manager.metadata.test_cmd or ""
 
+    coder = Coder.create(main_model=model, fnames=[], io=io, auto_commits=True, test_cmd=test_cmd, auto_test=True)
     for task in task_manager.tasks.values():
-        task_manager.process_task(task, model, io, test_cmd)
+        coder.fnames = task.fnames
+        task_manager.process_task(task, coder)
         task_manager.save_tasks()
 
     print("All tasks completed.")

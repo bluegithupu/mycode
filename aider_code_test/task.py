@@ -75,14 +75,12 @@ class TaskManager:
         with open(self.filename, 'w') as file:
             json.dump(data, file, ensure_ascii=False, indent=4)
 
-    def process_task(self, task, model, io, test_cmd):
+    def process_task(self, task, coder):
         if task.status == "completed":
             # print(f"Task '{task.task}' already completed. Skipping.")
             return
 
         print(f"Task '{task.task}'  start !!!!!!!!!!!!!!!!!!!!!!!!!.")
-        coder = Coder.create(main_model=model, fnames=task.fnames,
-                             io=io, auto_commits=True, test_cmd=test_cmd, auto_test=True)
         try:
             coder.run(task.task)
             result = coder.done_messages
