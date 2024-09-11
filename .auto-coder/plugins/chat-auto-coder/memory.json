@@ -66,15 +66,15 @@
     }
   ],
   "current_files": {
-    "files": [
-      "/Users/mac/Desktop/gpt_test/auto_coder_test/main.py",
-      "/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py"
-    ],
+    "files": [],
     "groups": {},
     "groups_info": {},
     "current_groups": []
   },
-  "conf": {},
+  "conf": {
+    "skip_build_index": "false",
+    "skip_confirm": "false"
+  },
   "exclude_dirs": [],
   "mode": "normal",
   "libs": {}

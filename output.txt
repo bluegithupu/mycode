@@ -1,23 +1,12 @@
-To change the background color of the Snake Game to black, we need to modify the `snake_game.py` file. Specifically, we need to update the `self.white` variable to represent the new background color and then ensure that the background is filled with this color in the `play` method.
+To change the background color of the game window to white in `/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py`, we need to modify the `self.white` attribute in the `SnakeGame` class.
 
-Here are the *SEARCH/REPLACE* blocks:
+Here is the *SEARCH/REPLACE* block:
 
 ```python
 ##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
 <<<<<<< SEARCH
-        self.white = (255, 255, 255)
-=======
         self.white = (0, 0, 0)
->>>>>>> REPLACE
-```
-
-```python
-##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
-<<<<<<< SEARCH
-        self.display.fill(self.white)
 =======
-        self.display.fill(self.white)
+        self.white = (255, 255, 255)
 >>>>>>> REPLACE
 ```
-
-These changes will set the background color to black and ensure that the background is filled with this color during the game.
