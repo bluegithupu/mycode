@@ -17,7 +17,7 @@ class SnakeGame:
         self.display = pygame.display.set_mode((500, 500))
         pygame.display.set_caption('Snake Game')
         self.clock = pygame.time.Clock()
-        self.white = (0, 0, 0)
+        self.white = (255, 255, 255)
         self.black = (0, 0, 0)
         self.red = (255, 0, 0)
         self.font = pygame.font.Font(None, 36)
