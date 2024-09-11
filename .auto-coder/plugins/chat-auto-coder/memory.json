@@ -123,6 +123,10 @@
     {
       "role": "user",
       "content": "三个选项默认都高亮显示，现在只有选中时显示一个"
+    },
+    {
+      "role": "user",
+      "content": "背景设为白色"
     }
   ],
   "current_files": {
