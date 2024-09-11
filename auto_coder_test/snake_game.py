@@ -115,16 +115,17 @@ class SnakeGame:
                         if event.key == pygame.K_p:
                             paused = False
             else:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    quit()
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_UP:
-                        self.change_direction('UP')
-                    elif event.key == pygame.K_DOWN:
-                        self.change_direction('DOWN')
-                    elif event.key == pygame.K_LEFT:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        quit()
+                    elif event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_UP:
+                            self.change_direction('UP')
+                        elif event.key == pygame.K_DOWN:
+                            self.change_direction('DOWN')
+                        elif event.key == pygame.K_LEFT:
+                            self.change_direction('LEFT')
                         self.change_direction('LEFT')
                     elif event.key == pygame.K_RIGHT:
                         self.change_direction('RIGHT')
@@ -136,7 +137,7 @@ class SnakeGame:
 
                 self.update_snake()
             background_img = pygame.image.load('background.png')
-        self.display.blit(background_img, (0, 0))
+            self.display.blit(background_img, (0, 0))
             self.draw_snake()
             self.draw_food()
             self.display_score()
@@ -161,3 +162,7 @@ class SnakeGame:
     def display_score(self):
         score_text = self.font.render(f"Score: {self.score}", True, self.black)
         self.display.blit(score_text, (10, 10))
+
+    def display_difficulty_selection(self):
+        # TODO: Implement difficulty selection logic
+        pass

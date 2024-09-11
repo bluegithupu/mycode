@@ -87,6 +87,10 @@
     {
       "role": "user",
       "content": "背景颜色设为黑色"
+    },
+    {
+      "role": "user",
+      "content": "根据以上建议改进代码"
     }
   ],
   "current_files": {
@@ -97,11 +101,7 @@
     "groups_info": {},
     "current_groups": []
   },
-  "conf": {
-    "skip_build_index": "false",
-    "skip_confirm": "false",
-    "human_as_model": "true"
-  },
+  "conf": {},
   "exclude_dirs": [],
   "mode": "normal",
   "libs": {}

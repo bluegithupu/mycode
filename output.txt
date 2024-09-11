@@ -1,93 +1,60 @@
-要根据之前的建议改进代码，我会提供多个 *SEARCH/REPLACE block* 来实现以下几项改进：
+To address the user's requirement of adding variables for all image paths and placing them at the top of the file, we need to modify `/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py` as follows:
 
-1. **改进背景为图片**。
-2. **使用图像来替换贪吃蛇和食物的方块**。
-3. **新增暂停菜单功能**。
+1. Define variables for all image paths at the top of the file.
+2. Replace the hardcoded image paths with these variables.
 
-### 1. 更改背景为图片
-我们将使用背景图片替代单色填充。
+Here are the *SEARCH/REPLACE* blocks:
 
 ```python
 ##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
 <<<<<<< SEARCH
-        self.display.fill(self.white)
+import random
+import time
+import pygame
+
+pygame.init()
+
+class SnakeGame:
 =======
-        background_img = pygame.image.load('background.png')
-        self.display.blit(background_img, (0, 0))
+import random
+import time
+import pygame
+
+pygame.init()
+
+SNAKE_HEAD_IMG_PATH = 'snake_head.png'
+FOOD_IMG_PATH = 'food.png'
+BACKGROUND_IMG_PATH = 'background.png'
+
+class SnakeGame:
 >>>>>>> REPLACE
 ```
 
-### 2. 使用图片替换贪吃蛇和食物的方块
-蛇和食物的绘制将从方块更改为图片。
-
 ```python
 ##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
 <<<<<<< SEARCH
-    def draw_snake(self):
-        for position in self.snake_position:
-            pygame.draw.rect(self.display, self.black, pygame.Rect(position[0], position[1], 10, 10))
-
-    def draw_food(self):
-        pygame.draw.rect(self.display, self.red, pygame.Rect(self.food_position[0], self.food_position[1], 10, 10))
-=======
-    def draw_snake(self):
         snake_head_img = pygame.image.load('snake_head.png')
-        for position in self.snake_position:
-            self.display.blit(snake_head_img, (position[0], position[1]))
+=======
+        snake_head_img = pygame.image.load(SNAKE_HEAD_IMG_PATH)
+>>>>>>> REPLACE
+```
 
-    def draw_food(self):
+```python
+##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
+<<<<<<< SEARCH
         food_img = pygame.image.load('food.png')
-        self.display.blit(food_img, (self.food_position[0], self.food_position[1]))
->>>>>>> REPLACE
-```
-
-### 3. 添加暂停菜单功能
-在游戏中添加暂停菜单，允许玩家在暂停时进行操作。
-
-```python
-##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
-<<<<<<< SEARCH
-        while True:
 =======
-        paused = False
-        
-        while True:
-            if paused:
-                self.display_pause_menu()
-                pygame.display.update()
-                for event in pygame.event.get():
-                    if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_p:
-                            paused = False
-            else:
+        food_img = pygame.image.load(FOOD_IMG_PATH)
 >>>>>>> REPLACE
 ```
 
 ```python
 ##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
 <<<<<<< SEARCH
-            self.update_snake()
+        background_img = pygame.image.load('background.png')
 =======
-                for event in pygame.event.get():
-                    if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_p:
-                            paused = True
-
-                self.update_snake()
+        background_img = pygame.image.load(BACKGROUND_IMG_PATH)
 >>>>>>> REPLACE
 ```
 
-```python
-##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
-<<<<<<< SEARCH
-    def display_difficulty_selection(self):
-=======
-    def display_pause_menu(self):
-        text = self.font.render("Paused - Press 'P' to Resume", True, self.black)
-        text_rect = text.get_rect(center=(250, 250))
-        self.display.blit(text, text_rect)
-
->>>>>>> REPLACE
-```
-
-通过这些更改，游戏将会更加美观，并且用户体验将有所提升。如果你还有其他需求，可以继续补充！
+These changes ensure that all image paths are now defined as variables at the top of the file and are used consistently throughout the code.
