@@ -1,46 +1,14 @@
-To convert the Snake Game into a graphical version, we need to make several changes:
+To implement the user's requirement of placing the difficulty selection in the graphical interface and adding score recording, we need to modify the `snake_game.py` file. Specifically, we will:
 
-1. **Add Pygame library import**: We need to import the Pygame library.
-2. **Initialize Pygame**: Initialize Pygame and set up the display.
-3. **Update the game loop**: Modify the game loop to handle Pygame events and render the game.
-4. **Draw the snake and food**: Implement functions to draw the snake and food on the screen.
+1. Add a method to display the difficulty selection in the graphical interface.
+2. Modify the `play` method to handle the difficulty selection.
+3. Add a method to display the score in the graphical interface.
 
-Here are the *SEARCH/REPLACE* blocks to achieve this:
-
-### 1. Add Pygame import and initialize Pygame
+Here are the *SEARCH/REPLACE* blocks for the required changes:
 
 ```python
 ##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
 <<<<<<< SEARCH
-import random
-import time
-
-class SnakeGame:
-=======
-import random
-import time
-import pygame
-
-pygame.init()
-
-class SnakeGame:
->>>>>>> REPLACE
-```
-
-### 2. Initialize Pygame display and colors
-
-```python
-##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
-<<<<<<< SEARCH
-    def __init__(self, difficulty):
-        self.difficulty = difficulty
-        self.score = 0
-        self.snake_length = 1
-        self.snake_position = [[100, 50]]
-        self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
-        self.direction = 'RIGHT'
-        self.change_to = self.direction
-=======
     def __init__(self, difficulty):
         self.difficulty = difficulty
         self.score = 0
@@ -56,22 +24,29 @@ class SnakeGame:
         self.white = (255, 255, 255)
         self.black = (0, 0, 0)
         self.red = (255, 0, 0)
+=======
+    def __init__(self):
+        self.difficulty = None
+        self.score = 0
+        self.snake_length = 1
+        self.snake_position = [[100, 50]]
+        self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+        self.direction = 'RIGHT'
+        self.change_to = self.direction
+
+        self.display = pygame.display.set_mode((500, 500))
+        pygame.display.set_caption('Snake Game')
+        self.clock = pygame.time.Clock()
+        self.white = (255, 255, 255)
+        self.black = (0, 0, 0)
+        self.red = (255, 0, 0)
+        self.font = pygame.font.Font(None, 36)
 >>>>>>> REPLACE
 ```
-
-### 3. Update the game loop to handle Pygame events and render the game
 
 ```python
 ##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
 <<<<<<< SEARCH
-    def play(self):
-        while True:
-            self.update_snake()
-            if self.is_collision():
-                print(f"Game Over! Your score is {self.score}")
-                break
-            time.sleep(0.1)
-=======
     def play(self):
         while True:
             for event in pygame.event.get():
@@ -99,39 +74,77 @@ class SnakeGame:
                 print(f"Game Over! Your score is {self.score}")
                 pygame.quit()
                 quit()
+=======
+    def play(self):
+        while self.difficulty is None:
+            self.display.fill(self.white)
+            self.display_difficulty_selection()
+            pygame.display.update()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_e:
+                        self.difficulty = 'easy'
+                    elif event.key == pygame.K_m:
+                        self.difficulty = 'medium'
+                    elif event.key == pygame.K_h:
+                        self.difficulty = 'hard'
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.change_direction('UP')
+                    elif event.key == pygame.K_DOWN:
+                        self.change_direction('DOWN')
+                    elif event.key == pygame.K_LEFT:
+                        self.change_direction('LEFT')
+                    elif event.key == pygame.K_RIGHT:
+                        self.change_direction('RIGHT')
+
+            self.update_snake()
+            self.display.fill(self.white)
+            self.draw_snake()
+            self.draw_food()
+            self.display_score()
+            pygame.display.update()
+            self.clock.tick(15)
+
+            if self.is_collision():
+                print(f"Game Over! Your score is {self.score}")
+                pygame.quit()
+                quit()
 >>>>>>> REPLACE
 ```
-
-### 4. Implement functions to draw the snake and food
 
 ```python
 ##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
 <<<<<<< SEARCH
-    def is_collision(self):
-        if self.snake_position[0][0] >= 500 or self.snake_position[0][0] < 0:
-            return True
-        if self.snake_position[0][1] >= 500 or self.snake_position[0][1] < 0:
-            return True
-        if self.snake_position[0] in self.snake_position[1:]:
-            return True
-        return False
 =======
-    def is_collision(self):
-        if self.snake_position[0][0] >= 500 or self.snake_position[0][0] < 0:
-            return True
-        if self.snake_position[0][1] >= 500 or self.snake_position[0][1] < 0:
-            return True
-        if self.snake_position[0] in self.snake_position[1:]:
-            return True
-        return False
+    def display_difficulty_selection(self):
+        text = self.font.render("Choose difficulty: E - Easy, M - Medium, H - Hard", True, self.black)
+        self.display.blit(text, (50, 200))
 
-    def draw_snake(self):
-        for position in self.snake_position:
-            pygame.draw.rect(self.display, self.black, pygame.Rect(position[0], position[1], 10, 10))
-
-    def draw_food(self):
-        pygame.draw.rect(self.display, self.red, pygame.Rect(self.food_position[0], self.food_position[1], 10, 10))
+    def display_score(self):
+        score_text = self.font.render(f"Score: {self.score}", True, self.black)
+        self.display.blit(score_text, (10, 10))
 >>>>>>> REPLACE
 ```
 
-These changes will convert the Snake Game into a graphical version using Pygame.
+```python
+##File: /Users/mac/Desktop/gpt_test/auto_coder_test/main.py
+<<<<<<< SEARCH
+    difficulty = input("Choose difficulty (easy, medium, hard): ").lower()
+    game = SnakeGame(difficulty)
+=======
+    game = SnakeGame()
+>>>>>>> REPLACE
+```
+
+These changes will place the difficulty selection in the graphical interface and add a score display in the game.
