@@ -1,0 +1,20 @@
+auto_merge: editblock
+context: '下面是对上面文件按分组给到的一些描述，当用户的需求正好匹配描述���时候，参考描述来做修改：
+
+
+  '
+human_as_model: false
+include_file:
+- ./base/base.yml
+query: "fix it: pygame 2.6.0 (SDL 2.28.4, Python 3.11.5)\nHello from the pygame community.\
+  \ https://www.pygame.org/contribute.html\nWelcome to Snake Game!\nTraceback (most\
+  \ recent call last):\n  File \"/Users/mac/Desktop/gpt_test/auto_coder_test/main.py\"\
+  , line 9, in <module>\n    main()\n  File \"/Users/mac/Desktop/gpt_test/auto_coder_test/main.py\"\
+  , line 6, in main\n    game.play()\n  File \"/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py\"\
+  , line 87, in play\n    self.display_difficulty_selection()\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
+  AttributeError: 'SnakeGame' object has no attribute 'display_difficulty_selection'"
+silence: true
+skip_build_index: true
+skip_confirm: true
+urls:
+- /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py

@@ -111,6 +111,10 @@
     {
       "role": "user",
       "content": "修复难度选择时，只能看见一个选项的问题"
+    },
+    {
+      "role": "user",
+      "content": "根据以上建议改进代码"
     }
   ],
   "current_files": {

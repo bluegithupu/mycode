@@ -1,30 +1,10 @@
-根据用户的需求和之前的建议，我们需要改进 `snake_game.py` 文件中的代码，确保在选择难度时，按上下按钮能够正确显示所有选项。我们将通过以下步骤来实现：
+To address the issue where the `SnakeGame` object does not have the `display_difficulty_selection` attribute, we need to ensure that the method `display_difficulty_selection` is correctly defined within the `SnakeGame` class. The method should be indented properly to be part of the class.
 
-1. **确保 `self.selected_difficulty` 的初始值正确**。
-2. **确保 `display_difficulty_selection` 方法被正确调用**。
-3. **添加调试输出**，以便在 `display_difficulty_selection` 方法中确认每个选项都被正确绘制。
-
-以下是改进后的代码：
+Here are the *SEARCH/REPLACE* blocks to fix the issue:
 
 ```python
 ##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
 <<<<<<< SEARCH
-    self.selected_difficulty = 0
-=======
-    self.selected_difficulty = 0  # Ensure initial value is correct
->>>>>>> REPLACE
-```
-
-```python
-##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
-<<<<<<< SEARCH
-def display_difficulty_selection(self):
-    options = ["Easy", "Medium", "Hard"]
-    for i, option in enumerate(options):
-        text = self.font.render(f"{option}", True, self.black if i != self.selected_difficulty else self.red)
-        text_rect = text.get_rect(center=(250, 200 + i * 50))
-        self.display.blit(text, text_rect)
-=======
 def display_difficulty_selection(self):
     options = ["Easy", "Medium", "Hard"]
     for i, option in enumerate(options):
@@ -32,7 +12,15 @@ def display_difficulty_selection(self):
         text_rect = text.get_rect(center=(250, 200 + i * 50))
         self.display.blit(text, text_rect)
         print(f"Drawing option: {option} at position {text_rect.center}")  # Debug output
+=======
+    def display_difficulty_selection(self):
+        options = ["Easy", "Medium", "Hard"]
+        for i, option in enumerate(options):
+            text = self.font.render(f"{option}", True, self.black if i != self.selected_difficulty else self.red)
+            text_rect = text.get_rect(center=(250, 200 + i * 50))
+            self.display.blit(text, text_rect)
+            print(f"Drawing option: {option} at position {text_rect.center}")  # Debug output
 >>>>>>> REPLACE
 ```
 
-通过这些修改，我们确保了 `self.selected_difficulty` 的初始值正确，并且在 `display_difficulty_selection` 方法中添加了调试输出，以便确认每个选项都被正确绘制。这样可以更好地诊断和解决选择难度时只能看到一个选项的问题。
+This change ensures that the `display_difficulty_selection` method is correctly indented and part of the `SnakeGame` class, making it an attribute of the `SnakeGame` object.
