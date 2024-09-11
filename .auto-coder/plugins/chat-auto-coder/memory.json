@@ -55,10 +55,17 @@
     {
       "role": "user",
       "content": "@/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py 游戏窗口背景色设为黑色"
+    },
+    {
+      "role": "user",
+      "content": "修改背景颜色为黑色"
     }
   ],
   "current_files": {
-    "files": [],
+    "files": [
+      "/Users/mac/Desktop/gpt_test/auto_coder_test/main.py",
+      "/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py"
+    ],
     "groups": {},
     "groups_info": {},
     "current_groups": []
