@@ -83,6 +83,10 @@
     {
       "role": "user",
       "content": "背景颜色设为黑色"
+    },
+    {
+      "role": "user",
+      "content": "背景颜色设为黑色"
     }
   ],
   "current_files": {
