@@ -55,15 +55,15 @@
   },
   "/Users/mac/Desktop/gpt_test/aider_code_test/main.py": {
     "module_name": "/Users/mac/Desktop/gpt_test/aider_code_test/main.py",
-    "symbols": "用途：主要用于执行代码任务并管理模型和输入输出。\n函数：\n变量：fnames, model, io\n类：Coder, Model, InputOutput\n导入语句：from aider.coders import Coder^^from aider.models import Model^^from aider.io import InputOutput",
-    "last_modified": 1718876074.0313115,
-    "md5": "aa4fb0ab4b74589206ca5ea3666440fc"
+    "symbols": "用途：主要用于处理任务管理并执行代码生成任务。\n函数：main\n变量：tasks_file, task_manager, model, chat_history_file, io, test_cmd, coder\n类：\n导入语句：import os^^from aider.models import Model^^from aider.io import InputOutput^^from task import TaskManager^^from aider.coders import Coder",
+    "last_modified": 1724835689.1722114,
+    "md5": "df636ef27ccff845d4d0f457043fcc9a"
   },
   "/Users/mac/Desktop/gpt_test/aider_auto_code_test/main.py": {
     "module_name": "/Users/mac/Desktop/gpt_test/aider_auto_code_test/main.py",
-    "symbols": "用途：主要用于创建一个FastAPI应用，提供\"/hello\"和\"/healthz\"两个路由服务。\n函数：hello, healthz\n类：\n变量：app\n导入语句：from fastapi import FastAPI",
-    "last_modified": 1718876716.046703,
-    "md5": "6b7b055fed12752b4e1e5b7b22bdf30d"
+    "symbols": "用途：主要用于提供健康检查和打印端点的功能。\n函数：health_check, print_endpoint\n变量：app\n类：\n导入语句：from fastapi import FastAPI",
+    "last_modified": 1722313243.343396,
+    "md5": "036821fb7f16a083fa1dd96327b149a2"
   },
   "/Users/mac/Desktop/gpt_test/my_test/douban_scraper.py": {
     "module_name": "/Users/mac/Desktop/gpt_test/my_test/douban_scraper.py",
@@ -112,5 +112,41 @@
     "symbols": "用途：主要用于读取指定目录下的文件并写入到输出文件中。\n函数：main\n变量：root_directory, output_file, current_path\n类：FileReader\n导入语句：import sys^^import os^^from file_reader import FileReader",
     "last_modified": 1712823205.1148539,
     "md5": "40884d73517eaac92b5cf7448f41753a"
+  },
+  "/Users/mac/Desktop/gpt_test/lang_graph_test/main.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/lang_graph_test/main.py",
+    "symbols": "用途：主要用于定义和运行一个状态图工作流，处理消息和工具调用。\n函数：search, should_continue, call_model\n变量：tools, tool_node, model, workflow, checkpointer, app, final_state\n类：\n导入语句：from typing import Annotated, Literal, TypedDict^^from langchain_core.messages import HumanMessage^^from langchain_openai import ChatOpenAI^^from langchain_core.tools import tool^^from langgraph.checkpoint import MemorySaver^^from langgraph.graph import END, StateGraph, MessagesState^^from langgraph.prebuilt import ToolNode",
+    "last_modified": 1722242866.3512976,
+    "md5": "f1bb7f11600150ad4504971cce74e5e0"
+  },
+  "/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py",
+    "symbols": "用途：实现一个简单的贪吃蛇游戏。\n函数：__init__, update_snake, get_score_increment, change_direction, is_collision, draw_snake, draw_food, play, display_difficulty_selection, display_score\n变量：difficulty, score, snake_length, snake_position, food_position, direction, change_to, display, clock, white, black, red, font, selected_difficulty\n类：SnakeGame\n导入语句：import random^^import time^^import pygame",
+    "last_modified": 1726036143.8562114,
+    "md5": "3f389ad35b6aeef818fa15217f8192e4"
+  },
+  "/Users/mac/Desktop/gpt_test/auto_coder_test/main.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/auto_coder_test/main.py",
+    "symbols": "用途：主要用于启动贪吃蛇游戏。\n函数：main\n变量：game\n类：\n导入语句：from snake_game import SnakeGame",
+    "last_modified": 1726035122.4321966,
+    "md5": "dd4cc1a9e3c34b4ec46767755855fc9a"
+  },
+  "/Users/mac/Desktop/gpt_test/aider_code_test/task.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/aider_code_test/task.py",
+    "symbols": "用途：主要用于管理任务和元数据，并处理任务的执行和保存。\n函数：__init__, get, set, to_dict, from_dict, to_dict, from_dict, __init__, load_tasks, save_tasks, process_task\n变量：\n类：Metadata, Task, TaskManager\n导入语句：import json^^import os^^from aider.coders import Coder^^import git",
+    "last_modified": 1723020248.4507048,
+    "md5": "fdf1396e17e771d0b3f2772511873d48"
+  },
+  "/Users/mac/Desktop/gpt_test/aider_code_for_monitor/main.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/aider_code_for_monitor/main.py",
+    "symbols": "用途：用于加载和保存任务状态，并执行任务。\n函数：load_tasks, save_tasks\n变量：fnames, model, io, coder, tasks_file, data, tasks, statuses\n类：\n导入语句：import json^^import os^^from aider.coders import Coder^^from aider.models import Model^^from aider.io import InputOutput",
+    "last_modified": 1721187391.5522518,
+    "md5": "24efca03dcb9ac5b7693dad541b75bee"
+  },
+  "/Users/mac/Desktop/gpt_test/my_test/deepseek_test.py": {
+    "module_name": "/Users/mac/Desktop/gpt_test/my_test/deepseek_test.py",
+    "symbols": "用途：主要用于调用 OpenAI 的对话 API 并使用 Function Calling 功能。\n函数：my_function\n变量：client, response, message, param_value, result\n类：\n导入语句：import json^^from openai import OpenAI",
+    "last_modified": 1724838746.3636854,
+    "md5": "271e0b126ed35a1f027ca39f95aeba60"
   }
 }

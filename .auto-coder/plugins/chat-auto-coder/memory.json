@@ -27,13 +27,38 @@
     {
       "role": "user",
       "content": "难度选择放置在图形中,竖向排列，使用上下按键选择"
+    },
+    {
+      "role": "user",
+      "content": "难度选择放置居中"
+    },
+    {
+      "role": "user",
+      "content": "贪吃蛇游戏背景色设为黑色"
+    },
+    {
+      "role": "user",
+      "content": "贪吃蛇游戏背景色设为黑色"
+    },
+    {
+      "role": "user",
+      "content": "贪吃蛇游戏背景色设为黑色, snake_game.py"
+    },
+    {
+      "role": "user",
+      "content": "贪吃蛇游戏背景色设为黑色, @/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py"
+    },
+    {
+      "role": "user",
+      "content": "@/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py 游戏窗口背景色设为黑色"
+    },
+    {
+      "role": "user",
+      "content": "@/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py 游戏窗口背景色设为黑色"
     }
   ],
   "current_files": {
-    "files": [
-      "/Users/mac/Desktop/gpt_test/auto_coder_test/main.py",
-      "/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py"
-    ],
+    "files": [],
     "groups": {},
     "groups_info": {},
     "current_groups": []

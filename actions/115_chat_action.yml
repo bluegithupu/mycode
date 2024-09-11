@@ -1,0 +1,13 @@
+auto_merge: editblock
+context: '下面是对上面文件按分组给到的一些描述，当用户的需求正好匹配描述���时候，参考描述来做修改：
+
+
+  '
+human_as_model: false
+include_file:
+- ./base/base.yml
+query: '@/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py 游戏窗口背景色设为黑色'
+silence: true
+skip_build_index: true
+skip_confirm: true
+urls: []
