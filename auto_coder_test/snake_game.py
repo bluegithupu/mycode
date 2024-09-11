@@ -72,11 +72,13 @@ class SnakeGame:
         return False
 
     def draw_snake(self):
+        snake_head_img = pygame.image.load('snake_head.png')
         for position in self.snake_position:
-            pygame.draw.rect(self.display, self.black, pygame.Rect(position[0], position[1], 10, 10))
+            self.display.blit(snake_head_img, (position[0], position[1]))
 
     def draw_food(self):
-        pygame.draw.rect(self.display, self.red, pygame.Rect(self.food_position[0], self.food_position[1], 10, 10))
+        food_img = pygame.image.load('food.png')
+        self.display.blit(food_img, (self.food_position[0], self.food_position[1]))
 
     def play(self):
         self.selected_difficulty = 0
@@ -102,7 +104,17 @@ class SnakeGame:
                         elif self.selected_difficulty == 2:
                             self.difficulty = 'hard'
 
+        paused = False
+        
         while True:
+            if paused:
+                self.display_pause_menu()
+                pygame.display.update()
+                for event in pygame.event.get():
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_p:
+                            paused = False
+            else:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -117,8 +129,14 @@ class SnakeGame:
                     elif event.key == pygame.K_RIGHT:
                         self.change_direction('RIGHT')
 
-            self.update_snake()
-            self.display.fill(self.white)
+                for event in pygame.event.get():
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_p:
+                            paused = True
+
+                self.update_snake()
+            background_img = pygame.image.load('background.png')
+        self.display.blit(background_img, (0, 0))
             self.draw_snake()
             self.draw_food()
             self.display_score()
@@ -129,7 +147,11 @@ class SnakeGame:
                 print(f"Game Over! Your score is {self.score}")
                 pygame.quit()
                 quit()
-    def display_difficulty_selection(self):
+    def display_pause_menu(self):
+        text = self.font.render("Paused - Press 'P' to Resume", True, self.black)
+        text_rect = text.get_rect(center=(250, 250))
+        self.display.blit(text, text_rect)
+
         options = ["Easy", "Medium", "Hard"]
         for i, option in enumerate(options):
             text = self.font.render(f"{option}", True, self.black if i != self.selected_difficulty else self.red)
