@@ -103,6 +103,14 @@
     {
       "role": "user",
       "content": "补全display_difficulty_selection方法"
+    },
+    {
+      "role": "user",
+      "content": "清理display_pause_menu， 取消暂停功能"
+    },
+    {
+      "role": "user",
+      "content": "修复难度选择时，只能看见一个选项的问题"
     }
   ],
   "current_files": {
