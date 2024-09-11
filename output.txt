@@ -1,47 +1,19 @@
-To fulfill the user's request to remove all image loading and use simple color blocks instead, we need to modify the `snake_game.py` file. Specifically, we will replace the image loading and drawing with simple color blocks for the snake head and food.
-
-Here are the *SEARCH/REPLACE* blocks:
+To complete the `display_difficulty_selection` method in the `SnakeGame` class, we need to implement the logic to display the difficulty options and highlight the selected difficulty. Here is the *SEARCH/REPLACE* block to achieve this:
 
 ```python
 ##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
 <<<<<<< SEARCH
-SNAKE_HEAD_IMG_PATH = 'snake_head.png'
-FOOD_IMG_PATH = 'food.png'
-BACKGROUND_IMG_PATH = 'background.png'
+    def display_difficulty_selection(self):
+        # TODO: Implement difficulty selection logic
+        pass
 =======
+    def display_difficulty_selection(self):
+        options = ["Easy", "Medium", "Hard"]
+        for i, option in enumerate(options):
+            text = self.font.render(f"{option}", True, self.black if i != self.selected_difficulty else self.red)
+            text_rect = text.get_rect(center=(250, 200 + i * 50))
+            self.display.blit(text, text_rect)
 >>>>>>> REPLACE
 ```
 
-```python
-##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
-<<<<<<< SEARCH
-        snake_head_img = pygame.image.load(SNAKE_HEAD_IMG_PATH)
-        for position in self.snake_position:
-            self.display.blit(snake_head_img, (position[0], position[1]))
-=======
-        for position in self.snake_position:
-            pygame.draw.rect(self.display, self.white, (position[0], position[1], 10, 10))
->>>>>>> REPLACE
-```
-
-```python
-##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
-<<<<<<< SEARCH
-        food_img = pygame.image.load(FOOD_IMG_PATH)
-        self.display.blit(food_img, (self.food_position[0], self.food_position[1]))
-=======
-        pygame.draw.rect(self.display, self.red, (self.food_position[0], self.food_position[1], 10, 10))
->>>>>>> REPLACE
-```
-
-```python
-##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
-<<<<<<< SEARCH
-        background_img = pygame.image.load(BACKGROUND_IMG_PATH)
-        self.display.blit(background_img, (0, 0))
-=======
-        self.display.fill(self.black)
->>>>>>> REPLACE
-```
-
-These changes will remove all image loading and replace the snake head and food with simple color blocks, as requested.
+This block will replace the `display_difficulty_selection` method with the completed implementation that displays the difficulty options and highlights the currently selected difficulty.

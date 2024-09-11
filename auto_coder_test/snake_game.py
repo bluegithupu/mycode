@@ -136,12 +136,12 @@ class SnakeGame:
                             paused = True
 
                 self.update_snake()
-        self.display.fill(self.black)
-            self.draw_snake()
-            self.draw_food()
-            self.display_score()
-            pygame.display.update()
-            self.clock.tick(15)
+                self.display.fill(self.black)
+                self.draw_snake()
+                self.draw_food()
+                self.display_score()
+                pygame.display.update()
+                self.clock.tick(15)
 
             if self.is_collision():
                 print(f"Game Over! Your score is {self.score}")

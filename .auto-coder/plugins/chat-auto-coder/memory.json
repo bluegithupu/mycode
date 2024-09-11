@@ -95,6 +95,10 @@
     {
       "role": "user",
       "content": "所有图片地址添加变量，放在文件上部"
+    },
+    {
+      "role": "user",
+      "content": "取消所有图片加载，使用简单色块即可"
     }
   ],
   "current_files": {
