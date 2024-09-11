@@ -63,17 +63,40 @@
     {
       "role": "user",
       "content": "修改背景颜色为黑色"
+    },
+    {
+      "role": "user",
+      "content": "修改snake程序的背景色为白色"
+    },
+    {
+      "role": "user",
+      "content": "@/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py 游戏窗口背景色设为白色"
+    },
+    {
+      "role": "user",
+      "content": "背景颜色设为黑色"
+    },
+    {
+      "role": "user",
+      "content": "背景颜色设为黑色"
+    },
+    {
+      "role": "user",
+      "content": "背景颜色设为黑色"
     }
   ],
   "current_files": {
-    "files": [],
+    "files": [
+      "/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py"
+    ],
     "groups": {},
     "groups_info": {},
     "current_groups": []
   },
   "conf": {
     "skip_build_index": "false",
-    "skip_confirm": "false"
+    "skip_confirm": "false",
+    "human_as_model": "true"
   },
   "exclude_dirs": [],
   "mode": "normal",

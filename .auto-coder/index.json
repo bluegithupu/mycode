@@ -122,8 +122,8 @@
   "/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py": {
     "module_name": "/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py",
     "symbols": "用途：实现一个简单的贪吃蛇游戏。\n函数：__init__, update_snake, get_score_increment, change_direction, is_collision, draw_snake, draw_food, play, display_difficulty_selection, display_score\n变量：difficulty, score, snake_length, snake_position, food_position, direction, change_to, display, clock, white, black, red, font, selected_difficulty\n类：SnakeGame\n导入语句：import random^^import time^^import pygame",
-    "last_modified": 1726039725.7687292,
-    "md5": "f6a4a40572856cc4e3046694c060801b"
+    "last_modified": 1726040783.2079628,
+    "md5": "13a4cd83171cee6ef937bb2d51835150"
   },
   "/Users/mac/Desktop/gpt_test/auto_coder_test/main.py": {
     "module_name": "/Users/mac/Desktop/gpt_test/auto_coder_test/main.py",
