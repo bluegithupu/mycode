@@ -23,6 +23,10 @@
     {
       "role": "user",
       "content": "难度选择放置在图形中，并添加分数记录"
+    },
+    {
+      "role": "user",
+      "content": "难度选择放置在图形中,竖向排列，使用上下按键选择"
     }
   ],
   "current_files": {

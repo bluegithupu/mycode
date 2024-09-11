@@ -1,68 +1,21 @@
-To implement the user's requirement of placing the difficulty selection vertically and using the up and down keys to select the difficulty, we need to modify the `snake_game.py` file. Specifically, we will:
-
-1. Change the `display_difficulty_selection` method to display the difficulty options vertically.
-2. Modify the `play` method to handle the up and down keys for selecting the difficulty.
-
-Here are the *SEARCH/REPLACE* blocks:
+To center the difficulty selection in the Snake Game, we need to modify the `display_difficulty_selection` method in the `SnakeGame` class. Here are the *SEARCH/REPLACE* blocks to achieve this:
 
 ```python
 ##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
 <<<<<<< SEARCH
-    def display_difficulty_selection(self):
-        text = self.font.render("Choose difficulty: E - Easy, M - Medium, H - Hard", True, self.black)
-        self.display.blit(text, (50, 200))
-=======
     def display_difficulty_selection(self):
         options = ["Easy", "Medium", "Hard"]
         for i, option in enumerate(options):
             text = self.font.render(f"{option}", True, self.black if i != self.selected_difficulty else self.red)
             self.display.blit(text, (50, 200 + i * 50))
->>>>>>> REPLACE
-```
-
-```python
-##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
-<<<<<<< SEARCH
-        while self.difficulty is None:
-            self.display.fill(self.white)
-            self.display_difficulty_selection()
-            pygame.display.update()
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    quit()
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_e:
-                        self.difficulty = 'easy'
-                    elif event.key == pygame.K_m:
-                        self.difficulty = 'medium'
-                    elif event.key == pygame.K_h:
-                        self.difficulty = 'hard'
 =======
-        self.selected_difficulty = 0
-        while self.difficulty is None:
-            self.display.fill(self.white)
-            self.display_difficulty_selection()
-            pygame.display.update()
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    quit()
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_UP:
-                        self.selected_difficulty = (self.selected_difficulty - 1) % 3
-                    elif event.key == pygame.K_DOWN:
-                        self.selected_difficulty = (self.selected_difficulty + 1) % 3
-                    elif event.key == pygame.K_RETURN:
-                        if self.selected_difficulty == 0:
-                            self.difficulty = 'easy'
-                        elif self.selected_difficulty == 1:
-                            self.difficulty = 'medium'
-                        elif self.selected_difficulty == 2:
-                            self.difficulty = 'hard'
+    def display_difficulty_selection(self):
+        options = ["Easy", "Medium", "Hard"]
+        for i, option in enumerate(options):
+            text = self.font.render(f"{option}", True, self.black if i != self.selected_difficulty else self.red)
+            text_rect = text.get_rect(center=(250, 200 + i * 50))
+            self.display.blit(text, text_rect)
 >>>>>>> REPLACE
 ```
 
-These changes will ensure that the difficulty selection is displayed vertically and can be selected using the up and down keys.
+This change centers the text for each difficulty option on the screen.
