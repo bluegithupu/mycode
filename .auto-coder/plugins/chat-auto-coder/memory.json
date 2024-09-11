@@ -9,5 +9,6 @@
     "files": []
   },
   "conf": {},
-  "exclude_dirs": []
+  "exclude_dirs": [],
+  "mode": "normal"
 }
