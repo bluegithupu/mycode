@@ -163,5 +163,8 @@ class SnakeGame:
         self.display.blit(score_text, (10, 10))
 
     def display_difficulty_selection(self):
-        # TODO: Implement difficulty selection logic
-        pass
+        options = ["Easy", "Medium", "Hard"]
+        for i, option in enumerate(options):
+            text = self.font.render(f"{option}", True, self.black if i != self.selected_difficulty else self.red)
+            text_rect = text.get_rect(center=(250, 200 + i * 50))
+            self.display.blit(text, text_rect)
