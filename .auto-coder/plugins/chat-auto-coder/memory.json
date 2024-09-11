@@ -7,11 +7,20 @@
     {
       "role": "user",
       "content": "新建auto_coder_test文件夹，并创建main.py, 完成hello world"
+    },
+    {
+      "role": "user",
+      "content": "写一个贪吃蛇程序，包含难度选择，简单，中等，困难。按照难度给与分数"
+    },
+    {
+      "role": "user",
+      "content": "写一个贪吃蛇图形化游戏，包含难度选择，简单，中等，困难。按照难度给与分数"
     }
   ],
   "current_files": {
     "files": [
-      "/Users/mac/Desktop/gpt_test/auto_coder_test/main.py"
+      "/Users/mac/Desktop/gpt_test/auto_coder_test/main.py",
+      "/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py"
     ],
     "groups": {},
     "groups_info": {},
