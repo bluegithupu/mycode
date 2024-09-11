@@ -81,7 +81,7 @@ class SnakeGame:
     def play(self):
         self.selected_difficulty = 0
         while self.difficulty is None:
-            self.display.fill(self.white)  # Fixed indentation
+            self.display.fill(self.black)  # Fixed indentation
             self.display_difficulty_selection()
             pygame.display.update()
 
