@@ -99,6 +99,10 @@
     {
       "role": "user",
       "content": "取消所有图片加载，使用简单色块即可"
+    },
+    {
+      "role": "user",
+      "content": "补全display_difficulty_selection方法"
     }
   ],
   "current_files": {
