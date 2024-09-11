@@ -4,6 +4,10 @@ import pygame
 
 pygame.init()
 
+SNAKE_HEAD_IMG_PATH = 'snake_head.png'
+FOOD_IMG_PATH = 'food.png'
+BACKGROUND_IMG_PATH = 'background.png'
+
 class SnakeGame:
     def __init__(self):
         self.difficulty = None
@@ -72,12 +76,12 @@ class SnakeGame:
         return False
 
     def draw_snake(self):
-        snake_head_img = pygame.image.load('snake_head.png')
+        snake_head_img = pygame.image.load(SNAKE_HEAD_IMG_PATH)
         for position in self.snake_position:
             self.display.blit(snake_head_img, (position[0], position[1]))
 
     def draw_food(self):
-        food_img = pygame.image.load('food.png')
+        food_img = pygame.image.load(FOOD_IMG_PATH)
         self.display.blit(food_img, (self.food_position[0], self.food_position[1]))
 
     def play(self):
@@ -136,7 +140,7 @@ class SnakeGame:
                             paused = True
 
                 self.update_snake()
-            background_img = pygame.image.load('background.png')
+            background_img = pygame.image.load(BACKGROUND_IMG_PATH)
             self.display.blit(background_img, (0, 0))
             self.draw_snake()
             self.draw_food()
