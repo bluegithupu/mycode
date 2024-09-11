@@ -17,7 +17,7 @@ class SnakeGame:
         self.display = pygame.display.set_mode((500, 500))
         pygame.display.set_caption('Snake Game')
         self.clock = pygame.time.Clock()
-        self.white = (255, 255, 255)
+        self.white = (0, 0, 0)
         self.black = (0, 0, 0)
         self.red = (255, 0, 0)
         self.font = pygame.font.Font(None, 36)
@@ -81,7 +81,7 @@ class SnakeGame:
     def play(self):
         self.selected_difficulty = 0
         while self.difficulty is None:
-            self.display.fill(self.white)
+        self.display.fill(self.white)
             self.display_difficulty_selection()
             pygame.display.update()
 
