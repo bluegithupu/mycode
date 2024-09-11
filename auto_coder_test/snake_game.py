@@ -1,5 +1,8 @@
 import random
 import time
+import pygame
+
+pygame.init()
 
 class SnakeGame:
     def __init__(self, difficulty):
@@ -10,6 +13,13 @@ class SnakeGame:
         self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
         self.direction = 'RIGHT'
         self.change_to = self.direction
+
+        self.display = pygame.display.set_mode((500, 500))
+        pygame.display.set_caption('Snake Game')
+        self.clock = pygame.time.Clock()
+        self.white = (255, 255, 255)
+        self.black = (0, 0, 0)
+        self.red = (255, 0, 0)
 
     def update_snake(self):
         current_position = self.snake_position[0].copy()
@@ -60,10 +70,37 @@ class SnakeGame:
             return True
         return False
 
+    def draw_snake(self):
+        for position in self.snake_position:
+            pygame.draw.rect(self.display, self.black, pygame.Rect(position[0], position[1], 10, 10))
+
+    def draw_food(self):
+        pygame.draw.rect(self.display, self.red, pygame.Rect(self.food_position[0], self.food_position[1], 10, 10))
+
     def play(self):
         while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.change_direction('UP')
+                    elif event.key == pygame.K_DOWN:
+                        self.change_direction('DOWN')
+                    elif event.key == pygame.K_LEFT:
+                        self.change_direction('LEFT')
+                    elif event.key == pygame.K_RIGHT:
+                        self.change_direction('RIGHT')
+
             self.update_snake()
+            self.display.fill(self.white)
+            self.draw_snake()
+            self.draw_food()
+            pygame.display.update()
+            self.clock.tick(15)
+
             if self.is_collision():
                 print(f"Game Over! Your score is {self.score}")
-                break
-            time.sleep(0.1)
+                pygame.quit()
+                quit()
