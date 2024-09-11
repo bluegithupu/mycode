@@ -79,6 +79,7 @@ class SnakeGame:
         pygame.draw.rect(self.display, self.red, pygame.Rect(self.food_position[0], self.food_position[1], 10, 10))
 
     def play(self):
+        self.selected_difficulty = 0
         while self.difficulty is None:
             self.display.fill(self.white)
             self.display_difficulty_selection()
@@ -89,12 +90,17 @@ class SnakeGame:
                     pygame.quit()
                     quit()
                 elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_e:
-                        self.difficulty = 'easy'
-                    elif event.key == pygame.K_m:
-                        self.difficulty = 'medium'
-                    elif event.key == pygame.K_h:
-                        self.difficulty = 'hard'
+                    if event.key == pygame.K_UP:
+                        self.selected_difficulty = (self.selected_difficulty - 1) % 3
+                    elif event.key == pygame.K_DOWN:
+                        self.selected_difficulty = (self.selected_difficulty + 1) % 3
+                    elif event.key == pygame.K_RETURN:
+                        if self.selected_difficulty == 0:
+                            self.difficulty = 'easy'
+                        elif self.selected_difficulty == 1:
+                            self.difficulty = 'medium'
+                        elif self.selected_difficulty == 2:
+                            self.difficulty = 'hard'
 
         while True:
             for event in pygame.event.get():
@@ -124,8 +130,10 @@ class SnakeGame:
                 pygame.quit()
                 quit()
     def display_difficulty_selection(self):
-        text = self.font.render("Choose difficulty: E - Easy, M - Medium, H - Hard", True, self.black)
-        self.display.blit(text, (50, 200))
+        options = ["Easy", "Medium", "Hard"]
+        for i, option in enumerate(options):
+            text = self.font.render(f"{option}", True, self.black if i != self.selected_difficulty else self.red)
+            self.display.blit(text, (50, 200 + i * 50))
 
     def display_score(self):
         score_text = self.font.render(f"Score: {self.score}", True, self.black)
