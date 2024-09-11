@@ -133,7 +133,8 @@ class SnakeGame:
         options = ["Easy", "Medium", "Hard"]
         for i, option in enumerate(options):
             text = self.font.render(f"{option}", True, self.black if i != self.selected_difficulty else self.red)
-            self.display.blit(text, (50, 200 + i * 50))
+            text_rect = text.get_rect(center=(250, 200 + i * 50))
+            self.display.blit(text, text_rect)
 
     def display_score(self):
         score_text = self.font.render(f"Score: {self.score}", True, self.black)
