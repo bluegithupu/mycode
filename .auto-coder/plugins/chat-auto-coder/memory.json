@@ -127,6 +127,14 @@
     {
       "role": "user",
       "content": "背景设为白色"
+    },
+    {
+      "role": "user",
+      "content": "根据以上建议改进代码"
+    },
+    {
+      "role": "user",
+      "content": "lint检查，并修复问题"
     }
   ],
   "current_files": {

@@ -1,54 +1,20 @@
-根据用户的需求和之前的建议，我们需要确保在黑色背景时，所有难度选项都能正确显示。具体来说，我们需要确保在每次调用 `display_difficulty_selection` 方法之前，背景被正确填充。
+To address the linting issues in the provided code, we will focus on fixing the following:
 
-以下是改进后的代码：
+1. **Indentation Issues**: Ensure consistent indentation.
+2. **Unnecessary `quit()` Calls**: Remove redundant `quit()` calls.
+3. **Unreachable Code**: Fix the unreachable code after the `while True` loop.
+4. **Unused Imports**: Remove unused imports.
+5. **Docstrings**: Add missing docstrings for functions.
+
+Here are the *SEARCH/REPLACE* blocks to fix these issues:
 
 ```python
 ##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
 <<<<<<< SEARCH
-while self.difficulty is None:
-    self.display.fill(self.white)  # Fixed indentation
-    self.display_difficulty_selection()
-    pygame.display.update()
+import random
+import time
+import pygame
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            quit()
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                self.selected_difficulty = (self.selected_difficulty - 1) % 3
-            elif event.key == pygame.K_DOWN:
-                self.selected_difficulty = (self.selected_difficulty + 1) % 3
-            elif event.key == pygame.K_RETURN:
-                if self.selected_difficulty == 0:
-                    self.difficulty = 'easy'
-                elif self.selected_difficulty == 1:
-                    self.difficulty = 'medium'
-                elif self.selected_difficulty == 2:
-                    self.difficulty = 'hard'
-=======
-while self.difficulty is None:
-    self.display.fill(self.black)  # 确保背景被正确填充
-    self.display_difficulty_selection()
-    pygame.display.update()
+pygame.init()
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            quit()
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                self.selected_difficulty = (self.selected_difficulty - 1) % 3
-            elif event.key == pygame.K_DOWN:
-                self.selected_difficulty = (self.selected_difficulty + 1) % 3
-            elif event.key == pygame.K_RETURN:
-                if self.selected_difficulty == 0:
-                    self.difficulty = 'easy'
-                elif self.selected_difficulty == 1:
-                    self.difficulty = 'medium'
-                elif self.selected_difficulty == 2:
-                    self.difficulty = 'hard'
->>>>>>> REPLACE
-```
 
-通过确保背景在每次绘制选项之前被正确填充，应该可以解决黑色背景时只能看到选中选项的问题。
