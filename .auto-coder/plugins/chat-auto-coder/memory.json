@@ -3,12 +3,22 @@
     {
       "role": "user",
       "content": "在 src 目录下创建app.py, 在该文件中实现一个计算器，使用 gradio 来实现。"
+    },
+    {
+      "role": "user",
+      "content": "新建auto_coder_test文件夹，并创建main.py, 完成hello world"
     }
   ],
   "current_files": {
-    "files": []
+    "files": [
+      "/Users/mac/Desktop/gpt_test/auto_coder_test/main.py"
+    ],
+    "groups": {},
+    "groups_info": {},
+    "current_groups": []
   },
   "conf": {},
   "exclude_dirs": [],
-  "mode": "normal"
+  "mode": "normal",
+  "libs": {}
 }
