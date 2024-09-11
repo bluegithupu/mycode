@@ -82,27 +82,27 @@ class SnakeGame:
 
     def play(self):
         self.selected_difficulty = 0  # Ensure initial value is correct
-        while self.difficulty is None:
-            self.display.fill(self.white)  # Fixed indentation
-            self.display_difficulty_selection()
-            pygame.display.update()
+while self.difficulty is None:
+    self.display.fill(self.black)  # 确保背景被正确填充
+    self.display_difficulty_selection()
+    pygame.display.update()
 
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    quit()
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_UP:
-                        self.selected_difficulty = (self.selected_difficulty - 1) % 3
-                    elif event.key == pygame.K_DOWN:
-                        self.selected_difficulty = (self.selected_difficulty + 1) % 3
-                    elif event.key == pygame.K_RETURN:
-                        if self.selected_difficulty == 0:
-                            self.difficulty = 'easy'
-                        elif self.selected_difficulty == 1:
-                            self.difficulty = 'medium'
-                        elif self.selected_difficulty == 2:
-                            self.difficulty = 'hard'
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            quit()
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                self.selected_difficulty = (self.selected_difficulty - 1) % 3
+            elif event.key == pygame.K_DOWN:
+                self.selected_difficulty = (self.selected_difficulty + 1) % 3
+            elif event.key == pygame.K_RETURN:
+                if self.selected_difficulty == 0:
+                    self.difficulty = 'easy'
+                elif self.selected_difficulty == 1:
+                    self.difficulty = 'medium'
+                elif self.selected_difficulty == 2:
+                    self.difficulty = 'hard'
 
         while True:
             for event in pygame.event.get():
