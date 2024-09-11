@@ -1,28 +1,12 @@
-To make the change where only the selected difficulty option is highlighted, we need to modify the `display_difficulty_selection` method in the `SnakeGame` class. Specifically, we will ensure that only the selected option is highlighted, and the others are displayed normally.
-
-Here are the *SEARCH/REPLACE* blocks:
+To change the background color of the Snake Game to white, we need to modify the `play` method in the `SnakeGame` class to set the background color to white instead of black. Here are the *SEARCH/REPLACE* blocks for this change:
 
 ```python
 ##File: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
 <<<<<<< SEARCH
-    def display_difficulty_selection(self):
-        options = ["Easy", "Medium", "Hard"]
-        for i, option in enumerate(options):
-            text = self.font.render(f"{option}", True, self.black if i != self.selected_difficulty else self.red)
-            text_rect = text.get_rect(center=(250, 200 + i * 50))
-            self.display.blit(text, text_rect)
-            print(f"Drawing option: {option} at position {text_rect.center}")  # Debug output
+            self.display.fill(self.black)
 =======
-    def display_difficulty_selection(self):
-        options = ["Easy", "Medium", "Hard"]
-        for i, option in enumerate(options):
-            text = self.font.render(f"{option}", True, self.black)
-            if i == self.selected_difficulty:
-                text = self.font.render(f"{option}", True, self.red)
-            text_rect = text.get_rect(center=(250, 200 + i * 50))
-            self.display.blit(text, text_rect)
-            print(f"Drawing option: {option} at position {text_rect.center}")  # Debug output
+            self.display.fill(self.white)
 >>>>>>> REPLACE
 ```
 
-This change ensures that only the selected difficulty option is highlighted in red, while the others are displayed in black.
+This change will ensure that the background color of the game is set to white.
