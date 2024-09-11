@@ -81,7 +81,7 @@ class SnakeGame:
         pygame.draw.rect(self.display, self.red, (self.food_position[0], self.food_position[1], 10, 10))
 
     def play(self):
-        self.selected_difficulty = 0
+        self.selected_difficulty = 0  # Ensure initial value is correct
         while self.difficulty is None:
             self.display.fill(self.black)  # Fixed indentation
             self.display_difficulty_selection()
@@ -138,9 +138,10 @@ class SnakeGame:
         score_text = self.font.render(f"Score: {self.score}", True, self.black)
         self.display.blit(score_text, (10, 10))
 
-    def display_difficulty_selection(self):
-        options = ["Easy", "Medium", "Hard"]
-        for i, option in enumerate(options):
-            text = self.font.render(f"{option}", True, self.black if i != self.selected_difficulty else self.red)
-            text_rect = text.get_rect(center=(250, 200 + i * 50))
-            self.display.blit(text, text_rect)
+def display_difficulty_selection(self):
+    options = ["Easy", "Medium", "Hard"]
+    for i, option in enumerate(options):
+        text = self.font.render(f"{option}", True, self.black if i != self.selected_difficulty else self.red)
+        text_rect = text.get_rect(center=(250, 200 + i * 50))
+        self.display.blit(text, text_rect)
+        print(f"Drawing option: {option} at position {text_rect.center}")  # Debug output
