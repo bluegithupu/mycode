@@ -91,6 +91,10 @@
     {
       "role": "user",
       "content": "根据以上建议改进代码"
+    },
+    {
+      "role": "user",
+      "content": "所有图片地址添加变量，放在文件上部"
     }
   ],
   "current_files": {
