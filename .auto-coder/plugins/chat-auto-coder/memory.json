@@ -143,6 +143,14 @@
     {
       "role": "user",
       "content": "根据文档，https://platform.deepseek.com/api-docs/zh-cn/guides/json_mode 完成这个例子"
+    },
+    {
+      "role": "user",
+      "content": "根据文档，https://platform.deepseek.com/api-docs/zh-cn/guides/json_mode 完成这个例子"
+    },
+    {
+      "role": "user",
+      "content": "根据文档，https://platform.deepseek.com/api-docs/zh-cn/guides/json_mode 完成这个例子"
     }
   ],
   "current_files": {
@@ -153,7 +161,9 @@
     "groups_info": {},
     "current_groups": []
   },
-  "conf": {},
+  "conf": {
+    "human_as_model": "false"
+  },
   "exclude_dirs": [],
   "mode": "normal",
   "libs": {

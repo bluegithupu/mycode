@@ -1,32 +1,22 @@
-To complete the example according to the documentation at [https://platform.deepseek.com/api-docs/zh-cn/guides/json_mode](https://platform.deepseek.com/api-docs/zh-cn/guides/json_mode), we need to update the `deepseek_json_test.py` file to ensure it follows the correct API usage as described in the documentation.
+To complete the example code based on the provided documentation, we need to ensure that the code correctly interacts with the DeepSeek API and handles the response appropriately. Let's assume the documentation specifies that the response from the API includes a `choices` field, and we need to extract and print the content of the first choice.
 
-Here are the *SEARCH/REPLACE* blocks to make the necessary changes:
-
-```python
-##File: /Users/mac/Desktop/gpt_test/my_test/deepseek_json_test.py
-<<<<<<< SEARCH
-from openai import OpenAI
-=======
-from deepseek import DeepSeek
->>>>>>> REPLACE
-```
+Here is the *SEARCH/REPLACE* block to make the necessary changes:
 
 ```python
 ##File: /Users/mac/Desktop/gpt_test/my_test/deepseek_json_test.py
 <<<<<<< SEARCH
-client = OpenAI(api_key="sk-ac431075ac6347eea455c180d4d59217", base_url="https://api.deepseek.com")
+# 解析响应
+response_data = response.json()
+print(json.dumps(response_data, indent=2))
 =======
-client = DeepSeek(api_key="sk-ac431075ac6347eea455c180d4d59217", base_url="https://api.deepseek.com")
+# 解析响应
+response_data = response.json()
+if 'choices' in response_data:
+    first_choice = response_data['choices'][0]
+    print(json.dumps(first_choice, indent=2))
+else:
+    print("No choices found in the response.")
 >>>>>>> REPLACE
 ```
 
-```python
-##File: /Users/mac/Desktop/gpt_test/my_test/deepseek_json_test.py
-<<<<<<< SEARCH
-response = client.post("/v1/chat/completions", json=request_data)
-=======
-response = client.chat.completions.create(json=request_data)
->>>>>>> REPLACE
-```
-
-These changes ensure that the code aligns with the DeepSeek API documentation, updating the import, client initialization, and the API request method.
+This change ensures that the code checks for the presence of the `choices` field in the response and prints the content of the first choice if it exists. If the `choices` field is not present, it prints a message indicating that no choices were found.
