@@ -18,4 +18,8 @@ response = client.chat.completions.create(json=request_data)
 
 # 解析响应
 response_data = response.json()
-print(json.dumps(response_data, indent=2))
+if 'choices' in response_data:
+    first_choice = response_data['choices'][0]
+    print(json.dumps(first_choice, indent=2))
+else:
+    print("No choices found in the response.")
