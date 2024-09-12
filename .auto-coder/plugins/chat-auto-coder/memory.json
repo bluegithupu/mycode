@@ -135,11 +135,15 @@
     {
       "role": "user",
       "content": "lint检查，并修复问题"
+    },
+    {
+      "role": "user",
+      "content": "根据文档，https://platform.deepseek.com/api-docs/zh-cn/guides/json_mode 完成这个例子"
     }
   ],
   "current_files": {
     "files": [
-      "/Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py"
+      "/Users/mac/Desktop/gpt_test/my_test/deepseek_json_test.py"
     ],
     "groups": {},
     "groups_info": {},
@@ -148,5 +152,7 @@
   "conf": {},
   "exclude_dirs": [],
   "mode": "normal",
-  "libs": {}
+  "libs": {
+    "https://platform.deepseek.com/api-docs/zh-cn/guides/json_mode": {}
+  }
 }

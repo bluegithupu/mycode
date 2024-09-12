@@ -1,0 +1,14 @@
+auto_merge: editblock
+context: '下面是对上面文件按分组给到的一些描述，当用户的需求正好匹配描述���时候，参考描述来做修改：
+
+
+  '
+human_as_model: false
+include_file:
+- ./base/base.yml
+query: 根据文档，https://platform.deepseek.com/api-docs/zh-cn/guides/json_mode 完成这个例子
+silence: true
+skip_build_index: true
+skip_confirm: true
+urls:
+- /Users/mac/Desktop/gpt_test/my_test/deepseek_test.py
