@@ -1,38 +1,32 @@
-To complete the example according to the documentation at [https://platform.deepseek.com/api-docs/zh-cn/guides/json_mode](https://platform.deepseek.com/api-docs/zh-cn/guides/json_mode), we need to modify the `/Users/mac/Desktop/gpt_test/my_test/deepseek_json_test.py` file to include the necessary code to interact with the DeepSeek API in JSON mode.
+To complete the example according to the documentation at [https://platform.deepseek.com/api-docs/zh-cn/guides/json_mode](https://platform.deepseek.com/api-docs/zh-cn/guides/json_mode), we need to update the `deepseek_json_test.py` file to ensure it follows the correct API usage as described in the documentation.
 
-Here is the *SEARCH/REPLACE* block for the required changes:
+Here are the *SEARCH/REPLACE* blocks to make the necessary changes:
 
 ```python
 ##File: /Users/mac/Desktop/gpt_test/my_test/deepseek_json_test.py
 <<<<<<< SEARCH
-import json
 from openai import OpenAI
-
-# 初始化 OpenAI 客户端
-client = OpenAI(api_key="sk-ac431075ac6347eea455c180d4d59217", base_url="https://api.deepseek.com")
 =======
-import json
-from openai import OpenAI
-
-# 初始化 OpenAI 客户端
-client = OpenAI(api_key="sk-ac431075ac6347eea455c180d4d59217", base_url="https://api.deepseek.com")
-
-# 定义请求数据
-request_data = {
-    "model": "deepseek-gpt-3.5-turbo",
-    "messages": [
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "Hello, how are you?"}
-    ]
-}
-
-# 发送请求
-response = client.post("/v1/chat/completions", json=request_data)
-
-# 解析响应
-response_data = response.json()
-print(json.dumps(response_data, indent=2))
+from deepseek import DeepSeek
 >>>>>>> REPLACE
 ```
 
-This *SEARCH/REPLACE* block adds the necessary code to interact with the DeepSeek API in JSON mode, including defining the request data, sending the request, and parsing the response.
+```python
+##File: /Users/mac/Desktop/gpt_test/my_test/deepseek_json_test.py
+<<<<<<< SEARCH
+client = OpenAI(api_key="sk-ac431075ac6347eea455c180d4d59217", base_url="https://api.deepseek.com")
+=======
+client = DeepSeek(api_key="sk-ac431075ac6347eea455c180d4d59217", base_url="https://api.deepseek.com")
+>>>>>>> REPLACE
+```
+
+```python
+##File: /Users/mac/Desktop/gpt_test/my_test/deepseek_json_test.py
+<<<<<<< SEARCH
+response = client.post("/v1/chat/completions", json=request_data)
+=======
+response = client.chat.completions.create(json=request_data)
+>>>>>>> REPLACE
+```
+
+These changes ensure that the code aligns with the DeepSeek API documentation, updating the import, client initialization, and the API request method.

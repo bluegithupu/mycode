@@ -139,6 +139,10 @@
     {
       "role": "user",
       "content": "根据文档，https://platform.deepseek.com/api-docs/zh-cn/guides/json_mode 完成这个例子"
+    },
+    {
+      "role": "user",
+      "content": "根据文档，https://platform.deepseek.com/api-docs/zh-cn/guides/json_mode 完成这个例子"
     }
   ],
   "current_files": {
