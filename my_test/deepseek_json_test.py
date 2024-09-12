@@ -1,8 +1,8 @@
 import json
-from openai import OpenAI
+from deepseek import DeepSeek
 
 # 初始化 OpenAI 客户端
-client = OpenAI(api_key="sk-ac431075ac6347eea455c180d4d59217", base_url="https://api.deepseek.com")
+client = DeepSeek(api_key="sk-ac431075ac6347eea455c180d4d59217", base_url="https://api.deepseek.com")
 
 # 定义请求数据
 request_data = {
@@ -14,7 +14,7 @@ request_data = {
 }
 
 # 发送请求
-response = client.post("/v1/chat/completions", json=request_data)
+response = client.chat.completions.create(json=request_data)
 
 # 解析响应
 response_data = response.json()
