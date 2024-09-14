@@ -14,7 +14,7 @@ request_data = {
 }
 
 # 发送请求
-response = client.chat.completions.create(json=request_data)
+response = client.chat.completions.create(request_data)
 
 # 解析响应
 response_data = response.json()
