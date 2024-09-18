@@ -1,23 +1,38 @@
-import requests
+import json
+from openai import OpenAI
 
-# 设置 API 密钥和请求数据
-api_key = 'your_api_key_here'
-request_data = {
-    "model": "gpt-3.5-turbo",
-    "messages": [
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "Hello, how are you?"}
-    ]
+# client = OpenAI(
+#     api_key="<your api key>",
+#     base_url="https://api.deepseek.com",
+# )
+
+client = OpenAI(api_key="sk-ac431075ac6347eea455c180d4d59217", base_url="https://api.deepseek.com")
+
+
+system_prompt = """
+The user will provide some exam text. Please parse the "question" and "answer" and output them in JSON format. 
+
+EXAMPLE INPUT: 
+Which is the highest mountain in the world? Mount Everest.
+
+EXAMPLE JSON OUTPUT:
+{
+    "question": "Which is the highest mountain in the world?",
+    "answer": "Mount Everest"
 }
+"""
 
-# 设置请求头
-headers = {
-    "Authorization": f"Bearer {api_key}",
-    "Content-Type": "application/json"
-}
+user_prompt = "Which is the longest river in the world? The Nile River."
 
-# 发送请求
-response = requests.post('https://platform.deepseek.com/api/v1/chat/completions', json=request_data, headers=headers)
+messages = [{"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}]
 
-# 打印响应
-print(response.json())
+response = client.chat.completions.create(
+    model="deepseek-chat",
+    messages=messages,
+    response_format={
+        'type': 'json_object'
+    }
+)
+
+print(json.loads(response.choices[0].message.content))

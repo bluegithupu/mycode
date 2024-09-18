@@ -1,14 +1,188 @@
-To complete the example code based on the provided documentation, we need to ensure that the code correctly interacts with the DeepSeek API and handles the response appropriately. Let's assume the documentation specifies that the response from the API includes a `choices` field, and we need to extract and print the content of the first choice.
 
-Here is the *SEARCH/REPLACE* block to make the necessary changes:
+如果你需要生成代码，对于每个需要更改的文件,你需要按 *SEARCH/REPLACE block* 的格式进行生成。
+
+# *SEARCH/REPLACE block* Rules:
+
+Every *SEARCH/REPLACE block* must use this format:
+1. The opening fence and code language, eg: ```python
+2. The file path alone on a line, starting with "##File:" and verbatim. No bold asterisks, no quotes around it, no escaping of characters, etc.
+3. The start of search block: <<<<<<< SEARCH
+4. A contiguous chunk of lines to search for in the existing source code
+5. The dividing line: =======
+6. The lines to replace into the source code
+7. The end of the replace block: >>>>>>> REPLACE
+8. The closing fence: ```
+
+Every *SEARCH* section must *EXACTLY MATCH* the existing source code, character for character, including all comments, docstrings, etc.
+
+*SEARCH/REPLACE* blocks will replace *all* matching occurrences.
+Include enough lines to make the SEARCH blocks unique.
+
+Include *ALL* the code being searched and replaced!
+
+To move code within a file, use 2 *SEARCH/REPLACE* blocks: 1 to delete it from its current location, 1 to insert it in the new location.
+
+If you want to put code in a new file, use a *SEARCH/REPLACE block* with:
+- A new file path, including dir name if needed
+- An empty `SEARCH` section
+- The new file's contents in the `REPLACE` section
+
+ONLY EVER RETURN CODE IN A *SEARCH/REPLACE BLOCK*!
+
+下面我们来看一个例子：
+
+当前项目目录结构：
+1. 项目根目录： /tmp/projects/mathweb
+2. 项目子目录/文件列表(类似tree 命令输出)
+flask/
+    app.py
+    templates/
+        index.html
+    static/
+        style.css
+
+用户需求： Change get_factorial() to use math.factorial
+
+回答： To make this change we need to modify `/tmp/projects/mathweb/flask/app.py` to:
+
+1. Import the math package.
+2. Remove the existing factorial() function.
+3. Update get_factorial() to call math.factorial instead.
+
+Here are the *SEARCH/REPLACE* blocks:
 
 ```python
-##File: /Users/mac/Desktop/gpt_test/my_test/deepseek_json_test.py
+##File: /tmp/projects/mathweb/flask/app.py
 <<<<<<< SEARCH
-# 解析响应
-response_data = response.json()
-print(json.dumps(response_data, indent=2))
+from flask import Flask
 =======
+import math
+from flask import Flask
+>>>>>>> REPLACE
+```
+
+```python
+##File: /tmp/projects/mathweb/flask/app.py
+<<<<<<< SEARCH
+def factorial(n):
+    "compute factorial"
+
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n-1)
+
+=======
+>>>>>>> REPLACE
+```
+
+```python
+##File: /tmp/projects/mathweb/flask/app.py
+<<<<<<< SEARCH
+    return str(factorial(n))
+=======
+    return str(math.factorial(n))
+>>>>>>> REPLACE
+```
+
+用户需求： Refactor hello() into its own file.
+
+回答：To make this change we need to modify `main.py` and make a new file `hello.py`:
+
+1. Make a new hello.py file with hello() in it.
+2. Remove hello() from main.py and replace it with an import.
+
+Here are the *SEARCH/REPLACE* blocks:
+
+```python
+##File: /tmp/projects/mathweb/hello.py
+<<<<<<< SEARCH
+=======
+def hello():
+    "print a greeting"
+
+    print("hello")
+>>>>>>> REPLACE
+```
+
+```python
+##File: /tmp/projects/mathweb/main.py
+<<<<<<< SEARCH
+def hello():
+    "print a greeting"
+
+    print("hello")
+=======
+from hello import hello
+>>>>>>> REPLACE
+```
+
+现在让我们开始一个新的任务:
+
+当前项目目录结构：
+1. 项目根目录： /Users/mac/Desktop/gpt_test
+2. 项目子目录/文件列表(类似tree 命令输出)：
+langchain-test/
+    server.py
+    code_load.py
+    toolsx.py
+    scarp.py
+    main.py
+lang_graph_test/
+    main.py
+auto_coder_test/
+    snake_game.py
+    main.py
+aider_code_test/
+    task.py
+    main.py
+aider_code_for_monitor/
+    main.py
+.auto-coder/
+    libs/
+        llm_friendly_packages/
+            src/
+                example1/
+                    main.py
+aider_auto_code_test/
+    main.py
+my_test/
+    deepseek_test.py
+    deepseek_json_test.py
+    douban_scraper.py
+crew_agents/
+    game/
+        main.py
+    writer/
+        main.py
+    coder/
+        __init__.py
+        coder_agent.py
+        main.py
+mycode/
+    file_reader.py
+    main.py
+下面是一些文件路径以及每个文件对应的源码：
+
+##File: /Users/mac/Desktop/gpt_test/my_test/deepseek_json_test.py
+import json
+from deepseek import DeepSeek
+
+# 初始化 OpenAI 客户端
+client = DeepSeek(api_key="sk-ac431075ac6347eea455c180d4d59217", base_url="https://api.deepseek.com")
+
+# 定义请求数据
+request_data = {
+    "model": "deepseek-gpt-3.5-turbo",
+    "messages": [
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "Hello, how are you?"}
+    ]
+}
+
+# 发送请求
+response = client.chat.completions.create(json=request_data)
+
 # 解析响应
 response_data = response.json()
 if 'choices' in response_data:
@@ -16,7 +190,13 @@ if 'choices' in response_data:
     print(json.dumps(first_choice, indent=2))
 else:
     print("No choices found in the response.")
->>>>>>> REPLACE
-```
 
-This change ensures that the code checks for the presence of the `choices` field in the response and prints the content of the first choice if it exists. If the `choices` field is not present, it prints a message indicating that no choices were found.
+
+
+下面是对上面文件按分组给到的一些描述，当用户的需求正好匹配描述���时候，参考描述来做修改：
+
+     
+
+下面是用户的需求：
+
+根据文档https://platform.deepseek.com/api-docs/zh-cn/guides/json_mode 完成这个例子
