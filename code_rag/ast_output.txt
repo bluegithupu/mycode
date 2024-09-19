@@ -1,0 +1,2800 @@
+Processing file: /Users/mac/Desktop/gpt_test/auto_coder_test/snake_game.py
+module: import random
+import time
+import pygame
+
+pygame.init()
+
+
+
+class SnakeGame:
+    def __init__(self):
+        self.difficulty = None
+        self.score = 0
+        self.snake_length = 1
+        self.snake_position = [[100, 50]]
+        self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+        self.direction = 'RIGHT'
+        self.change_to = self.direction
+
+        self.display = pygame.display.set_mode((500, 500))
+        pygame.display.set_caption('Snake Game')
+        self.clock = pygame.time.Clock()
+        self.white = (255, 255, 255)
+        self.black = (0, 0, 0)
+        self.red = (255, 0, 0)
+        self.font = pygame.font.Font(None, 36)
+
+    def update_snake(self):
+        current_position = self.snake_position[0].copy()
+
+        if self.direction == 'UP':
+            current_position[1] -= 10
+        if self.direction == 'DOWN':
+            current_position[1] += 10
+        if self.direction == 'LEFT':
+            current_position[0] -= 10
+        if self.direction == 'RIGHT':
+            current_position[0] += 10
+
+        self.snake_position.insert(0, current_position)
+
+        if current_position == self.food_position:
+            self.score += self.get_score_increment()
+            self.snake_length += 1
+            self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+        else:
+            self.snake_position.pop()
+
+    def get_score_increment(self):
+        if self.difficulty == 'easy':
+            return 1
+        elif self.difficulty == 'medium':
+            return 2
+        elif self.difficulty == 'hard':
+            return 3
+        return 0
+
+    def change_direction(self, new_direction):
+        if new_direction == 'UP' and self.direction != 'DOWN':
+            self.direction = 'UP'
+        if new_direction == 'DOWN' and self.direction != 'UP':
+            self.direction = 'DOWN'
+        if new_direction == 'LEFT' and self.direction != 'RIGHT':
+            self.direction = 'LEFT'
+        if new_direction == 'RIGHT' and self.direction != 'LEFT':
+            self.direction = 'RIGHT'
+
+    def is_collision(self):
+        if self.snake_position[0][0] >= 500 or self.snake_position[0][0] < 0:
+            return True
+        if self.snake_position[0][1] >= 500 or self.snake_position[0][1] < 0:
+            return True
+        if self.snake_position[0] in self.snake_position[1:]:
+            return True
+        return False
+
+    def draw_snake(self):
+        for position in self.snake_position:
+            pygame.draw.rect(self.display, self.white, (position[0], position[1], 10, 10))
+
+    def draw_food(self):
+        pygame.draw.rect(self.display, self.red, (self.food_position[0], self.food_position[1], 10, 10))
+
+    def play(self):
+        self.selected_difficulty = 0  # Ensure initial value is correct
+        self.set_difficulty()
+
+    def set_difficulty(self):
+        while self.difficulty is None:
+            self.display.fill(self.black)  # 确保背景被正确填充
+            self.display_difficulty_selection()
+            pygame.display.update()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.selected_difficulty = (self.selected_difficulty - 1) % 3
+                    elif event.key == pygame.K_DOWN:
+                        self.selected_difficulty = (self.selected_difficulty + 1) % 3
+                    elif event.key == pygame.K_RETURN:
+                        if self.selected_difficulty == 0:
+                            self.difficulty = 'easy'
+                        elif self.selected_difficulty == 1:
+                            self.difficulty = 'medium'
+                        elif self.selected_difficulty == 2:
+                            self.difficulty = 'hard'
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.change_direction('UP')
+                    elif event.key == pygame.K_DOWN:
+                        self.change_direction('DOWN')
+                    elif event.key == pygame.K_LEFT:
+                        self.change_direction('LEFT')
+                    elif event.key == pygame.K_RIGHT:
+                        self.change_direction('RIGHT')
+
+            self.update_snake()
+            self.display.fill(self.black)
+            self.draw_snake()
+            self.draw_food()
+            self.display_score()
+            pygame.display.update()
+            self.clock.tick(15)
+
+            if self.is_collision():
+                print(f"Game Over! Your score is {self.score}")
+                pygame.quit()
+                quit()
+                quit()
+
+
+    def display_score(self):
+        score_text = self.font.render(f"Score: {self.score}", True, self.black)
+        self.display.blit(score_text, (10, 10))
+
+    def display_difficulty_selection(self):
+        options = ["Easy", "Medium", "Hard"]
+        for i, option in enumerate(options):
+            text = self.font.render(f"{option}", True, self.black)
+            if i == self.selected_difficulty:
+                text = self.font.render(f"{option}", True, self.red)
+            text_rect = text.get_rect(center=(250, 200 + i * 50))
+            self.display.blit(text, text_rect)
+            print(f"Drawing option: {option} at position {text_rect.center}")  # Debug output
+  import_statement: import random
+    import: import
+    dotted_name: random
+      identifier: random
+  import_statement: import time
+    import: import
+    dotted_name: time
+      identifier: time
+  import_statement: import pygame
+    import: import
+    dotted_name: pygame
+      identifier: pygame
+  expression_statement: pygame.init()
+    call: pygame.init()
+      attribute: pygame.init
+        identifier: pygame
+        .: .
+        identifier: init
+      argument_list: ()
+        (: (
+        ): )
+  class_definition: class SnakeGame:
+    def __init__(self):
+        self.difficulty = None
+        self.score = 0
+        self.snake_length = 1
+        self.snake_position = [[100, 50]]
+        self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+        self.direction = 'RIGHT'
+        self.change_to = self.direction
+
+        self.display = pygame.display.set_mode((500, 500))
+        pygame.display.set_caption('Snake Game')
+        self.clock = pygame.time.Clock()
+        self.white = (255, 255, 255)
+        self.black = (0, 0, 0)
+        self.red = (255, 0, 0)
+        self.font = pygame.font.Font(None, 36)
+
+    def update_snake(self):
+        current_position = self.snake_position[0].copy()
+
+        if self.direction == 'UP':
+            current_position[1] -= 10
+        if self.direction == 'DOWN':
+            current_position[1] += 10
+        if self.direction == 'LEFT':
+            current_position[0] -= 10
+        if self.direction == 'RIGHT':
+            current_position[0] += 10
+
+        self.snake_position.insert(0, current_position)
+
+        if current_position == self.food_position:
+            self.score += self.get_score_increment()
+            self.snake_length += 1
+            self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+        else:
+            self.snake_position.pop()
+
+    def get_score_increment(self):
+        if self.difficulty == 'easy':
+            return 1
+        elif self.difficulty == 'medium':
+            return 2
+        elif self.difficulty == 'hard':
+            return 3
+        return 0
+
+    def change_direction(self, new_direction):
+        if new_direction == 'UP' and self.direction != 'DOWN':
+            self.direction = 'UP'
+        if new_direction == 'DOWN' and self.direction != 'UP':
+            self.direction = 'DOWN'
+        if new_direction == 'LEFT' and self.direction != 'RIGHT':
+            self.direction = 'LEFT'
+        if new_direction == 'RIGHT' and self.direction != 'LEFT':
+            self.direction = 'RIGHT'
+
+    def is_collision(self):
+        if self.snake_position[0][0] >= 500 or self.snake_position[0][0] < 0:
+            return True
+        if self.snake_position[0][1] >= 500 or self.snake_position[0][1] < 0:
+            return True
+        if self.snake_position[0] in self.snake_position[1:]:
+            return True
+        return False
+
+    def draw_snake(self):
+        for position in self.snake_position:
+            pygame.draw.rect(self.display, self.white, (position[0], position[1], 10, 10))
+
+    def draw_food(self):
+        pygame.draw.rect(self.display, self.red, (self.food_position[0], self.food_position[1], 10, 10))
+
+    def play(self):
+        self.selected_difficulty = 0  # Ensure initial value is correct
+        self.set_difficulty()
+
+    def set_difficulty(self):
+        while self.difficulty is None:
+            self.display.fill(self.black)  # 确保背景被正确填充
+            self.display_difficulty_selection()
+            pygame.display.update()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.selected_difficulty = (self.selected_difficulty - 1) % 3
+                    elif event.key == pygame.K_DOWN:
+                        self.selected_difficulty = (self.selected_difficulty + 1) % 3
+                    elif event.key == pygame.K_RETURN:
+                        if self.selected_difficulty == 0:
+                            self.difficulty = 'easy'
+                        elif self.selected_difficulty == 1:
+                            self.difficulty = 'medium'
+                        elif self.selected_difficulty == 2:
+                            self.difficulty = 'hard'
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.change_direction('UP')
+                    elif event.key == pygame.K_DOWN:
+                        self.change_direction('DOWN')
+                    elif event.key == pygame.K_LEFT:
+                        self.change_direction('LEFT')
+                    elif event.key == pygame.K_RIGHT:
+                        self.change_direction('RIGHT')
+
+            self.update_snake()
+            self.display.fill(self.black)
+            self.draw_snake()
+            self.draw_food()
+            self.display_score()
+            pygame.display.update()
+            self.clock.tick(15)
+
+            if self.is_collision():
+                print(f"Game Over! Your score is {self.score}")
+                pygame.quit()
+                quit()
+                quit()
+
+
+    def display_score(self):
+        score_text = self.font.render(f"Score: {self.score}", True, self.black)
+        self.display.blit(score_text, (10, 10))
+
+    def display_difficulty_selection(self):
+        options = ["Easy", "Medium", "Hard"]
+        for i, option in enumerate(options):
+            text = self.font.render(f"{option}", True, self.black)
+            if i == self.selected_difficulty:
+                text = self.font.render(f"{option}", True, self.red)
+            text_rect = text.get_rect(center=(250, 200 + i * 50))
+            self.display.blit(text, text_rect)
+            print(f"Drawing option: {option} at position {text_rect.center}")  # Debug output
+    class: class
+    identifier: SnakeGame
+    :: :
+    block: def __init__(self):
+        self.difficulty = None
+        self.score = 0
+        self.snake_length = 1
+        self.snake_position = [[100, 50]]
+        self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+        self.direction = 'RIGHT'
+        self.change_to = self.direction
+
+        self.display = pygame.display.set_mode((500, 500))
+        pygame.display.set_caption('Snake Game')
+        self.clock = pygame.time.Clock()
+        self.white = (255, 255, 255)
+        self.black = (0, 0, 0)
+        self.red = (255, 0, 0)
+        self.font = pygame.font.Font(None, 36)
+
+    def update_snake(self):
+        current_position = self.snake_position[0].copy()
+
+        if self.direction == 'UP':
+            current_position[1] -= 10
+        if self.direction == 'DOWN':
+            current_position[1] += 10
+        if self.direction == 'LEFT':
+            current_position[0] -= 10
+        if self.direction == 'RIGHT':
+            current_position[0] += 10
+
+        self.snake_position.insert(0, current_position)
+
+        if current_position == self.food_position:
+            self.score += self.get_score_increment()
+            self.snake_length += 1
+            self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+        else:
+            self.snake_position.pop()
+
+    def get_score_increment(self):
+        if self.difficulty == 'easy':
+            return 1
+        elif self.difficulty == 'medium':
+            return 2
+        elif self.difficulty == 'hard':
+            return 3
+        return 0
+
+    def change_direction(self, new_direction):
+        if new_direction == 'UP' and self.direction != 'DOWN':
+            self.direction = 'UP'
+        if new_direction == 'DOWN' and self.direction != 'UP':
+            self.direction = 'DOWN'
+        if new_direction == 'LEFT' and self.direction != 'RIGHT':
+            self.direction = 'LEFT'
+        if new_direction == 'RIGHT' and self.direction != 'LEFT':
+            self.direction = 'RIGHT'
+
+    def is_collision(self):
+        if self.snake_position[0][0] >= 500 or self.snake_position[0][0] < 0:
+            return True
+        if self.snake_position[0][1] >= 500 or self.snake_position[0][1] < 0:
+            return True
+        if self.snake_position[0] in self.snake_position[1:]:
+            return True
+        return False
+
+    def draw_snake(self):
+        for position in self.snake_position:
+            pygame.draw.rect(self.display, self.white, (position[0], position[1], 10, 10))
+
+    def draw_food(self):
+        pygame.draw.rect(self.display, self.red, (self.food_position[0], self.food_position[1], 10, 10))
+
+    def play(self):
+        self.selected_difficulty = 0  # Ensure initial value is correct
+        self.set_difficulty()
+
+    def set_difficulty(self):
+        while self.difficulty is None:
+            self.display.fill(self.black)  # 确保背景被正确填充
+            self.display_difficulty_selection()
+            pygame.display.update()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.selected_difficulty = (self.selected_difficulty - 1) % 3
+                    elif event.key == pygame.K_DOWN:
+                        self.selected_difficulty = (self.selected_difficulty + 1) % 3
+                    elif event.key == pygame.K_RETURN:
+                        if self.selected_difficulty == 0:
+                            self.difficulty = 'easy'
+                        elif self.selected_difficulty == 1:
+                            self.difficulty = 'medium'
+                        elif self.selected_difficulty == 2:
+                            self.difficulty = 'hard'
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.change_direction('UP')
+                    elif event.key == pygame.K_DOWN:
+                        self.change_direction('DOWN')
+                    elif event.key == pygame.K_LEFT:
+                        self.change_direction('LEFT')
+                    elif event.key == pygame.K_RIGHT:
+                        self.change_direction('RIGHT')
+
+            self.update_snake()
+            self.display.fill(self.black)
+            self.draw_snake()
+            self.draw_food()
+            self.display_score()
+            pygame.display.update()
+            self.clock.tick(15)
+
+            if self.is_collision():
+                print(f"Game Over! Your score is {self.score}")
+                pygame.quit()
+                quit()
+                quit()
+
+
+    def display_score(self):
+        score_text = self.font.render(f"Score: {self.score}", True, self.black)
+        self.display.blit(score_text, (10, 10))
+
+    def display_difficulty_selection(self):
+        options = ["Easy", "Medium", "Hard"]
+        for i, option in enumerate(options):
+            text = self.font.render(f"{option}", True, self.black)
+            if i == self.selected_difficulty:
+                text = self.font.render(f"{option}", True, self.red)
+            text_rect = text.get_rect(center=(250, 200 + i * 50))
+            self.display.blit(text, text_rect)
+            print(f"Drawing option: {option} at position {text_rect.center}")  # Debug output
+      function_definition: def __init__(self):
+        self.difficulty = None
+        self.score = 0
+        self.snake_length = 1
+        self.snake_position = [[100, 50]]
+        self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+        self.direction = 'RIGHT'
+        self.change_to = self.direction
+
+        self.display = pygame.display.set_mode((500, 500))
+        pygame.display.set_caption('Snake Game')
+        self.clock = pygame.time.Clock()
+        self.white = (255, 255, 255)
+        self.black = (0, 0, 0)
+        self.red = (255, 0, 0)
+        self.font = pygame.font.Font(None, 36)
+        def: def
+        identifier: __init__
+        parameters: (self)
+          (: (
+          identifier: self
+          ): )
+        :: :
+        block: self.difficulty = None
+        self.score = 0
+        self.snake_length = 1
+        self.snake_position = [[100, 50]]
+        self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+        self.direction = 'RIGHT'
+        self.change_to = self.direction
+
+        self.display = pygame.display.set_mode((500, 500))
+        pygame.display.set_caption('Snake Game')
+        self.clock = pygame.time.Clock()
+        self.white = (255, 255, 255)
+        self.black = (0, 0, 0)
+        self.red = (255, 0, 0)
+        self.font = pygame.font.Font(None, 36)
+          expression_statement: self.difficulty = None
+            assignment: self.difficulty = None
+              attribute: self.difficulty
+                identifier: self
+                .: .
+                identifier: difficulty
+              =: =
+              none: None
+          expression_statement: self.score = 0
+            assignment: self.score = 0
+              attribute: self.score
+                identifier: self
+                .: .
+                identifier: score
+              =: =
+              integer: 0
+          expression_statement: self.snake_length = 1
+            assignment: self.snake_length = 1
+              attribute: self.snake_length
+                identifier: self
+                .: .
+                identifier: snake_length
+              =: =
+              integer: 1
+          expression_statement: self.snake_position = [[100, 50]]
+            assignment: self.snake_position = [[100, 50]]
+              attribute: self.snake_position
+                identifier: self
+                .: .
+                identifier: snake_position
+              =: =
+              list: [[100, 50]]
+                [: [
+                list: [100, 50]
+                  [: [
+                  integer: 100
+                  ,: ,
+                  integer: 50
+                  ]: ]
+                ]: ]
+          expression_statement: self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+            assignment: self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+              attribute: self.food_position
+                identifier: self
+                .: .
+                identifier: food_position
+              =: =
+              list: [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+                [: [
+                binary_operator: random.randint(0, 50) * 10
+                  call: random.randint(0, 50)
+                    attribute: random.randint
+                      identifier: random
+                      .: .
+                      identifier: randint
+                    argument_list: (0, 50)
+                      (: (
+                      integer: 0
+                      ,: ,
+                      integer: 50
+                      ): )
+                  *: *
+                  integer: 10
+                ,: ,
+                binary_operator: random.randint(0, 50) * 10
+                  call: random.randint(0, 50)
+                    attribute: random.randint
+                      identifier: random
+                      .: .
+                      identifier: randint
+                    argument_list: (0, 50)
+                      (: (
+                      integer: 0
+                      ,: ,
+                      integer: 50
+                      ): )
+                  *: *
+                  integer: 10
+                ]: ]
+          expression_statement: self.direction = 'RIGHT'
+            assignment: self.direction = 'RIGHT'
+              attribute: self.direction
+                identifier: self
+                .: .
+                identifier: direction
+              =: =
+              string: 'RIGHT'
+                string_start: '
+                string_content: RIGHT
+                string_end: '
+          expression_statement: self.change_to = self.direction
+            assignment: self.change_to = self.direction
+              attribute: self.change_to
+                identifier: self
+                .: .
+                identifier: change_to
+              =: =
+              attribute: self.direction
+                identifier: self
+                .: .
+                identifier: direction
+          expression_statement: self.display = pygame.display.set_mode((500, 500))
+            assignment: self.display = pygame.display.set_mode((500, 500))
+              attribute: self.display
+                identifier: self
+                .: .
+                identifier: display
+              =: =
+              call: pygame.display.set_mode((500, 500))
+                attribute: pygame.display.set_mode
+                  attribute: pygame.display
+                    identifier: pygame
+                    .: .
+                    identifier: display
+                  .: .
+                  identifier: set_mode
+                argument_list: ((500, 500))
+                  (: (
+                  tuple: (500, 500)
+                    (: (
+                    integer: 500
+                    ,: ,
+                    integer: 500
+                    ): )
+                  ): )
+          expression_statement: pygame.display.set_caption('Snake Game')
+            call: pygame.display.set_caption('Snake Game')
+              attribute: pygame.display.set_caption
+                attribute: pygame.display
+                  identifier: pygame
+                  .: .
+                  identifier: display
+                .: .
+                identifier: set_caption
+              argument_list: ('Snake Game')
+                (: (
+                string: 'Snake Game'
+                  string_start: '
+                  string_content: Snake Game
+                  string_end: '
+                ): )
+          expression_statement: self.clock = pygame.time.Clock()
+            assignment: self.clock = pygame.time.Clock()
+              attribute: self.clock
+                identifier: self
+                .: .
+                identifier: clock
+              =: =
+              call: pygame.time.Clock()
+                attribute: pygame.time.Clock
+                  attribute: pygame.time
+                    identifier: pygame
+                    .: .
+                    identifier: time
+                  .: .
+                  identifier: Clock
+                argument_list: ()
+                  (: (
+                  ): )
+          expression_statement: self.white = (255, 255, 255)
+            assignment: self.white = (255, 255, 255)
+              attribute: self.white
+                identifier: self
+                .: .
+                identifier: white
+              =: =
+              tuple: (255, 255, 255)
+                (: (
+                integer: 255
+                ,: ,
+                integer: 255
+                ,: ,
+                integer: 255
+                ): )
+          expression_statement: self.black = (0, 0, 0)
+            assignment: self.black = (0, 0, 0)
+              attribute: self.black
+                identifier: self
+                .: .
+                identifier: black
+              =: =
+              tuple: (0, 0, 0)
+                (: (
+                integer: 0
+                ,: ,
+                integer: 0
+                ,: ,
+                integer: 0
+                ): )
+          expression_statement: self.red = (255, 0, 0)
+            assignment: self.red = (255, 0, 0)
+              attribute: self.red
+                identifier: self
+                .: .
+                identifier: red
+              =: =
+              tuple: (255, 0, 0)
+                (: (
+                integer: 255
+                ,: ,
+                integer: 0
+                ,: ,
+                integer: 0
+                ): )
+          expression_statement: self.font = pygame.font.Font(None, 36)
+            assignment: self.font = pygame.font.Font(None, 36)
+              attribute: self.font
+                identifier: self
+                .: .
+                identifier: font
+              =: =
+              call: pygame.font.Font(None, 36)
+                attribute: pygame.font.Font
+                  attribute: pygame.font
+                    identifier: pygame
+                    .: .
+                    identifier: font
+                  .: .
+                  identifier: Font
+                argument_list: (None, 36)
+                  (: (
+                  none: None
+                  ,: ,
+                  integer: 36
+                  ): )
+      function_definition: def update_snake(self):
+        current_position = self.snake_position[0].copy()
+
+        if self.direction == 'UP':
+            current_position[1] -= 10
+        if self.direction == 'DOWN':
+            current_position[1] += 10
+        if self.direction == 'LEFT':
+            current_position[0] -= 10
+        if self.direction == 'RIGHT':
+            current_position[0] += 10
+
+        self.snake_position.insert(0, current_position)
+
+        if current_position == self.food_position:
+            self.score += self.get_score_increment()
+            self.snake_length += 1
+            self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+        else:
+            self.snake_position.pop()
+        def: def
+        identifier: update_snake
+        parameters: (self)
+          (: (
+          identifier: self
+          ): )
+        :: :
+        block: current_position = self.snake_position[0].copy()
+
+        if self.direction == 'UP':
+            current_position[1] -= 10
+        if self.direction == 'DOWN':
+            current_position[1] += 10
+        if self.direction == 'LEFT':
+            current_position[0] -= 10
+        if self.direction == 'RIGHT':
+            current_position[0] += 10
+
+        self.snake_position.insert(0, current_position)
+
+        if current_position == self.food_position:
+            self.score += self.get_score_increment()
+            self.snake_length += 1
+            self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+        else:
+            self.snake_position.pop()
+          expression_statement: current_position = self.snake_position[0].copy()
+            assignment: current_position = self.snake_position[0].copy()
+              identifier: current_position
+              =: =
+              call: self.snake_position[0].copy()
+                attribute: self.snake_position[0].copy
+                  subscript: self.snake_position[0]
+                    attribute: self.snake_position
+                      identifier: self
+                      .: .
+                      identifier: snake_position
+                    [: [
+                    integer: 0
+                    ]: ]
+                  .: .
+                  identifier: copy
+                argument_list: ()
+                  (: (
+                  ): )
+          if_statement: if self.direction == 'UP':
+            current_position[1] -= 10
+            if: if
+            comparison_operator: self.direction == 'UP'
+              attribute: self.direction
+                identifier: self
+                .: .
+                identifier: direction
+              ==: ==
+              string: 'UP'
+                string_start: '
+                string_content: UP
+                string_end: '
+            :: :
+            block: current_position[1] -= 10
+              expression_statement: current_position[1] -= 10
+                augmented_assignment: current_position[1] -= 10
+                  subscript: current_position[1]
+                    identifier: current_position
+                    [: [
+                    integer: 1
+                    ]: ]
+                  -=: -=
+                  integer: 10
+          if_statement: if self.direction == 'DOWN':
+            current_position[1] += 10
+            if: if
+            comparison_operator: self.direction == 'DOWN'
+              attribute: self.direction
+                identifier: self
+                .: .
+                identifier: direction
+              ==: ==
+              string: 'DOWN'
+                string_start: '
+                string_content: DOWN
+                string_end: '
+            :: :
+            block: current_position[1] += 10
+              expression_statement: current_position[1] += 10
+                augmented_assignment: current_position[1] += 10
+                  subscript: current_position[1]
+                    identifier: current_position
+                    [: [
+                    integer: 1
+                    ]: ]
+                  +=: +=
+                  integer: 10
+          if_statement: if self.direction == 'LEFT':
+            current_position[0] -= 10
+            if: if
+            comparison_operator: self.direction == 'LEFT'
+              attribute: self.direction
+                identifier: self
+                .: .
+                identifier: direction
+              ==: ==
+              string: 'LEFT'
+                string_start: '
+                string_content: LEFT
+                string_end: '
+            :: :
+            block: current_position[0] -= 10
+              expression_statement: current_position[0] -= 10
+                augmented_assignment: current_position[0] -= 10
+                  subscript: current_position[0]
+                    identifier: current_position
+                    [: [
+                    integer: 0
+                    ]: ]
+                  -=: -=
+                  integer: 10
+          if_statement: if self.direction == 'RIGHT':
+            current_position[0] += 10
+            if: if
+            comparison_operator: self.direction == 'RIGHT'
+              attribute: self.direction
+                identifier: self
+                .: .
+                identifier: direction
+              ==: ==
+              string: 'RIGHT'
+                string_start: '
+                string_content: RIGHT
+                string_end: '
+            :: :
+            block: current_position[0] += 10
+              expression_statement: current_position[0] += 10
+                augmented_assignment: current_position[0] += 10
+                  subscript: current_position[0]
+                    identifier: current_position
+                    [: [
+                    integer: 0
+                    ]: ]
+                  +=: +=
+                  integer: 10
+          expression_statement: self.snake_position.insert(0, current_position)
+            call: self.snake_position.insert(0, current_position)
+              attribute: self.snake_position.insert
+                attribute: self.snake_position
+                  identifier: self
+                  .: .
+                  identifier: snake_position
+                .: .
+                identifier: insert
+              argument_list: (0, current_position)
+                (: (
+                integer: 0
+                ,: ,
+                identifier: current_position
+                ): )
+          if_statement: if current_position == self.food_position:
+            self.score += self.get_score_increment()
+            self.snake_length += 1
+            self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+        else:
+            self.snake_position.pop()
+            if: if
+            comparison_operator: current_position == self.food_position
+              identifier: current_position
+              ==: ==
+              attribute: self.food_position
+                identifier: self
+                .: .
+                identifier: food_position
+            :: :
+            block: self.score += self.get_score_increment()
+            self.snake_length += 1
+            self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+              expression_statement: self.score += self.get_score_increment()
+                augmented_assignment: self.score += self.get_score_increment()
+                  attribute: self.score
+                    identifier: self
+                    .: .
+                    identifier: score
+                  +=: +=
+                  call: self.get_score_increment()
+                    attribute: self.get_score_increment
+                      identifier: self
+                      .: .
+                      identifier: get_score_increment
+                    argument_list: ()
+                      (: (
+                      ): )
+              expression_statement: self.snake_length += 1
+                augmented_assignment: self.snake_length += 1
+                  attribute: self.snake_length
+                    identifier: self
+                    .: .
+                    identifier: snake_length
+                  +=: +=
+                  integer: 1
+              expression_statement: self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+                assignment: self.food_position = [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+                  attribute: self.food_position
+                    identifier: self
+                    .: .
+                    identifier: food_position
+                  =: =
+                  list: [random.randint(0, 50) * 10, random.randint(0, 50) * 10]
+                    [: [
+                    binary_operator: random.randint(0, 50) * 10
+                      call: random.randint(0, 50)
+                        attribute: random.randint
+                          identifier: random
+                          .: .
+                          identifier: randint
+                        argument_list: (0, 50)
+                          (: (
+                          integer: 0
+                          ,: ,
+                          integer: 50
+                          ): )
+                      *: *
+                      integer: 10
+                    ,: ,
+                    binary_operator: random.randint(0, 50) * 10
+                      call: random.randint(0, 50)
+                        attribute: random.randint
+                          identifier: random
+                          .: .
+                          identifier: randint
+                        argument_list: (0, 50)
+                          (: (
+                          integer: 0
+                          ,: ,
+                          integer: 50
+                          ): )
+                      *: *
+                      integer: 10
+                    ]: ]
+            else_clause: else:
+            self.snake_position.pop()
+              else: else
+              :: :
+              block: self.snake_position.pop()
+                expression_statement: self.snake_position.pop()
+                  call: self.snake_position.pop()
+                    attribute: self.snake_position.pop
+                      attribute: self.snake_position
+                        identifier: self
+                        .: .
+                        identifier: snake_position
+                      .: .
+                      identifier: pop
+                    argument_list: ()
+                      (: (
+                      ): )
+      function_definition: def get_score_increment(self):
+        if self.difficulty == 'easy':
+            return 1
+        elif self.difficulty == 'medium':
+            return 2
+        elif self.difficulty == 'hard':
+            return 3
+        return 0
+        def: def
+        identifier: get_score_increment
+        parameters: (self)
+          (: (
+          identifier: self
+          ): )
+        :: :
+        block: if self.difficulty == 'easy':
+            return 1
+        elif self.difficulty == 'medium':
+            return 2
+        elif self.difficulty == 'hard':
+            return 3
+        return 0
+          if_statement: if self.difficulty == 'easy':
+            return 1
+        elif self.difficulty == 'medium':
+            return 2
+        elif self.difficulty == 'hard':
+            return 3
+            if: if
+            comparison_operator: self.difficulty == 'easy'
+              attribute: self.difficulty
+                identifier: self
+                .: .
+                identifier: difficulty
+              ==: ==
+              string: 'easy'
+                string_start: '
+                string_content: easy
+                string_end: '
+            :: :
+            block: return 1
+              return_statement: return 1
+                return: return
+                integer: 1
+            elif_clause: elif self.difficulty == 'medium':
+            return 2
+              elif: elif
+              comparison_operator: self.difficulty == 'medium'
+                attribute: self.difficulty
+                  identifier: self
+                  .: .
+                  identifier: difficulty
+                ==: ==
+                string: 'medium'
+                  string_start: '
+                  string_content: medium
+                  string_end: '
+              :: :
+              block: return 2
+                return_statement: return 2
+                  return: return
+                  integer: 2
+            elif_clause: elif self.difficulty == 'hard':
+            return 3
+              elif: elif
+              comparison_operator: self.difficulty == 'hard'
+                attribute: self.difficulty
+                  identifier: self
+                  .: .
+                  identifier: difficulty
+                ==: ==
+                string: 'hard'
+                  string_start: '
+                  string_content: hard
+                  string_end: '
+              :: :
+              block: return 3
+                return_statement: return 3
+                  return: return
+                  integer: 3
+          return_statement: return 0
+            return: return
+            integer: 0
+      function_definition: def change_direction(self, new_direction):
+        if new_direction == 'UP' and self.direction != 'DOWN':
+            self.direction = 'UP'
+        if new_direction == 'DOWN' and self.direction != 'UP':
+            self.direction = 'DOWN'
+        if new_direction == 'LEFT' and self.direction != 'RIGHT':
+            self.direction = 'LEFT'
+        if new_direction == 'RIGHT' and self.direction != 'LEFT':
+            self.direction = 'RIGHT'
+        def: def
+        identifier: change_direction
+        parameters: (self, new_direction)
+          (: (
+          identifier: self
+          ,: ,
+          identifier: new_direction
+          ): )
+        :: :
+        block: if new_direction == 'UP' and self.direction != 'DOWN':
+            self.direction = 'UP'
+        if new_direction == 'DOWN' and self.direction != 'UP':
+            self.direction = 'DOWN'
+        if new_direction == 'LEFT' and self.direction != 'RIGHT':
+            self.direction = 'LEFT'
+        if new_direction == 'RIGHT' and self.direction != 'LEFT':
+            self.direction = 'RIGHT'
+          if_statement: if new_direction == 'UP' and self.direction != 'DOWN':
+            self.direction = 'UP'
+            if: if
+            boolean_operator: new_direction == 'UP' and self.direction != 'DOWN'
+              comparison_operator: new_direction == 'UP'
+                identifier: new_direction
+                ==: ==
+                string: 'UP'
+                  string_start: '
+                  string_content: UP
+                  string_end: '
+              and: and
+              comparison_operator: self.direction != 'DOWN'
+                attribute: self.direction
+                  identifier: self
+                  .: .
+                  identifier: direction
+                !=: !=
+                string: 'DOWN'
+                  string_start: '
+                  string_content: DOWN
+                  string_end: '
+            :: :
+            block: self.direction = 'UP'
+              expression_statement: self.direction = 'UP'
+                assignment: self.direction = 'UP'
+                  attribute: self.direction
+                    identifier: self
+                    .: .
+                    identifier: direction
+                  =: =
+                  string: 'UP'
+                    string_start: '
+                    string_content: UP
+                    string_end: '
+          if_statement: if new_direction == 'DOWN' and self.direction != 'UP':
+            self.direction = 'DOWN'
+            if: if
+            boolean_operator: new_direction == 'DOWN' and self.direction != 'UP'
+              comparison_operator: new_direction == 'DOWN'
+                identifier: new_direction
+                ==: ==
+                string: 'DOWN'
+                  string_start: '
+                  string_content: DOWN
+                  string_end: '
+              and: and
+              comparison_operator: self.direction != 'UP'
+                attribute: self.direction
+                  identifier: self
+                  .: .
+                  identifier: direction
+                !=: !=
+                string: 'UP'
+                  string_start: '
+                  string_content: UP
+                  string_end: '
+            :: :
+            block: self.direction = 'DOWN'
+              expression_statement: self.direction = 'DOWN'
+                assignment: self.direction = 'DOWN'
+                  attribute: self.direction
+                    identifier: self
+                    .: .
+                    identifier: direction
+                  =: =
+                  string: 'DOWN'
+                    string_start: '
+                    string_content: DOWN
+                    string_end: '
+          if_statement: if new_direction == 'LEFT' and self.direction != 'RIGHT':
+            self.direction = 'LEFT'
+            if: if
+            boolean_operator: new_direction == 'LEFT' and self.direction != 'RIGHT'
+              comparison_operator: new_direction == 'LEFT'
+                identifier: new_direction
+                ==: ==
+                string: 'LEFT'
+                  string_start: '
+                  string_content: LEFT
+                  string_end: '
+              and: and
+              comparison_operator: self.direction != 'RIGHT'
+                attribute: self.direction
+                  identifier: self
+                  .: .
+                  identifier: direction
+                !=: !=
+                string: 'RIGHT'
+                  string_start: '
+                  string_content: RIGHT
+                  string_end: '
+            :: :
+            block: self.direction = 'LEFT'
+              expression_statement: self.direction = 'LEFT'
+                assignment: self.direction = 'LEFT'
+                  attribute: self.direction
+                    identifier: self
+                    .: .
+                    identifier: direction
+                  =: =
+                  string: 'LEFT'
+                    string_start: '
+                    string_content: LEFT
+                    string_end: '
+          if_statement: if new_direction == 'RIGHT' and self.direction != 'LEFT':
+            self.direction = 'RIGHT'
+            if: if
+            boolean_operator: new_direction == 'RIGHT' and self.direction != 'LEFT'
+              comparison_operator: new_direction == 'RIGHT'
+                identifier: new_direction
+                ==: ==
+                string: 'RIGHT'
+                  string_start: '
+                  string_content: RIGHT
+                  string_end: '
+              and: and
+              comparison_operator: self.direction != 'LEFT'
+                attribute: self.direction
+                  identifier: self
+                  .: .
+                  identifier: direction
+                !=: !=
+                string: 'LEFT'
+                  string_start: '
+                  string_content: LEFT
+                  string_end: '
+            :: :
+            block: self.direction = 'RIGHT'
+              expression_statement: self.direction = 'RIGHT'
+                assignment: self.direction = 'RIGHT'
+                  attribute: self.direction
+                    identifier: self
+                    .: .
+                    identifier: direction
+                  =: =
+                  string: 'RIGHT'
+                    string_start: '
+                    string_content: RIGHT
+                    string_end: '
+      function_definition: def is_collision(self):
+        if self.snake_position[0][0] >= 500 or self.snake_position[0][0] < 0:
+            return True
+        if self.snake_position[0][1] >= 500 or self.snake_position[0][1] < 0:
+            return True
+        if self.snake_position[0] in self.snake_position[1:]:
+            return True
+        return False
+        def: def
+        identifier: is_collision
+        parameters: (self)
+          (: (
+          identifier: self
+          ): )
+        :: :
+        block: if self.snake_position[0][0] >= 500 or self.snake_position[0][0] < 0:
+            return True
+        if self.snake_position[0][1] >= 500 or self.snake_position[0][1] < 0:
+            return True
+        if self.snake_position[0] in self.snake_position[1:]:
+            return True
+        return False
+          if_statement: if self.snake_position[0][0] >= 500 or self.snake_position[0][0] < 0:
+            return True
+            if: if
+            boolean_operator: self.snake_position[0][0] >= 500 or self.snake_position[0][0] < 0
+              comparison_operator: self.snake_position[0][0] >= 500
+                subscript: self.snake_position[0][0]
+                  subscript: self.snake_position[0]
+                    attribute: self.snake_position
+                      identifier: self
+                      .: .
+                      identifier: snake_position
+                    [: [
+                    integer: 0
+                    ]: ]
+                  [: [
+                  integer: 0
+                  ]: ]
+                >=: >=
+                integer: 500
+              or: or
+              comparison_operator: self.snake_position[0][0] < 0
+                subscript: self.snake_position[0][0]
+                  subscript: self.snake_position[0]
+                    attribute: self.snake_position
+                      identifier: self
+                      .: .
+                      identifier: snake_position
+                    [: [
+                    integer: 0
+                    ]: ]
+                  [: [
+                  integer: 0
+                  ]: ]
+                <: <
+                integer: 0
+            :: :
+            block: return True
+              return_statement: return True
+                return: return
+                true: True
+          if_statement: if self.snake_position[0][1] >= 500 or self.snake_position[0][1] < 0:
+            return True
+            if: if
+            boolean_operator: self.snake_position[0][1] >= 500 or self.snake_position[0][1] < 0
+              comparison_operator: self.snake_position[0][1] >= 500
+                subscript: self.snake_position[0][1]
+                  subscript: self.snake_position[0]
+                    attribute: self.snake_position
+                      identifier: self
+                      .: .
+                      identifier: snake_position
+                    [: [
+                    integer: 0
+                    ]: ]
+                  [: [
+                  integer: 1
+                  ]: ]
+                >=: >=
+                integer: 500
+              or: or
+              comparison_operator: self.snake_position[0][1] < 0
+                subscript: self.snake_position[0][1]
+                  subscript: self.snake_position[0]
+                    attribute: self.snake_position
+                      identifier: self
+                      .: .
+                      identifier: snake_position
+                    [: [
+                    integer: 0
+                    ]: ]
+                  [: [
+                  integer: 1
+                  ]: ]
+                <: <
+                integer: 0
+            :: :
+            block: return True
+              return_statement: return True
+                return: return
+                true: True
+          if_statement: if self.snake_position[0] in self.snake_position[1:]:
+            return True
+            if: if
+            comparison_operator: self.snake_position[0] in self.snake_position[1:]
+              subscript: self.snake_position[0]
+                attribute: self.snake_position
+                  identifier: self
+                  .: .
+                  identifier: snake_position
+                [: [
+                integer: 0
+                ]: ]
+              in: in
+              subscript: self.snake_position[1:]
+                attribute: self.snake_position
+                  identifier: self
+                  .: .
+                  identifier: snake_position
+                [: [
+                slice: 1:
+                  integer: 1
+                  :: :
+                ]: ]
+            :: :
+            block: return True
+              return_statement: return True
+                return: return
+                true: True
+          return_statement: return False
+            return: return
+            false: False
+      function_definition: def draw_snake(self):
+        for position in self.snake_position:
+            pygame.draw.rect(self.display, self.white, (position[0], position[1], 10, 10))
+        def: def
+        identifier: draw_snake
+        parameters: (self)
+          (: (
+          identifier: self
+          ): )
+        :: :
+        block: for position in self.snake_position:
+            pygame.draw.rect(self.display, self.white, (position[0], position[1], 10, 10))
+          for_statement: for position in self.snake_position:
+            pygame.draw.rect(self.display, self.white, (position[0], position[1], 10, 10))
+            for: for
+            identifier: position
+            in: in
+            attribute: self.snake_position
+              identifier: self
+              .: .
+              identifier: snake_position
+            :: :
+            block: pygame.draw.rect(self.display, self.white, (position[0], position[1], 10, 10))
+              expression_statement: pygame.draw.rect(self.display, self.white, (position[0], position[1], 10, 10))
+                call: pygame.draw.rect(self.display, self.white, (position[0], position[1], 10, 10))
+                  attribute: pygame.draw.rect
+                    attribute: pygame.draw
+                      identifier: pygame
+                      .: .
+                      identifier: draw
+                    .: .
+                    identifier: rect
+                  argument_list: (self.display, self.white, (position[0], position[1], 10, 10))
+                    (: (
+                    attribute: self.display
+                      identifier: self
+                      .: .
+                      identifier: display
+                    ,: ,
+                    attribute: self.white
+                      identifier: self
+                      .: .
+                      identifier: white
+                    ,: ,
+                    tuple: (position[0], position[1], 10, 10)
+                      (: (
+                      subscript: position[0]
+                        identifier: position
+                        [: [
+                        integer: 0
+                        ]: ]
+                      ,: ,
+                      subscript: position[1]
+                        identifier: position
+                        [: [
+                        integer: 1
+                        ]: ]
+                      ,: ,
+                      integer: 10
+                      ,: ,
+                      integer: 10
+                      ): )
+                    ): )
+      function_definition: def draw_food(self):
+        pygame.draw.rect(self.display, self.red, (self.food_position[0], self.food_position[1], 10, 10))
+        def: def
+        identifier: draw_food
+        parameters: (self)
+          (: (
+          identifier: self
+          ): )
+        :: :
+        block: pygame.draw.rect(self.display, self.red, (self.food_position[0], self.food_position[1], 10, 10))
+          expression_statement: pygame.draw.rect(self.display, self.red, (self.food_position[0], self.food_position[1], 10, 10))
+            call: pygame.draw.rect(self.display, self.red, (self.food_position[0], self.food_position[1], 10, 10))
+              attribute: pygame.draw.rect
+                attribute: pygame.draw
+                  identifier: pygame
+                  .: .
+                  identifier: draw
+                .: .
+                identifier: rect
+              argument_list: (self.display, self.red, (self.food_position[0], self.food_position[1], 10, 10))
+                (: (
+                attribute: self.display
+                  identifier: self
+                  .: .
+                  identifier: display
+                ,: ,
+                attribute: self.red
+                  identifier: self
+                  .: .
+                  identifier: red
+                ,: ,
+                tuple: (self.food_position[0], self.food_position[1], 10, 10)
+                  (: (
+                  subscript: self.food_position[0]
+                    attribute: self.food_position
+                      identifier: self
+                      .: .
+                      identifier: food_position
+                    [: [
+                    integer: 0
+                    ]: ]
+                  ,: ,
+                  subscript: self.food_position[1]
+                    attribute: self.food_position
+                      identifier: self
+                      .: .
+                      identifier: food_position
+                    [: [
+                    integer: 1
+                    ]: ]
+                  ,: ,
+                  integer: 10
+                  ,: ,
+                  integer: 10
+                  ): )
+                ): )
+      function_definition: def play(self):
+        self.selected_difficulty = 0  # Ensure initial value is correct
+        self.set_difficulty()
+        def: def
+        identifier: play
+        parameters: (self)
+          (: (
+          identifier: self
+          ): )
+        :: :
+        block: self.selected_difficulty = 0  # Ensure initial value is correct
+        self.set_difficulty()
+          expression_statement: self.selected_difficulty = 0
+            assignment: self.selected_difficulty = 0
+              attribute: self.selected_difficulty
+                identifier: self
+                .: .
+                identifier: selected_difficulty
+              =: =
+              integer: 0
+          comment: # Ensure initial value is correct
+          expression_statement: self.set_difficulty()
+            call: self.set_difficulty()
+              attribute: self.set_difficulty
+                identifier: self
+                .: .
+                identifier: set_difficulty
+              argument_list: ()
+                (: (
+                ): )
+      function_definition: def set_difficulty(self):
+        while self.difficulty is None:
+            self.display.fill(self.black)  # 确保背景被正确填充
+            self.display_difficulty_selection()
+            pygame.display.update()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.selected_difficulty = (self.selected_difficulty - 1) % 3
+                    elif event.key == pygame.K_DOWN:
+                        self.selected_difficulty = (self.selected_difficulty + 1) % 3
+                    elif event.key == pygame.K_RETURN:
+                        if self.selected_difficulty == 0:
+                            self.difficulty = 'easy'
+                        elif self.selected_difficulty == 1:
+                            self.difficulty = 'medium'
+                        elif self.selected_difficulty == 2:
+                            self.difficulty = 'hard'
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.change_direction('UP')
+                    elif event.key == pygame.K_DOWN:
+                        self.change_direction('DOWN')
+                    elif event.key == pygame.K_LEFT:
+                        self.change_direction('LEFT')
+                    elif event.key == pygame.K_RIGHT:
+                        self.change_direction('RIGHT')
+
+            self.update_snake()
+            self.display.fill(self.black)
+            self.draw_snake()
+            self.draw_food()
+            self.display_score()
+            pygame.display.update()
+            self.clock.tick(15)
+
+            if self.is_collision():
+                print(f"Game Over! Your score is {self.score}")
+                pygame.quit()
+                quit()
+                quit()
+        def: def
+        identifier: set_difficulty
+        parameters: (self)
+          (: (
+          identifier: self
+          ): )
+        :: :
+        block: while self.difficulty is None:
+            self.display.fill(self.black)  # 确保背景被正确填充
+            self.display_difficulty_selection()
+            pygame.display.update()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.selected_difficulty = (self.selected_difficulty - 1) % 3
+                    elif event.key == pygame.K_DOWN:
+                        self.selected_difficulty = (self.selected_difficulty + 1) % 3
+                    elif event.key == pygame.K_RETURN:
+                        if self.selected_difficulty == 0:
+                            self.difficulty = 'easy'
+                        elif self.selected_difficulty == 1:
+                            self.difficulty = 'medium'
+                        elif self.selected_difficulty == 2:
+                            self.difficulty = 'hard'
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.change_direction('UP')
+                    elif event.key == pygame.K_DOWN:
+                        self.change_direction('DOWN')
+                    elif event.key == pygame.K_LEFT:
+                        self.change_direction('LEFT')
+                    elif event.key == pygame.K_RIGHT:
+                        self.change_direction('RIGHT')
+
+            self.update_snake()
+            self.display.fill(self.black)
+            self.draw_snake()
+            self.draw_food()
+            self.display_score()
+            pygame.display.update()
+            self.clock.tick(15)
+
+            if self.is_collision():
+                print(f"Game Over! Your score is {self.score}")
+                pygame.quit()
+                quit()
+                quit()
+          while_statement: while self.difficulty is None:
+            self.display.fill(self.black)  # 确保背景被正确填充
+            self.display_difficulty_selection()
+            pygame.display.update()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.selected_difficulty = (self.selected_difficulty - 1) % 3
+                    elif event.key == pygame.K_DOWN:
+                        self.selected_difficulty = (self.selected_difficulty + 1) % 3
+                    elif event.key == pygame.K_RETURN:
+                        if self.selected_difficulty == 0:
+                            self.difficulty = 'easy'
+                        elif self.selected_difficulty == 1:
+                            self.difficulty = 'medium'
+                        elif self.selected_difficulty == 2:
+                            self.difficulty = 'hard'
+            while: while
+            comparison_operator: self.difficulty is None
+              attribute: self.difficulty
+                identifier: self
+                .: .
+                identifier: difficulty
+              is: is
+              none: None
+            :: :
+            block: self.display.fill(self.black)  # 确保背景被正确填充
+            self.display_difficulty_selection()
+            pygame.display.update()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.selected_difficulty = (self.selected_difficulty - 1) % 3
+                    elif event.key == pygame.K_DOWN:
+                        self.selected_difficulty = (self.selected_difficulty + 1) % 3
+                    elif event.key == pygame.K_RETURN:
+                        if self.selected_difficulty == 0:
+                            self.difficulty = 'easy'
+                        elif self.selected_difficulty == 1:
+                            self.difficulty = 'medium'
+                        elif self.selected_difficulty == 2:
+                            self.difficulty = 'hard'
+              expression_statement: self.display.fill(self.black)
+                call: self.display.fill(self.black)
+                  attribute: self.display.fill
+                    attribute: self.display
+                      identifier: self
+                      .: .
+                      identifier: display
+                    .: .
+                    identifier: fill
+                  argument_list: (self.black)
+                    (: (
+                    attribute: self.black
+                      identifier: self
+                      .: .
+                      identifier: black
+                    ): )
+              comment: # 确保背景被正确填充
+              expression_statement: self.display_difficulty_selection()
+                call: self.display_difficulty_selection()
+                  attribute: self.display_difficulty_selection
+                    identifier: self
+                    .: .
+                    identifier: display_difficulty_selection
+                  argument_list: ()
+                    (: (
+                    ): )
+              expression_statement: pygame.display.update()
+                call: pygame.display.update()
+                  attribute: pygame.display.update
+                    attribute: pygame.display
+                      identifier: pygame
+                      .: .
+                      identifier: display
+                    .: .
+                    identifier: update
+                  argument_list: ()
+                    (: (
+                    ): )
+              for_statement: for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.selected_difficulty = (self.selected_difficulty - 1) % 3
+                    elif event.key == pygame.K_DOWN:
+                        self.selected_difficulty = (self.selected_difficulty + 1) % 3
+                    elif event.key == pygame.K_RETURN:
+                        if self.selected_difficulty == 0:
+                            self.difficulty = 'easy'
+                        elif self.selected_difficulty == 1:
+                            self.difficulty = 'medium'
+                        elif self.selected_difficulty == 2:
+                            self.difficulty = 'hard'
+                for: for
+                identifier: event
+                in: in
+                call: pygame.event.get()
+                  attribute: pygame.event.get
+                    attribute: pygame.event
+                      identifier: pygame
+                      .: .
+                      identifier: event
+                    .: .
+                    identifier: get
+                  argument_list: ()
+                    (: (
+                    ): )
+                :: :
+                block: if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.selected_difficulty = (self.selected_difficulty - 1) % 3
+                    elif event.key == pygame.K_DOWN:
+                        self.selected_difficulty = (self.selected_difficulty + 1) % 3
+                    elif event.key == pygame.K_RETURN:
+                        if self.selected_difficulty == 0:
+                            self.difficulty = 'easy'
+                        elif self.selected_difficulty == 1:
+                            self.difficulty = 'medium'
+                        elif self.selected_difficulty == 2:
+                            self.difficulty = 'hard'
+                  if_statement: if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.selected_difficulty = (self.selected_difficulty - 1) % 3
+                    elif event.key == pygame.K_DOWN:
+                        self.selected_difficulty = (self.selected_difficulty + 1) % 3
+                    elif event.key == pygame.K_RETURN:
+                        if self.selected_difficulty == 0:
+                            self.difficulty = 'easy'
+                        elif self.selected_difficulty == 1:
+                            self.difficulty = 'medium'
+                        elif self.selected_difficulty == 2:
+                            self.difficulty = 'hard'
+                    if: if
+                    comparison_operator: event.type == pygame.QUIT
+                      attribute: event.type
+                        identifier: event
+                        .: .
+                        identifier: type
+                      ==: ==
+                      attribute: pygame.QUIT
+                        identifier: pygame
+                        .: .
+                        identifier: QUIT
+                    :: :
+                    block: pygame.quit()
+                    quit()
+                      expression_statement: pygame.quit()
+                        call: pygame.quit()
+                          attribute: pygame.quit
+                            identifier: pygame
+                            .: .
+                            identifier: quit
+                          argument_list: ()
+                            (: (
+                            ): )
+                      expression_statement: quit()
+                        call: quit()
+                          identifier: quit
+                          argument_list: ()
+                            (: (
+                            ): )
+                    elif_clause: elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.selected_difficulty = (self.selected_difficulty - 1) % 3
+                    elif event.key == pygame.K_DOWN:
+                        self.selected_difficulty = (self.selected_difficulty + 1) % 3
+                    elif event.key == pygame.K_RETURN:
+                        if self.selected_difficulty == 0:
+                            self.difficulty = 'easy'
+                        elif self.selected_difficulty == 1:
+                            self.difficulty = 'medium'
+                        elif self.selected_difficulty == 2:
+                            self.difficulty = 'hard'
+                      elif: elif
+                      comparison_operator: event.type == pygame.KEYDOWN
+                        attribute: event.type
+                          identifier: event
+                          .: .
+                          identifier: type
+                        ==: ==
+                        attribute: pygame.KEYDOWN
+                          identifier: pygame
+                          .: .
+                          identifier: KEYDOWN
+                      :: :
+                      block: if event.key == pygame.K_UP:
+                        self.selected_difficulty = (self.selected_difficulty - 1) % 3
+                    elif event.key == pygame.K_DOWN:
+                        self.selected_difficulty = (self.selected_difficulty + 1) % 3
+                    elif event.key == pygame.K_RETURN:
+                        if self.selected_difficulty == 0:
+                            self.difficulty = 'easy'
+                        elif self.selected_difficulty == 1:
+                            self.difficulty = 'medium'
+                        elif self.selected_difficulty == 2:
+                            self.difficulty = 'hard'
+                        if_statement: if event.key == pygame.K_UP:
+                        self.selected_difficulty = (self.selected_difficulty - 1) % 3
+                    elif event.key == pygame.K_DOWN:
+                        self.selected_difficulty = (self.selected_difficulty + 1) % 3
+                    elif event.key == pygame.K_RETURN:
+                        if self.selected_difficulty == 0:
+                            self.difficulty = 'easy'
+                        elif self.selected_difficulty == 1:
+                            self.difficulty = 'medium'
+                        elif self.selected_difficulty == 2:
+                            self.difficulty = 'hard'
+                          if: if
+                          comparison_operator: event.key == pygame.K_UP
+                            attribute: event.key
+                              identifier: event
+                              .: .
+                              identifier: key
+                            ==: ==
+                            attribute: pygame.K_UP
+                              identifier: pygame
+                              .: .
+                              identifier: K_UP
+                          :: :
+                          block: self.selected_difficulty = (self.selected_difficulty - 1) % 3
+                            expression_statement: self.selected_difficulty = (self.selected_difficulty - 1) % 3
+                              assignment: self.selected_difficulty = (self.selected_difficulty - 1) % 3
+                                attribute: self.selected_difficulty
+                                  identifier: self
+                                  .: .
+                                  identifier: selected_difficulty
+                                =: =
+                                binary_operator: (self.selected_difficulty - 1) % 3
+                                  parenthesized_expression: (self.selected_difficulty - 1)
+                                    (: (
+                                    binary_operator: self.selected_difficulty - 1
+                                      attribute: self.selected_difficulty
+                                        identifier: self
+                                        .: .
+                                        identifier: selected_difficulty
+                                      -: -
+                                      integer: 1
+                                    ): )
+                                  %: %
+                                  integer: 3
+                          elif_clause: elif event.key == pygame.K_DOWN:
+                        self.selected_difficulty = (self.selected_difficulty + 1) % 3
+                            elif: elif
+                            comparison_operator: event.key == pygame.K_DOWN
+                              attribute: event.key
+                                identifier: event
+                                .: .
+                                identifier: key
+                              ==: ==
+                              attribute: pygame.K_DOWN
+                                identifier: pygame
+                                .: .
+                                identifier: K_DOWN
+                            :: :
+                            block: self.selected_difficulty = (self.selected_difficulty + 1) % 3
+                              expression_statement: self.selected_difficulty = (self.selected_difficulty + 1) % 3
+                                assignment: self.selected_difficulty = (self.selected_difficulty + 1) % 3
+                                  attribute: self.selected_difficulty
+                                    identifier: self
+                                    .: .
+                                    identifier: selected_difficulty
+                                  =: =
+                                  binary_operator: (self.selected_difficulty + 1) % 3
+                                    parenthesized_expression: (self.selected_difficulty + 1)
+                                      (: (
+                                      binary_operator: self.selected_difficulty + 1
+                                        attribute: self.selected_difficulty
+                                          identifier: self
+                                          .: .
+                                          identifier: selected_difficulty
+                                        +: +
+                                        integer: 1
+                                      ): )
+                                    %: %
+                                    integer: 3
+                          elif_clause: elif event.key == pygame.K_RETURN:
+                        if self.selected_difficulty == 0:
+                            self.difficulty = 'easy'
+                        elif self.selected_difficulty == 1:
+                            self.difficulty = 'medium'
+                        elif self.selected_difficulty == 2:
+                            self.difficulty = 'hard'
+                            elif: elif
+                            comparison_operator: event.key == pygame.K_RETURN
+                              attribute: event.key
+                                identifier: event
+                                .: .
+                                identifier: key
+                              ==: ==
+                              attribute: pygame.K_RETURN
+                                identifier: pygame
+                                .: .
+                                identifier: K_RETURN
+                            :: :
+                            block: if self.selected_difficulty == 0:
+                            self.difficulty = 'easy'
+                        elif self.selected_difficulty == 1:
+                            self.difficulty = 'medium'
+                        elif self.selected_difficulty == 2:
+                            self.difficulty = 'hard'
+                              if_statement: if self.selected_difficulty == 0:
+                            self.difficulty = 'easy'
+                        elif self.selected_difficulty == 1:
+                            self.difficulty = 'medium'
+                        elif self.selected_difficulty == 2:
+                            self.difficulty = 'hard'
+                                if: if
+                                comparison_operator: self.selected_difficulty == 0
+                                  attribute: self.selected_difficulty
+                                    identifier: self
+                                    .: .
+                                    identifier: selected_difficulty
+                                  ==: ==
+                                  integer: 0
+                                :: :
+                                block: self.difficulty = 'easy'
+                                  expression_statement: self.difficulty = 'easy'
+                                    assignment: self.difficulty = 'easy'
+                                      attribute: self.difficulty
+                                        identifier: self
+                                        .: .
+                                        identifier: difficulty
+                                      =: =
+                                      string: 'easy'
+                                        string_start: '
+                                        string_content: easy
+                                        string_end: '
+                                elif_clause: elif self.selected_difficulty == 1:
+                            self.difficulty = 'medium'
+                                  elif: elif
+                                  comparison_operator: self.selected_difficulty == 1
+                                    attribute: self.selected_difficulty
+                                      identifier: self
+                                      .: .
+                                      identifier: selected_difficulty
+                                    ==: ==
+                                    integer: 1
+                                  :: :
+                                  block: self.difficulty = 'medium'
+                                    expression_statement: self.difficulty = 'medium'
+                                      assignment: self.difficulty = 'medium'
+                                        attribute: self.difficulty
+                                          identifier: self
+                                          .: .
+                                          identifier: difficulty
+                                        =: =
+                                        string: 'medium'
+                                          string_start: '
+                                          string_content: medium
+                                          string_end: '
+                                elif_clause: elif self.selected_difficulty == 2:
+                            self.difficulty = 'hard'
+                                  elif: elif
+                                  comparison_operator: self.selected_difficulty == 2
+                                    attribute: self.selected_difficulty
+                                      identifier: self
+                                      .: .
+                                      identifier: selected_difficulty
+                                    ==: ==
+                                    integer: 2
+                                  :: :
+                                  block: self.difficulty = 'hard'
+                                    expression_statement: self.difficulty = 'hard'
+                                      assignment: self.difficulty = 'hard'
+                                        attribute: self.difficulty
+                                          identifier: self
+                                          .: .
+                                          identifier: difficulty
+                                        =: =
+                                        string: 'hard'
+                                          string_start: '
+                                          string_content: hard
+                                          string_end: '
+          while_statement: while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.change_direction('UP')
+                    elif event.key == pygame.K_DOWN:
+                        self.change_direction('DOWN')
+                    elif event.key == pygame.K_LEFT:
+                        self.change_direction('LEFT')
+                    elif event.key == pygame.K_RIGHT:
+                        self.change_direction('RIGHT')
+
+            self.update_snake()
+            self.display.fill(self.black)
+            self.draw_snake()
+            self.draw_food()
+            self.display_score()
+            pygame.display.update()
+            self.clock.tick(15)
+
+            if self.is_collision():
+                print(f"Game Over! Your score is {self.score}")
+                pygame.quit()
+                quit()
+                quit()
+            while: while
+            true: True
+            :: :
+            block: for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.change_direction('UP')
+                    elif event.key == pygame.K_DOWN:
+                        self.change_direction('DOWN')
+                    elif event.key == pygame.K_LEFT:
+                        self.change_direction('LEFT')
+                    elif event.key == pygame.K_RIGHT:
+                        self.change_direction('RIGHT')
+
+            self.update_snake()
+            self.display.fill(self.black)
+            self.draw_snake()
+            self.draw_food()
+            self.display_score()
+            pygame.display.update()
+            self.clock.tick(15)
+
+            if self.is_collision():
+                print(f"Game Over! Your score is {self.score}")
+                pygame.quit()
+                quit()
+                quit()
+              for_statement: for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.change_direction('UP')
+                    elif event.key == pygame.K_DOWN:
+                        self.change_direction('DOWN')
+                    elif event.key == pygame.K_LEFT:
+                        self.change_direction('LEFT')
+                    elif event.key == pygame.K_RIGHT:
+                        self.change_direction('RIGHT')
+                for: for
+                identifier: event
+                in: in
+                call: pygame.event.get()
+                  attribute: pygame.event.get
+                    attribute: pygame.event
+                      identifier: pygame
+                      .: .
+                      identifier: event
+                    .: .
+                    identifier: get
+                  argument_list: ()
+                    (: (
+                    ): )
+                :: :
+                block: if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.change_direction('UP')
+                    elif event.key == pygame.K_DOWN:
+                        self.change_direction('DOWN')
+                    elif event.key == pygame.K_LEFT:
+                        self.change_direction('LEFT')
+                    elif event.key == pygame.K_RIGHT:
+                        self.change_direction('RIGHT')
+                  if_statement: if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.change_direction('UP')
+                    elif event.key == pygame.K_DOWN:
+                        self.change_direction('DOWN')
+                    elif event.key == pygame.K_LEFT:
+                        self.change_direction('LEFT')
+                    elif event.key == pygame.K_RIGHT:
+                        self.change_direction('RIGHT')
+                    if: if
+                    comparison_operator: event.type == pygame.QUIT
+                      attribute: event.type
+                        identifier: event
+                        .: .
+                        identifier: type
+                      ==: ==
+                      attribute: pygame.QUIT
+                        identifier: pygame
+                        .: .
+                        identifier: QUIT
+                    :: :
+                    block: pygame.quit()
+                    quit()
+                      expression_statement: pygame.quit()
+                        call: pygame.quit()
+                          attribute: pygame.quit
+                            identifier: pygame
+                            .: .
+                            identifier: quit
+                          argument_list: ()
+                            (: (
+                            ): )
+                      expression_statement: quit()
+                        call: quit()
+                          identifier: quit
+                          argument_list: ()
+                            (: (
+                            ): )
+                    elif_clause: elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        self.change_direction('UP')
+                    elif event.key == pygame.K_DOWN:
+                        self.change_direction('DOWN')
+                    elif event.key == pygame.K_LEFT:
+                        self.change_direction('LEFT')
+                    elif event.key == pygame.K_RIGHT:
+                        self.change_direction('RIGHT')
+                      elif: elif
+                      comparison_operator: event.type == pygame.KEYDOWN
+                        attribute: event.type
+                          identifier: event
+                          .: .
+                          identifier: type
+                        ==: ==
+                        attribute: pygame.KEYDOWN
+                          identifier: pygame
+                          .: .
+                          identifier: KEYDOWN
+                      :: :
+                      block: if event.key == pygame.K_UP:
+                        self.change_direction('UP')
+                    elif event.key == pygame.K_DOWN:
+                        self.change_direction('DOWN')
+                    elif event.key == pygame.K_LEFT:
+                        self.change_direction('LEFT')
+                    elif event.key == pygame.K_RIGHT:
+                        self.change_direction('RIGHT')
+                        if_statement: if event.key == pygame.K_UP:
+                        self.change_direction('UP')
+                    elif event.key == pygame.K_DOWN:
+                        self.change_direction('DOWN')
+                    elif event.key == pygame.K_LEFT:
+                        self.change_direction('LEFT')
+                    elif event.key == pygame.K_RIGHT:
+                        self.change_direction('RIGHT')
+                          if: if
+                          comparison_operator: event.key == pygame.K_UP
+                            attribute: event.key
+                              identifier: event
+                              .: .
+                              identifier: key
+                            ==: ==
+                            attribute: pygame.K_UP
+                              identifier: pygame
+                              .: .
+                              identifier: K_UP
+                          :: :
+                          block: self.change_direction('UP')
+                            expression_statement: self.change_direction('UP')
+                              call: self.change_direction('UP')
+                                attribute: self.change_direction
+                                  identifier: self
+                                  .: .
+                                  identifier: change_direction
+                                argument_list: ('UP')
+                                  (: (
+                                  string: 'UP'
+                                    string_start: '
+                                    string_content: UP
+                                    string_end: '
+                                  ): )
+                          elif_clause: elif event.key == pygame.K_DOWN:
+                        self.change_direction('DOWN')
+                            elif: elif
+                            comparison_operator: event.key == pygame.K_DOWN
+                              attribute: event.key
+                                identifier: event
+                                .: .
+                                identifier: key
+                              ==: ==
+                              attribute: pygame.K_DOWN
+                                identifier: pygame
+                                .: .
+                                identifier: K_DOWN
+                            :: :
+                            block: self.change_direction('DOWN')
+                              expression_statement: self.change_direction('DOWN')
+                                call: self.change_direction('DOWN')
+                                  attribute: self.change_direction
+                                    identifier: self
+                                    .: .
+                                    identifier: change_direction
+                                  argument_list: ('DOWN')
+                                    (: (
+                                    string: 'DOWN'
+                                      string_start: '
+                                      string_content: DOWN
+                                      string_end: '
+                                    ): )
+                          elif_clause: elif event.key == pygame.K_LEFT:
+                        self.change_direction('LEFT')
+                            elif: elif
+                            comparison_operator: event.key == pygame.K_LEFT
+                              attribute: event.key
+                                identifier: event
+                                .: .
+                                identifier: key
+                              ==: ==
+                              attribute: pygame.K_LEFT
+                                identifier: pygame
+                                .: .
+                                identifier: K_LEFT
+                            :: :
+                            block: self.change_direction('LEFT')
+                              expression_statement: self.change_direction('LEFT')
+                                call: self.change_direction('LEFT')
+                                  attribute: self.change_direction
+                                    identifier: self
+                                    .: .
+                                    identifier: change_direction
+                                  argument_list: ('LEFT')
+                                    (: (
+                                    string: 'LEFT'
+                                      string_start: '
+                                      string_content: LEFT
+                                      string_end: '
+                                    ): )
+                          elif_clause: elif event.key == pygame.K_RIGHT:
+                        self.change_direction('RIGHT')
+                            elif: elif
+                            comparison_operator: event.key == pygame.K_RIGHT
+                              attribute: event.key
+                                identifier: event
+                                .: .
+                                identifier: key
+                              ==: ==
+                              attribute: pygame.K_RIGHT
+                                identifier: pygame
+                                .: .
+                                identifier: K_RIGHT
+                            :: :
+                            block: self.change_direction('RIGHT')
+                              expression_statement: self.change_direction('RIGHT')
+                                call: self.change_direction('RIGHT')
+                                  attribute: self.change_direction
+                                    identifier: self
+                                    .: .
+                                    identifier: change_direction
+                                  argument_list: ('RIGHT')
+                                    (: (
+                                    string: 'RIGHT'
+                                      string_start: '
+                                      string_content: RIGHT
+                                      string_end: '
+                                    ): )
+              expression_statement: self.update_snake()
+                call: self.update_snake()
+                  attribute: self.update_snake
+                    identifier: self
+                    .: .
+                    identifier: update_snake
+                  argument_list: ()
+                    (: (
+                    ): )
+              expression_statement: self.display.fill(self.black)
+                call: self.display.fill(self.black)
+                  attribute: self.display.fill
+                    attribute: self.display
+                      identifier: self
+                      .: .
+                      identifier: display
+                    .: .
+                    identifier: fill
+                  argument_list: (self.black)
+                    (: (
+                    attribute: self.black
+                      identifier: self
+                      .: .
+                      identifier: black
+                    ): )
+              expression_statement: self.draw_snake()
+                call: self.draw_snake()
+                  attribute: self.draw_snake
+                    identifier: self
+                    .: .
+                    identifier: draw_snake
+                  argument_list: ()
+                    (: (
+                    ): )
+              expression_statement: self.draw_food()
+                call: self.draw_food()
+                  attribute: self.draw_food
+                    identifier: self
+                    .: .
+                    identifier: draw_food
+                  argument_list: ()
+                    (: (
+                    ): )
+              expression_statement: self.display_score()
+                call: self.display_score()
+                  attribute: self.display_score
+                    identifier: self
+                    .: .
+                    identifier: display_score
+                  argument_list: ()
+                    (: (
+                    ): )
+              expression_statement: pygame.display.update()
+                call: pygame.display.update()
+                  attribute: pygame.display.update
+                    attribute: pygame.display
+                      identifier: pygame
+                      .: .
+                      identifier: display
+                    .: .
+                    identifier: update
+                  argument_list: ()
+                    (: (
+                    ): )
+              expression_statement: self.clock.tick(15)
+                call: self.clock.tick(15)
+                  attribute: self.clock.tick
+                    attribute: self.clock
+                      identifier: self
+                      .: .
+                      identifier: clock
+                    .: .
+                    identifier: tick
+                  argument_list: (15)
+                    (: (
+                    integer: 15
+                    ): )
+              if_statement: if self.is_collision():
+                print(f"Game Over! Your score is {self.score}")
+                pygame.quit()
+                quit()
+                quit()
+                if: if
+                call: self.is_collision()
+                  attribute: self.is_collision
+                    identifier: self
+                    .: .
+                    identifier: is_collision
+                  argument_list: ()
+                    (: (
+                    ): )
+                :: :
+                block: print(f"Game Over! Your score is {self.score}")
+                pygame.quit()
+                quit()
+                quit()
+                  expression_statement: print(f"Game Over! Your score is {self.score}")
+                    call: print(f"Game Over! Your score is {self.score}")
+                      identifier: print
+                      argument_list: (f"Game Over! Your score is {self.score}")
+                        (: (
+                        string: f"Game Over! Your score is {self.score}"
+                          string_start: f"
+                          string_content: Game Over! Your score is 
+                          interpolation: {self.score}
+                            {: {
+                            attribute: self.score
+                              identifier: self
+                              .: .
+                              identifier: score
+                            }: }
+                          string_end: "
+                        ): )
+                  expression_statement: pygame.quit()
+                    call: pygame.quit()
+                      attribute: pygame.quit
+                        identifier: pygame
+                        .: .
+                        identifier: quit
+                      argument_list: ()
+                        (: (
+                        ): )
+                  expression_statement: quit()
+                    call: quit()
+                      identifier: quit
+                      argument_list: ()
+                        (: (
+                        ): )
+                  expression_statement: quit()
+                    call: quit()
+                      identifier: quit
+                      argument_list: ()
+                        (: (
+                        ): )
+      function_definition: def display_score(self):
+        score_text = self.font.render(f"Score: {self.score}", True, self.black)
+        self.display.blit(score_text, (10, 10))
+        def: def
+        identifier: display_score
+        parameters: (self)
+          (: (
+          identifier: self
+          ): )
+        :: :
+        block: score_text = self.font.render(f"Score: {self.score}", True, self.black)
+        self.display.blit(score_text, (10, 10))
+          expression_statement: score_text = self.font.render(f"Score: {self.score}", True, self.black)
+            assignment: score_text = self.font.render(f"Score: {self.score}", True, self.black)
+              identifier: score_text
+              =: =
+              call: self.font.render(f"Score: {self.score}", True, self.black)
+                attribute: self.font.render
+                  attribute: self.font
+                    identifier: self
+                    .: .
+                    identifier: font
+                  .: .
+                  identifier: render
+                argument_list: (f"Score: {self.score}", True, self.black)
+                  (: (
+                  string: f"Score: {self.score}"
+                    string_start: f"
+                    string_content: Score: 
+                    interpolation: {self.score}
+                      {: {
+                      attribute: self.score
+                        identifier: self
+                        .: .
+                        identifier: score
+                      }: }
+                    string_end: "
+                  ,: ,
+                  true: True
+                  ,: ,
+                  attribute: self.black
+                    identifier: self
+                    .: .
+                    identifier: black
+                  ): )
+          expression_statement: self.display.blit(score_text, (10, 10))
+            call: self.display.blit(score_text, (10, 10))
+              attribute: self.display.blit
+                attribute: self.display
+                  identifier: self
+                  .: .
+                  identifier: display
+                .: .
+                identifier: blit
+              argument_list: (score_text, (10, 10))
+                (: (
+                identifier: score_text
+                ,: ,
+                tuple: (10, 10)
+                  (: (
+                  integer: 10
+                  ,: ,
+                  integer: 10
+                  ): )
+                ): )
+      function_definition: def display_difficulty_selection(self):
+        options = ["Easy", "Medium", "Hard"]
+        for i, option in enumerate(options):
+            text = self.font.render(f"{option}", True, self.black)
+            if i == self.selected_difficulty:
+                text = self.font.render(f"{option}", True, self.red)
+            text_rect = text.get_rect(center=(250, 200 + i * 50))
+            self.display.blit(text, text_rect)
+            print(f"Drawing option: {option} at position {text_rect.center}")  # Debug output
+        def: def
+        identifier: display_difficulty_selection
+        parameters: (self)
+          (: (
+          identifier: self
+          ): )
+        :: :
+        block: options = ["Easy", "Medium", "Hard"]
+        for i, option in enumerate(options):
+            text = self.font.render(f"{option}", True, self.black)
+            if i == self.selected_difficulty:
+                text = self.font.render(f"{option}", True, self.red)
+            text_rect = text.get_rect(center=(250, 200 + i * 50))
+            self.display.blit(text, text_rect)
+            print(f"Drawing option: {option} at position {text_rect.center}")  # Debug output
+          expression_statement: options = ["Easy", "Medium", "Hard"]
+            assignment: options = ["Easy", "Medium", "Hard"]
+              identifier: options
+              =: =
+              list: ["Easy", "Medium", "Hard"]
+                [: [
+                string: "Easy"
+                  string_start: "
+                  string_content: Easy
+                  string_end: "
+                ,: ,
+                string: "Medium"
+                  string_start: "
+                  string_content: Medium
+                  string_end: "
+                ,: ,
+                string: "Hard"
+                  string_start: "
+                  string_content: Hard
+                  string_end: "
+                ]: ]
+          for_statement: for i, option in enumerate(options):
+            text = self.font.render(f"{option}", True, self.black)
+            if i == self.selected_difficulty:
+                text = self.font.render(f"{option}", True, self.red)
+            text_rect = text.get_rect(center=(250, 200 + i * 50))
+            self.display.blit(text, text_rect)
+            print(f"Drawing option: {option} at position {text_rect.center}")  # Debug output
+            for: for
+            pattern_list: i, option
+              identifier: i
+              ,: ,
+              identifier: option
+            in: in
+            call: enumerate(options)
+              identifier: enumerate
+              argument_list: (options)
+                (: (
+                identifier: options
+                ): )
+            :: :
+            block: text = self.font.render(f"{option}", True, self.black)
+            if i == self.selected_difficulty:
+                text = self.font.render(f"{option}", True, self.red)
+            text_rect = text.get_rect(center=(250, 200 + i * 50))
+            self.display.blit(text, text_rect)
+            print(f"Drawing option: {option} at position {text_rect.center}")  # Debug output
+              expression_statement: text = self.font.render(f"{option}", True, self.black)
+                assignment: text = self.font.render(f"{option}", True, self.black)
+                  identifier: text
+                  =: =
+                  call: self.font.render(f"{option}", True, self.black)
+                    attribute: self.font.render
+                      attribute: self.font
+                        identifier: self
+                        .: .
+                        identifier: font
+                      .: .
+                      identifier: render
+                    argument_list: (f"{option}", True, self.black)
+                      (: (
+                      string: f"{option}"
+                        string_start: f"
+                        interpolation: {option}
+                          {: {
+                          identifier: option
+                          }: }
+                        string_end: "
+                      ,: ,
+                      true: True
+                      ,: ,
+                      attribute: self.black
+                        identifier: self
+                        .: .
+                        identifier: black
+                      ): )
+              if_statement: if i == self.selected_difficulty:
+                text = self.font.render(f"{option}", True, self.red)
+                if: if
+                comparison_operator: i == self.selected_difficulty
+                  identifier: i
+                  ==: ==
+                  attribute: self.selected_difficulty
+                    identifier: self
+                    .: .
+                    identifier: selected_difficulty
+                :: :
+                block: text = self.font.render(f"{option}", True, self.red)
+                  expression_statement: text = self.font.render(f"{option}", True, self.red)
+                    assignment: text = self.font.render(f"{option}", True, self.red)
+                      identifier: text
+                      =: =
+                      call: self.font.render(f"{option}", True, self.red)
+                        attribute: self.font.render
+                          attribute: self.font
+                            identifier: self
+                            .: .
+                            identifier: font
+                          .: .
+                          identifier: render
+                        argument_list: (f"{option}", True, self.red)
+                          (: (
+                          string: f"{option}"
+                            string_start: f"
+                            interpolation: {option}
+                              {: {
+                              identifier: option
+                              }: }
+                            string_end: "
+                          ,: ,
+                          true: True
+                          ,: ,
+                          attribute: self.red
+                            identifier: self
+                            .: .
+                            identifier: red
+                          ): )
+              expression_statement: text_rect = text.get_rect(center=(250, 200 + i * 50))
+                assignment: text_rect = text.get_rect(center=(250, 200 + i * 50))
+                  identifier: text_rect
+                  =: =
+                  call: text.get_rect(center=(250, 200 + i * 50))
+                    attribute: text.get_rect
+                      identifier: text
+                      .: .
+                      identifier: get_rect
+                    argument_list: (center=(250, 200 + i * 50))
+                      (: (
+                      keyword_argument: center=(250, 200 + i * 50)
+                        identifier: center
+                        =: =
+                        tuple: (250, 200 + i * 50)
+                          (: (
+                          integer: 250
+                          ,: ,
+                          binary_operator: 200 + i * 50
+                            integer: 200
+                            +: +
+                            binary_operator: i * 50
+                              identifier: i
+                              *: *
+                              integer: 50
+                          ): )
+                      ): )
+              expression_statement: self.display.blit(text, text_rect)
+                call: self.display.blit(text, text_rect)
+                  attribute: self.display.blit
+                    attribute: self.display
+                      identifier: self
+                      .: .
+                      identifier: display
+                    .: .
+                    identifier: blit
+                  argument_list: (text, text_rect)
+                    (: (
+                    identifier: text
+                    ,: ,
+                    identifier: text_rect
+                    ): )
+              expression_statement: print(f"Drawing option: {option} at position {text_rect.center}")
+                call: print(f"Drawing option: {option} at position {text_rect.center}")
+                  identifier: print
+                  argument_list: (f"Drawing option: {option} at position {text_rect.center}")
+                    (: (
+                    string: f"Drawing option: {option} at position {text_rect.center}"
+                      string_start: f"
+                      string_content: Drawing option: 
+                      interpolation: {option}
+                        {: {
+                        identifier: option
+                        }: }
+                      string_content:  at position 
+                      interpolation: {text_rect.center}
+                        {: {
+                        attribute: text_rect.center
+                          identifier: text_rect
+                          .: .
+                          identifier: center
+                        }: }
+                      string_end: "
+                    ): )
+              comment: # Debug output
+
+
+Processing file: /Users/mac/Desktop/gpt_test/auto_coder_test/main.py
+module: from snake_game import SnakeGame
+
+def main():
+    print("Welcome to Snake Game!")
+    game = SnakeGame()
+    game.play()
+
+if __name__ == "__main__":
+    main()
+  import_from_statement: from snake_game import SnakeGame
+    from: from
+    dotted_name: snake_game
+      identifier: snake_game
+    import: import
+    dotted_name: SnakeGame
+      identifier: SnakeGame
+  function_definition: def main():
+    print("Welcome to Snake Game!")
+    game = SnakeGame()
+    game.play()
+    def: def
+    identifier: main
+    parameters: ()
+      (: (
+      ): )
+    :: :
+    block: print("Welcome to Snake Game!")
+    game = SnakeGame()
+    game.play()
+      expression_statement: print("Welcome to Snake Game!")
+        call: print("Welcome to Snake Game!")
+          identifier: print
+          argument_list: ("Welcome to Snake Game!")
+            (: (
+            string: "Welcome to Snake Game!"
+              string_start: "
+              string_content: Welcome to Snake Game!
+              string_end: "
+            ): )
+      expression_statement: game = SnakeGame()
+        assignment: game = SnakeGame()
+          identifier: game
+          =: =
+          call: SnakeGame()
+            identifier: SnakeGame
+            argument_list: ()
+              (: (
+              ): )
+      expression_statement: game.play()
+        call: game.play()
+          attribute: game.play
+            identifier: game
+            .: .
+            identifier: play
+          argument_list: ()
+            (: (
+            ): )
+  if_statement: if __name__ == "__main__":
+    main()
+    if: if
+    comparison_operator: __name__ == "__main__"
+      identifier: __name__
+      ==: ==
+      string: "__main__"
+        string_start: "
+        string_content: __main__
+        string_end: "
+    :: :
+    block: main()
+      expression_statement: main()
+        call: main()
+          identifier: main
+          argument_list: ()
+            (: (
+            ): )
+
+
