@@ -1,0 +1,32 @@
+{
+  "/Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py": {
+    "module_name": "logger.py",
+    "symbols": "### 用途\n该代码文件的主要用途是设置和配置一个日志记录器 (`logger`)，用于记录程序的运行日志。日志记录器会将日志信息同时输出到控制台和文件中。\n\n### 函数列表\n1. **`setup_logger()`**:\n   - **用途**: 配置并返回一个日志记录器实例。\n   - **参数**: 无\n   - **返回值**: 返回一个配置好的 `logger` 实例。\n\n### 变量列表\n1. **`logger`**:\n   - **类型**: `logging.Logger`\n   - **用途**: 存储通过 `setup_logger()` 函数配置好的日志记录器实例。\n\n### 类列表\n该代码文件中没有定义任何类。\n\n### 导入语句\n1. **`import logging`**:\n   - **用途**: 导入 Python 标准库中的 `logging` 模块，用于日志记录功能。",
+    "last_modified": 1726736070.6835988,
+    "md5": "4c7933d006301d61d1245df414f33381"
+  },
+  "/Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py": {
+    "module_name": "file_processor.py",
+    "symbols": "### 用途\n该代码文件的主要用途是处理文件内容，计算文件的MD5哈希值，并使用LLM（可能是某种语言模型）分析文件内容，提取相关信息（如用途、函数列表、变量列表、类列表、导入语句）。如果文件内容未发生变化，则使用现有的索引信息。\n\n### 函数列表\n1. `calculate_md5(content)`\n   - 用途：计算给定内容的MD5哈希值。\n   - 参数：`content` - 需要计算哈希值的字符串内容。\n   - 返回值：MD5哈希值的十六进制表示。\n\n2. `process_file(file_path, existing_info=None)`\n   - 用途：处理指定文件，计算文件的MD5哈希值，并使用LLM分析文件内容。如果文件内容未发生变化，则返回现有的索引信息。\n   - 参数：\n     - `file_path` - 需要处理的文件路径。\n     - `existing_info` - 现有的索引信息（可选）。\n   - 返回值：包含文件名、符号列表、最后修改时间和MD5哈希值的字典。\n\n3. `analyze_with_llm(content)`\n   - 用途：使用LLM分析给定的代码内容，提取相关信息（如用途、函数列表、变量列表、类列表、导入语句）。\n   - 参数：`content` - 需要分析的代码内容。\n   - 返回值：LLM分析结果的字符串。\n\n### 变量列表\n- `start_time`：记录文件处理开始时间的变量。\n- `content`：读取的文件内容。\n- `md5`：计算得到的文件内容的MD5哈希值。\n- `last_modified`：文件的最后修改时间。\n- `llm_start`：记录LLM分析开始时间的变量。\n- `prompt`：发送给LLM的提示信息。\n- `response`：LLM返回的分析结果。\n\n### 类列表\n该代码文件中没有定义类。\n\n### 导入语句\n1. `import os`\n2. `import hashlib`\n3. `import time`\n4. `import sys`\n5. `sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))`\n6. `from llm.help import get_llm_response`\n7. `from logger import logger`",
+    "last_modified": 1726736286.2814405,
+    "md5": "dcbee20d821f4b4fc83f032634dffccb"
+  },
+  "/Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py": {
+    "module_name": "data_storage.py",
+    "symbols": "### 用途\n该代码文件的主要用途是将数据保存为JSON格式文件。\n\n### 函数列表\n- `save_to_json(data, filename)`\n\n### 变量列表\n- `f`：在函数 `save_to_json` 中用于表示文件对象。\n\n### 类列表\n该代码文件中没有定义类。\n\n### 导入语句\n- `import json`",
+    "last_modified": 1726734094.8238003,
+    "md5": "84dabe7950a6c16071d455846da3224f"
+  },
+  "/Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py": {
+    "module_name": "directory_traversal.py",
+    "symbols": "### 用途\n该代码文件的主要用途是遍历指定目录（`root_path`），并收集该目录及其子目录中以特定文件扩展名（如 `.py`, `.java`, `.js`, `.ts`, `.cpp`, `.c`, `.h`）结尾的文件路径。\n\n### 函数列表\n1. **`traverse_directory(root_path)`**\n   - **参数**: `root_path` (字符串) - 要遍历的根目录路径。\n   - **返回值**: 返回一个包含所有符合条件的文件路径的列表。\n   - **功能**: 遍历指定目录及其子目录，收集以特定文件扩展名结尾的文件路径。\n\n### 变量列表\n1. **`file_list`** (在 `traverse_directory` 函数中)\n   - **类型**: 列表\n   - **用途**: 用于存储符合条件的文件路径。\n\n### 类列表\n该代码文件中没有定义任何类。\n\n### 导入语句\n1. **`import os`**\n   - **用途**: 导入 `os` 模块，用于处理文件和目录路径以及遍历目录。",
+    "last_modified": 1726734089.6191344,
+    "md5": "17b758eae43609e23e788ff85a758a06"
+  },
+  "/Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py": {
+    "module_name": "main.py",
+    "symbols": "### 用途\n该代码文件的主要用途是遍历指定目录中的所有文件，处理这些文件并生成一个索引数据，然后将这些索引数据保存到一个 JSON 文件中。整个过程包括加载现有索引数据、遍历目录、处理文件、保存索引数据，并记录每个步骤的耗时。\n\n### 函数列表\n1. `load_existing_index(index_file)`\n   - 用途：加载现有的索引数据，如果索引文件存在则读取并返回，否则返回一个空字典。\n   - 参数：`index_file` - 索引文件的路径。\n   - 返回值：返回一个字典，包含现有的索引数据。\n\n2. `main()`\n   - 用途：主函数，负责整个程序的流程控制。包括加载现有索引数据、遍历目录、处理文件、保存索引数据，并记录每个步骤的耗时。\n   - 参数：无\n   - 返回值：无\n\n### 变量列表\n1. `start_time` - 记录程序开始的时间。\n2. `repo_path` - 指定要遍历的目录路径。\n3. `index_file` - 索引文件的路径。\n4. `existing_index` - 加载的现有索引数据。\n5. `new_index_data` - 新的索引数据，用于存储处理后的文件信息。\n6. `files` - 遍历目录后得到的文件列表。\n7. `file_path` - 当前处理的文件路径。\n8. `existing_info` - 当前文件的现有索引信息。\n9. `file_info` - 当前文件处理后的信息。\n10. `traverse_start` - 记录遍历目录开始的时间。\n11. `process_start` - 记录处理文件开始的时间。\n12. `save_start` - 记录保存索引数据开始的时间。\n\n### 类列表\n该代码文件中没有定义任何类。\n\n### 导入语句\n1. `import os` - 用于文件和目录操作。\n2. `import json` - 用于处理 JSON 数据。\n3. `import time` - 用于记录时间。\n4. `from directory_traversal import traverse_directory` - 从 `directory_traversal` 模块导入 `traverse_directory` 函数。\n5. `from file_processor import process_file` - 从 `file_processor` 模块导入 `process_file` 函数。\n6. `from data_storage import save_to_json` - 从 `data_storage` 模块导入 `save_to_json` 函数。\n7. `from logger import logger` - 从 `logger` 模块导入 `logger` 实例。\n8. `import sys` - 用于系统相关的操作。",
+    "last_modified": 1726736279.3667722,
+    "md5": "93a48def9dc53655d08efd5c7dfa93f1"
+  }
+}

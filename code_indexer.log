@@ -1,0 +1,6 @@
+2024-09-19 16:29:23,852 - code_indexer - INFO - Processed file: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 16:29:43,360 - code_indexer - INFO - Processed file: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 16:29:47,933 - code_indexer - INFO - Processed file: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 16:30:02,210 - code_indexer - INFO - Processed file: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 16:30:17,858 - code_indexer - INFO - Processed file: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 16:30:17,860 - code_indexer - INFO - Index data saved to index.json

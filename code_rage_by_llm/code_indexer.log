@@ -1,0 +1,202 @@
+2024-09-19 16:35:50,309 - code_indexer - INFO - File unchanged, using existing index: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 16:36:22,252 - code_indexer - INFO - Processed file: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 16:36:22,255 - code_indexer - INFO - File unchanged, using existing index: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 16:36:22,256 - code_indexer - INFO - File unchanged, using existing index: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 16:36:55,003 - code_indexer - INFO - Processed file: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 16:36:55,004 - code_indexer - INFO - Updated index data saved to index.json
+2024-09-19 16:43:42,928 - code_indexer - INFO - Processed file: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 16:43:45,479 - code_indexer - INFO - Processed file: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 16:43:50,703 - code_indexer - INFO - Processed file: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 16:44:07,082 - code_indexer - INFO - Processed file: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 16:44:21,021 - code_indexer - INFO - Processed file: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 16:44:21,024 - code_indexer - INFO - Updated index data saved to index.json
+2024-09-19 16:45:40,587 - code_indexer - INFO - 开始加载现有索引数据
+2024-09-19 16:45:40,587 - code_indexer - INFO - 开始加载现有索引数据
+2024-09-19 16:45:40,587 - code_indexer - INFO - 加载索引数据耗时: 0.00秒
+2024-09-19 16:45:40,587 - code_indexer - INFO - 加载索引数据耗时: 0.00秒
+2024-09-19 16:45:40,588 - code_indexer - INFO - 开始遍历目录
+2024-09-19 16:45:40,588 - code_indexer - INFO - 开始遍历目录
+2024-09-19 16:45:40,588 - code_indexer - INFO - 遍历目录耗时: 0.00秒，共找到 5 个文件
+2024-09-19 16:45:40,588 - code_indexer - INFO - 遍历目录耗时: 0.00秒，共找到 5 个文件
+2024-09-19 16:45:40,590 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 16:45:40,590 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 16:45:40,590 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 16:45:40,590 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 16:45:40,591 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 16:45:40,591 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 16:45:40,591 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 16:45:40,595 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 16:45:40,591 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 16:45:40,595 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 16:45:46,214 - code_indexer - INFO - LLM分析耗时: 5.61秒
+2024-09-19 16:45:46,214 - code_indexer - INFO - LLM分析耗时: 5.61秒
+2024-09-19 16:45:46,214 - code_indexer - INFO - 处理文件总耗时: 5.63秒
+2024-09-19 16:45:46,214 - code_indexer - INFO - 处理文件总耗时: 5.63秒
+2024-09-19 16:45:46,215 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 16:45:46,215 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 16:45:55,724 - code_indexer - INFO - LLM分析耗时: 15.12秒
+2024-09-19 16:45:55,724 - code_indexer - INFO - LLM分析耗时: 15.12秒
+2024-09-19 16:45:55,724 - code_indexer - INFO - 处理文件总耗时: 15.14秒
+2024-09-19 16:45:55,724 - code_indexer - INFO - 处理文件总耗时: 15.14秒
+2024-09-19 16:45:55,724 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 16:45:55,724 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 16:45:55,990 - code_indexer - INFO - LLM分析耗时: 15.38秒
+2024-09-19 16:45:55,990 - code_indexer - INFO - LLM分析耗时: 15.38秒
+2024-09-19 16:45:55,990 - code_indexer - INFO - 处理文件总耗时: 15.40秒
+2024-09-19 16:45:55,990 - code_indexer - INFO - 处理文件总耗时: 15.40秒
+2024-09-19 16:45:55,990 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 16:45:55,990 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 16:46:05,272 - code_indexer - INFO - LLM分析耗时: 24.68秒
+2024-09-19 16:46:05,272 - code_indexer - INFO - LLM分析耗时: 24.68秒
+2024-09-19 16:46:05,272 - code_indexer - INFO - 处理文件总耗时: 24.68秒
+2024-09-19 16:46:05,272 - code_indexer - INFO - 处理文件总耗时: 24.68秒
+2024-09-19 16:46:05,273 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 16:46:05,273 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 16:46:18,294 - code_indexer - INFO - LLM分析耗时: 37.68秒
+2024-09-19 16:46:18,294 - code_indexer - INFO - LLM分析耗时: 37.68秒
+2024-09-19 16:46:18,294 - code_indexer - INFO - 处理文件总耗时: 37.70秒
+2024-09-19 16:46:18,294 - code_indexer - INFO - 处理文件总耗时: 37.70秒
+2024-09-19 16:46:18,295 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 16:46:18,295 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 16:46:18,295 - code_indexer - INFO - 处理所有文件耗时: 37.71秒
+2024-09-19 16:46:18,295 - code_indexer - INFO - 处理所有文件耗时: 37.71秒
+2024-09-19 16:46:18,296 - code_indexer - INFO - 保存索引数据耗时: 0.00秒
+2024-09-19 16:46:18,296 - code_indexer - INFO - 保存索引数据耗时: 0.00秒
+2024-09-19 16:46:18,296 - code_indexer - INFO - 总耗时: 37.71秒
+2024-09-19 16:46:18,296 - code_indexer - INFO - 总耗时: 37.71秒
+2024-09-19 16:49:12,719 - code_indexer - INFO - 开始加载现有索引数据
+2024-09-19 16:49:12,719 - code_indexer - INFO - 开始加载现有索引数据
+2024-09-19 16:49:12,719 - code_indexer - INFO - 加载索引数据耗时: 0.00秒
+2024-09-19 16:49:12,719 - code_indexer - INFO - 加载索引数据耗时: 0.00秒
+2024-09-19 16:49:12,719 - code_indexer - INFO - 开始遍历目录
+2024-09-19 16:49:12,719 - code_indexer - INFO - 开始遍历目录
+2024-09-19 16:49:12,720 - code_indexer - INFO - 遍历目录耗时: 0.00秒，共找到 5 个文件
+2024-09-19 16:49:12,720 - code_indexer - INFO - 遍历目录耗时: 0.00秒，共找到 5 个文件
+2024-09-19 16:49:12,720 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 16:49:12,720 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 16:49:20,304 - code_indexer - INFO - LLM分析耗时: 7.58秒
+2024-09-19 16:49:20,304 - code_indexer - INFO - LLM分析耗时: 7.58秒
+2024-09-19 16:49:20,304 - code_indexer - INFO - 处理文件总耗时: 7.58秒
+2024-09-19 16:49:20,304 - code_indexer - INFO - 处理文件总耗时: 7.58秒
+2024-09-19 16:49:20,304 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 16:49:20,304 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 16:49:20,305 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 16:49:20,305 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 16:49:43,163 - code_indexer - INFO - LLM分析耗时: 22.86秒
+2024-09-19 16:49:43,163 - code_indexer - INFO - LLM分析耗时: 22.86秒
+2024-09-19 16:49:43,163 - code_indexer - INFO - 处理文件总耗时: 22.86秒
+2024-09-19 16:49:43,163 - code_indexer - INFO - 处理文件总耗时: 22.86秒
+2024-09-19 16:49:43,164 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 16:49:43,164 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 16:49:43,164 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 16:49:43,164 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 16:49:48,727 - code_indexer - INFO - LLM分析耗时: 5.56秒
+2024-09-19 16:49:48,727 - code_indexer - INFO - LLM分析耗时: 5.56秒
+2024-09-19 16:49:48,727 - code_indexer - INFO - 处理文件总耗时: 5.56秒
+2024-09-19 16:49:48,727 - code_indexer - INFO - 处理文件总耗时: 5.56秒
+2024-09-19 16:49:48,727 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 16:49:48,727 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 16:49:48,727 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 16:49:48,727 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 16:49:57,434 - code_indexer - INFO - LLM分析耗时: 8.71秒
+2024-09-19 16:49:57,434 - code_indexer - INFO - LLM分析耗时: 8.71秒
+2024-09-19 16:49:57,434 - code_indexer - INFO - 处理文件总耗时: 8.71秒
+2024-09-19 16:49:57,434 - code_indexer - INFO - 处理文件总耗时: 8.71秒
+2024-09-19 16:49:57,434 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 16:49:57,434 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 16:49:57,435 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 16:49:57,435 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 16:50:39,416 - code_indexer - INFO - LLM分析耗时: 41.98秒
+2024-09-19 16:50:39,416 - code_indexer - INFO - LLM分析耗时: 41.98秒
+2024-09-19 16:50:39,416 - code_indexer - INFO - 处理文件总耗时: 41.98秒
+2024-09-19 16:50:39,416 - code_indexer - INFO - 处理文件总耗时: 41.98秒
+2024-09-19 16:50:39,417 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 16:50:39,417 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 16:50:39,417 - code_indexer - INFO - 处理所有文件耗时: 86.70秒
+2024-09-19 16:50:39,417 - code_indexer - INFO - 处理所有文件耗时: 86.70秒
+2024-09-19 16:50:39,417 - code_indexer - INFO - 保存索引数据耗时: 0.00秒
+2024-09-19 16:50:39,417 - code_indexer - INFO - 保存索引数据耗时: 0.00秒
+2024-09-19 16:50:39,418 - code_indexer - INFO - 总耗时: 86.70秒
+2024-09-19 16:50:39,418 - code_indexer - INFO - 总耗时: 86.70秒
+2024-09-19 16:55:27,808 - code_indexer - INFO - 开始加载现有索引数据
+2024-09-19 16:55:27,809 - code_indexer - INFO - 加载索引数据耗时: 0.00秒
+2024-09-19 16:55:27,809 - code_indexer - INFO - 开始遍历目录
+2024-09-19 16:55:27,809 - code_indexer - INFO - 遍历目录耗时: 0.00秒，共找到 5 个文件
+2024-09-19 16:55:27,809 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 16:55:40,432 - code_indexer - INFO - LLM分析耗时: 12.62秒
+2024-09-19 16:55:40,432 - code_indexer - INFO - 处理文件总耗时: 12.62秒
+2024-09-19 16:55:40,432 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 16:55:40,432 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 16:56:11,819 - code_indexer - INFO - LLM分析耗时: 31.39秒
+2024-09-19 16:56:11,819 - code_indexer - INFO - 处理文件总耗时: 31.39秒
+2024-09-19 16:56:11,820 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 16:56:11,820 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 16:56:17,422 - code_indexer - INFO - LLM分析耗时: 5.60秒
+2024-09-19 16:56:17,423 - code_indexer - INFO - 处理文件总耗时: 5.60秒
+2024-09-19 16:56:17,423 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 16:56:17,423 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 16:56:32,921 - code_indexer - INFO - LLM分析耗时: 15.50秒
+2024-09-19 16:56:32,922 - code_indexer - INFO - 处理文件总耗时: 15.50秒
+2024-09-19 16:56:32,922 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 16:56:32,922 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 16:57:07,828 - code_indexer - INFO - LLM分析耗时: 34.91秒
+2024-09-19 16:57:07,828 - code_indexer - INFO - 处理文件总耗时: 34.91秒
+2024-09-19 16:57:07,828 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 16:57:07,828 - code_indexer - INFO - 处理所有文件耗时: 100.02秒
+2024-09-19 16:57:07,829 - code_indexer - INFO - 保存索引数据耗时: 0.00秒
+2024-09-19 16:57:07,829 - code_indexer - INFO - 总耗时: 100.02秒
+2024-09-19 16:58:39,814 - code_indexer - INFO - 开始加载现有索引数据
+2024-09-19 16:58:39,814 - code_indexer - INFO - 加载索引数据耗时: 0.00秒
+2024-09-19 16:58:39,814 - code_indexer - INFO - 开始遍历目录
+2024-09-19 16:58:39,814 - code_indexer - INFO - 遍历目录耗时: 0.00秒，共找到 5 个文件
+2024-09-19 16:58:39,815 - code_indexer - INFO - 文件未变化，使用现有索引: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 16:58:39,815 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 16:58:39,815 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 16:59:11,327 - code_indexer - INFO - LLM分析耗时: 31.51秒
+2024-09-19 16:59:11,327 - code_indexer - INFO - 处理文件总耗时: 31.51秒
+2024-09-19 16:59:11,327 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 16:59:11,328 - code_indexer - INFO - 文件未变化，使用现有索引: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 16:59:11,328 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 16:59:11,328 - code_indexer - INFO - 文件未变化，使用现有索引: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 16:59:11,328 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 16:59:11,328 - code_indexer - INFO - 开始分析文件内容: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 16:59:52,041 - code_indexer - INFO - LLM分析耗时: 40.71秒
+2024-09-19 16:59:52,041 - code_indexer - INFO - 处理文件总耗时: 40.71秒
+2024-09-19 16:59:52,041 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 16:59:52,041 - code_indexer - INFO - 处理所有文件耗时: 72.23秒
+2024-09-19 16:59:52,042 - code_indexer - INFO - 保存索引数据耗时: 0.00秒
+2024-09-19 16:59:52,042 - code_indexer - INFO - 总耗时: 72.23秒
+2024-09-19 17:05:10,533 - code_indexer - INFO - 开始加载现有索引数据
+2024-09-19 17:05:10,534 - code_indexer - INFO - 加载索引数据耗时: 0.00秒
+2024-09-19 17:05:10,534 - code_indexer - INFO - 开始遍历目录
+2024-09-19 17:05:10,534 - code_indexer - INFO - 遍历目录耗时: 0.00秒，共找到 5 个文件
+2024-09-19 17:05:10,535 - code_indexer - INFO - 文件未变化，使用现有索引: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 17:05:10,535 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 17:05:10,535 - code_indexer - INFO - 文件未变化，使用现有索引: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 17:05:10,535 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 17:05:10,536 - code_indexer - INFO - 文件未变化，使用现有索引: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 17:05:10,536 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 17:05:10,537 - code_indexer - INFO - 文件未变化，使用现有索引: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 17:05:10,537 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 17:05:10,537 - code_indexer - INFO - 文件未变化，使用现有索引: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 17:05:10,537 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 17:05:10,537 - code_indexer - INFO - 处理所有文件耗时: 0.00秒
+2024-09-19 17:05:10,538 - code_indexer - INFO - 保存索引数据耗时: 0.00秒
+2024-09-19 17:05:10,538 - code_indexer - INFO - 总耗时: 0.01秒
+2024-09-19 17:05:14,358 - code_indexer - INFO - 开始加载现有索引数据
+2024-09-19 17:05:14,358 - code_indexer - INFO - 加载索引数据耗时: 0.00秒
+2024-09-19 17:05:14,358 - code_indexer - INFO - 开始遍历目录
+2024-09-19 17:05:14,359 - code_indexer - INFO - 遍历目录耗时: 0.00秒，共找到 5 个文件
+2024-09-19 17:05:14,359 - code_indexer - INFO - 文件未变化，使用现有索引: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 17:05:14,359 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/logger.py
+2024-09-19 17:05:14,359 - code_indexer - INFO - 文件未变化，使用现有索引: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 17:05:14,359 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/file_processor.py
+2024-09-19 17:05:14,360 - code_indexer - INFO - 文件未变化，使用现有索引: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 17:05:14,360 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/data_storage.py
+2024-09-19 17:05:14,360 - code_indexer - INFO - 文件未变化，使用现有索引: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 17:05:14,360 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/directory_traversal.py
+2024-09-19 17:05:14,360 - code_indexer - INFO - 文件未变化，使用现有索引: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 17:05:14,360 - code_indexer - INFO - 处理文件完成: /Users/mac/Desktop/gpt_test/code_rage_by_llm/main.py
+2024-09-19 17:05:14,360 - code_indexer - INFO - 处理所有文件耗时: 0.00秒
+2024-09-19 17:05:14,361 - code_indexer - INFO - 保存索引数据耗时: 0.00秒
+2024-09-19 17:05:14,361 - code_indexer - INFO - 总耗时: 0.00秒
