@@ -13,6 +13,16 @@ def load_existing_index(index_file):
             return json.load(f)
     return {}
 
+def get_repo_content(repo_path):
+    content = ""
+    for root, dirs, files in os.walk(repo_path):
+        for file in files:
+            if file.endswith(('.py', '.md', '.txt')):  # 可以根据需要添加更多文件类型
+                file_path = os.path.join(root, file)
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    content += f.read() + "\n\n"
+    return content
+
 def main():
     start_time = time.time()
 
@@ -22,6 +32,10 @@ def main():
     logger.info(f"开始加载现有索引数据")
     existing_index = load_existing_index(index_file)
     logger.info(f"加载索引数据耗时: {time.time() - start_time:.2f}秒")
+
+    logger.info(f"开始获取仓库内容")
+    repo_content = get_repo_content(repo_path)
+    logger.info(f"获取仓库内容耗时: {time.time() - start_time:.2f}秒")
 
     new_index_data = {}
 
@@ -34,7 +48,7 @@ def main():
     for file_path in files:
         try:
             existing_info = existing_index.get(file_path, {})
-            file_info = process_file(file_path, existing_info)
+            file_info = process_file(file_path, existing_info, repo_content)
             new_index_data[file_path] = file_info
             logger.info(f"处理文件完成: {file_path}")
         except Exception as e:

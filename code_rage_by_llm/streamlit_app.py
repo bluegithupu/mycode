@@ -13,6 +13,7 @@ def format_indices(indices):
     formatted = ""
     for file_path, info in indices.items():
         formatted += f"文件路径: {file_path}\n"
+        formatted += f"定位: {info.get('orientation', '未知')}\n"
         symbols = info.get('symbols', {})
         if isinstance(symbols, str):
             formatted += f"符号信息: {symbols}\n\n"
@@ -54,8 +55,8 @@ def get_answer(query, indices):
        - 利用 "导入语句" 信息确定文件间的依赖关系。
        - 如果找到了相关文件，也包括与之直接相关的依赖文件。
 
-    5. 考虑文件用途：
-       - 使用每个文件的 "用途" 信息来判断其与查询的相关性。
+    5. 考虑文件用途和定位：
+       - 使用每个文件的 "用途" 和 "定位" 信息来判断其与查询的相关性。
 
     6. 构建结果：
        - 对于每个相关文件，创建一个TargetFile对象。
