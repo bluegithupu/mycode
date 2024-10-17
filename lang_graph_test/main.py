@@ -5,7 +5,7 @@ from langchain_openai import ChatOpenAI
 
 from langchain_core.tools import tool
 from langgraph.checkpoint import MemorySaver
-from langgraph.graph import END, StateGraph, MessagesState
+from langgraph.graph import START, END, StateGraph, MessagesState
 from langgraph.prebuilt import ToolNode
 
 
@@ -53,6 +53,8 @@ workflow = StateGraph(MessagesState)
 workflow.add_node("agent", call_model)
 workflow.add_node("tools", tool_node)
 
+# add start edges
+workflow.add_edge(START, "agent")
 # Set the entrypoint as `agent`
 # This means that this node is the first one called
 workflow.set_entry_point("agent")
