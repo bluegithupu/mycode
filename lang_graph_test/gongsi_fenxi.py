@@ -12,6 +12,10 @@ from langchain.tools.tavily_search import TavilySearchResults
 os.environ['OPENAI_API_KEY'] = 'sk-cdjsim5KBne5thQJ2bF279E94fEa487aA347A7D85747Af10'
 os.environ['OPENAI_API_BASE'] = 'https://api.rcouyi.com/v1'
 os.environ['TAVILY_API_KEY'] = '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'
+# 添加LangChain追踪配置
+os.environ['LANGCHAIN_TRACING_V2'] = 'true'
+os.environ['LANGCHAIN_API_KEY'] = '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'
+
 
 # 定义分析状态
 class AnalysisState(TypedDict):
@@ -69,7 +73,18 @@ def write_report(state: AnalysisState):
     messages = state['messages'] + [SystemMessage(content=prompt)]
     model = ChatOpenAI(model="gpt-4o-mini", temperature=0)
     response = model.invoke(messages)
-    return {"messages": [AIMessage(content=f"生成的报告:\n{response.content}")], "report": response.content}
+    
+    # 生成文件名
+    filename = f"{state['company']}_{datetime.now().strftime('%Y%m%d')}_report.md"
+    
+    # 将报告写入本地文件
+    with open(filename, 'w', encoding='utf-8') as f:
+        f.write(response.content)
+    
+    return {
+        "messages": [AIMessage(content=f"生成的报告已保存到文件：{filename}\n\n报告内容:\n{response.content}")],
+        "report": response.content
+    }
 
 # 定义图
 workflow = StateGraph(AnalysisState)
@@ -101,9 +116,11 @@ async def run_analysis(company, company_keywords):
             print(message)
         else:
             message.pretty_print()
+            if "生成的报告已保存到文件" in message.content:
+                print("\n" + message.content.split("\n")[0])  # 打印文件保存信息
 
 if __name__ == "__main__":
-    company = "英伟达"
-    company_keywords = "B200"
+    company = "腾讯"
+    company_keywords = "游戏"
     
     asyncio.run(run_analysis(company, company_keywords))
