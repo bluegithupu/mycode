@@ -13,6 +13,7 @@ from langchain_core.pydantic_v1 import BaseModel, Field, conlist
 from langchain_openai import ChatOpenAI
 from langgraph.graph import StateGraph, START, END, add_messages
 
+
 # 在文件顶部添加以下硬编码的 API 密钥
 import os
 os.environ['TAVILY_API_KEY'] = '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'
@@ -21,6 +22,11 @@ os.environ['OPENAI_API_BASE'] = 'https://api.rcouyi.com/v1'
 # PDF生成代码
 import re
 from fpdf import FPDF
+
+import logging
+
+# 设置日志记录器
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class PDF(FPDF):
     def header(self):
@@ -187,15 +193,32 @@ tavily_client = AsyncTavilyClient()
 
 # 定义一个异步自定义研究工具节点,用于存储Tavily的搜索结果,以便更好地处理和后续过滤
 async def tool_node(state: ResearchState):
-    docs = state.get('documents',{})
+    # docs = state.get('documents',{})
 
-    print("Debug - Documents:")
-    for url, doc in docs.items():
-        print("=====================")
-        print(f"URL: {url}")
-        print(f"Title: {doc.get('title', 'N/A')}")
-        print(f"Content: {doc.get('content', 'N/A')[:100]}...")  # 只打印前100个字符
-        print("-" * 50)
+    logging.info("Entering tool_node function")
+    
+    if state is None:
+        logging.error("State is None")
+        return {"messages": [], "documents": {}}
+    
+    logging.debug(f"State keys: {state.keys()}")
+    
+    docs = state.get('documents')
+    logging.info(f"Retrieved documents from state: {type(docs)}")
+    
+    if docs is None:
+        logging.warning("Documents is None, initializing as empty dict")
+        docs = {}
+    
+    logging.debug(f"Documents content: {docs}")
+
+    # print("Debug - Documents:")
+    # for url, doc in docs.items():
+    #     print("=====================")
+    #     print(f"URL: {url}")
+    #     print(f"Title: {doc.get('title', 'N/A')}")
+    #     print(f"Content: {doc.get('content', 'N/A')[:100]}...")  # 只打印前100个字符
+    #     print("-" * 50)
 
     docs_str = ""
     msgs = []
