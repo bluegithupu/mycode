@@ -27,9 +27,16 @@ class AnalysisState(TypedDict):
 
 # 定义搜索节点
 async def search_node(state: AnalysisState):
-    tavily_tool = TavilySearchResults(max_results=5)
-    query = f"{state['company']} {state['company_keywords']} 最新动态"
-    results = await tavily_tool.ainvoke({"query": query})
+    tavily_tool = TavilySearchResults(max_results=3)  # 增加搜索结果数量
+    queries = [
+        f"{state['company']} {state['company_keywords']} 最新动态",
+        f"{state['company']} 财报",
+        f"{state['company']} 行业分析",
+        f"{state['company']} 专家评论"
+    ]
+    results = []
+    for query in queries:
+        results.extend(await tavily_tool.ainvoke({"query": query}))
     
     return {"search_results": results, "messages": [AIMessage(content=f"搜索完成，找到 {len(results)} 条结果。")]}  # Changed here
 
@@ -120,7 +127,7 @@ async def run_analysis(company, company_keywords):
                 print("\n" + message.content.split("\n")[0])  # 打印文件保存信息
 
 if __name__ == "__main__":
-    company = "腾讯"
-    company_keywords = "游戏"
+    company = "片仔癀"
+    company_keywords = "提价 原材料涨价"
     
     asyncio.run(run_analysis(company, company_keywords))
