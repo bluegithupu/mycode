@@ -1,8 +1,0 @@
-
-include_file:
-  - ./base/base.yml
-  - ./base/enable_index.yml
-  - ./base/enable_wholefile.yml    
-
-query: |
-  Help me create a auto_coder_test/server.py in the project root directory, use fastapi, create a /hello endpoint, and return world.

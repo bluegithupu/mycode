@@ -1,8 +1,0 @@
-auto_merge: editblock
-human_as_model: false
-include_file:
-- ./base/base.yml
-query: 在 src 目录下创建app.py, 在该文件中实现一个计算器，使用 gradio 来实现。
-skip_build_index: true
-skip_confirm: true
-urls: []
