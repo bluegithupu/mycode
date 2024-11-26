@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "网页助手",
+  "version": "1.0",
+  "description": "一个简单的Chrome扩展示例",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ]
+} 
