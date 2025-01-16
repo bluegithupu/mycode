@@ -22,9 +22,10 @@ def tavily_search(query):
     }
     
     response = requests.post(url, json=payload, headers=headers)
+    print(response)
     
     if response.status_code == 200:
-        return json.loads(response.text)
+        return json.loads(response.text).get("content", "")
     else:
         return f"Error: {response.status_code}, {response.text}"
 
@@ -57,11 +58,15 @@ def tavily_extract(urls: Union[str, List[str]]):
 
 # 使用示例
 
-# 提取示例
-urls_to_extract = [
-    "https://docs.tavily.com/docs/welcome"
-]  # 您可以提供一个URL列表或单个URL字符串
+# # 提取示例
+# urls_to_extract = [
+#     "https://docs.tavily.com/docs/welcome"
+# ]  # 您可以提供一个URL列表或单个URL字符串
 
-extract_result = tavily_extract(urls_to_extract)
-print("\n提取结果:")
-print(json.dumps(extract_result, indent=2, ensure_ascii=False))
+# extract_result = tavily_extract(urls_to_extract)
+# print("\n提取结果:")
+# print(json.dumps(extract_result, indent=2, ensure_ascii=False))
+
+
+
+print(tavily_search("北京今天的天气?"))
