@@ -1,0 +1,179 @@
+/* styles/Todos.module.css */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.loading,
+.error {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+.todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.todo-item:hover {
+    background: #e9ecef;
+}
+
+.completed {
+    color: #2b8a3e;
+    /* 绿色表示完成 */
+    margin-right: 10px;
+}
+
+.pending {
+    color: #f08c00;
+    /* 橙色表示未完成 */
+    margin-right: 10px;
+}
+
+.todo-title {
+    flex: 1;
+    margin: 0 15px;
+}
+
+.user-id {
+    color: #868e96;
+    font-size: 0.9rem;
+}
+
+.todo-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.todo-table th,
+.todo-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border: 1px solid #e0e0e0;
+}
+
+.todo-table th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+    color: #333;
+}
+
+.todo-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.todo-table td:first-child {
+    width: 60px;
+    text-align: center;
+}
+
+.todo-table td:last-child {
+    width: 80px;
+    text-align: center;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.addButton {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.addButton:hover {
+    background-color: #45a049;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+}
+
+.modalContent h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.formGroup {
+    margin-bottom: 15px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.formGroup input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.formActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.formActions button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.formActions button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.formActions button[type="button"] {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.formActions button:hover {
+    opacity: 0.9;
+}
