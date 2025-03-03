@@ -1,1 +1,6 @@
+---
+description: repo全局指南
+globs: *
+alwaysApply: false
+---
 这是一个混合的repo，每个文件夹都是一个练习项目
