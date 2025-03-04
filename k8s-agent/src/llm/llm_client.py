@@ -8,6 +8,7 @@ from typing import Dict, List, Optional
 
 from openai import OpenAI
 from dotenv import load_dotenv
+from ..k8s.k8s_client import K8sClient
 
 load_dotenv()
 
@@ -28,6 +29,10 @@ class LLMClient:
         self.client = OpenAI(api_key=self.api_key,
                              base_url=self.base_url if self.base_url else None)
 
+        # 获取kubectl帮助文档
+        self.k8s_client = K8sClient()
+        self.kubectl_help = self.k8s_client.kubectl_help
+
         print(f"API Key: {self.api_key}")
         print(f"Base URL: {self.base_url}")
         print(f"Model: {self.model}")
@@ -45,6 +50,10 @@ class LLMClient:
         """分析用户输入，生成kubectl命令"""
         prompt = f"""
         作为一个Kubernetes运维专家，请分析以下用户需求，并生成相应的kubectl命令。
+        请参考以下kubectl帮助文档来确保生成的命令是正确的：
+
+        {self.kubectl_help}
+
         直接返回一个JSON对象（不要包含markdown格式），格式如下：
         {{
             "command": "具体的kubectl命令",

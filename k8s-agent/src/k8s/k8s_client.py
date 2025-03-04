@@ -18,6 +18,24 @@ class K8sClient:
         self.allowed_commands = json.loads(
             os.getenv("ALLOWED_COMMANDS", '["get", "describe", "logs"]'))
         self.max_retries = int(os.getenv("MAX_RETRIES", "3"))
+        # 初始化时获取帮助文档
+        self.kubectl_help = self.get_kubectl_help()
+
+    def get_kubectl_help(self) -> str:
+        """获取kubectl帮助文档"""
+        try:
+            result = subprocess.run(
+                "kubectl --help",
+                shell=True,
+                capture_output=True,
+                text=True,
+                timeout=10
+            )
+            if result.returncode == 0:
+                return result.stdout
+            return "无法获取kubectl帮助文档"
+        except Exception as e:
+            return f"获取kubectl帮助文档失败: {str(e)}"
 
     def execute_command(self, command: str) -> Dict:
         """执行kubectl命令"""
