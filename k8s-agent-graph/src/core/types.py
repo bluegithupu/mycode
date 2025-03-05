@@ -30,6 +30,20 @@ class ResultAnalysis(BaseModel):
     suggestions: str
 
 
+class ChatMessage(BaseModel):
+    """聊天消息"""
+    role: str  # system/user/assistant
+    content: str
+
+
+class ChatSession(BaseModel):
+    """聊天会话"""
+    messages: List[ChatMessage]
+    last_command: Optional[str] = None
+    last_result: Optional[ExecutionResult] = None
+    last_analysis: Optional[ResultAnalysis] = None
+
+
 class AgentState(TypedDict):
     """工作流状态定义"""
     # 输入状态
@@ -52,3 +66,6 @@ class AgentState(TypedDict):
     # 重试相关
     retry_count: Optional[int]
     max_retries: Optional[int]
+
+    # 会话相关
+    chat_session: Optional[ChatSession]

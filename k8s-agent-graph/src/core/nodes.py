@@ -4,7 +4,7 @@
 from typing import Dict, Annotated
 import traceback
 from langgraph.graph import StateGraph, END
-from .types import AgentState
+from .types import AgentState, ChatMessage, ChatSession
 from ..k8s.k8s_client import K8sClient
 from ..llm.llm_client import LLMClient
 from ..utils.logger import setup_logger
@@ -24,9 +24,55 @@ def analyze_command(state: AgentState) -> AgentState:
     """分析用户输入，生成kubectl命令"""
     logger.info("开始分析用户输入...")
     try:
-        logger.debug(f"用户输入: {state.get('user_input')}")
+        user_input = state["user_input"]
+        chat_session = state.get("chat_session")
+
+        # 构建完整的输入上下文
+        context_parts = []
+
+        # 添加历史命令和结果信息
+        if chat_session:
+            if chat_session.last_command:
+                context_parts.append(f"上一次执行的命令: {chat_session.last_command}")
+
+            if chat_session.last_result:
+                result_text = chat_session.last_result.stdout if chat_session.last_result.success else chat_session.last_result.stderr
+                context_parts.append(
+                    f"上一次执行结果: {'成功' if chat_session.last_result.success else '失败'}")
+                context_parts.append(f"输出内容: {result_text[:200]}...")  # 限制输出长度
+
+            if chat_session.last_analysis:
+                context_parts.append(
+                    f"上一次分析结果: {chat_session.last_analysis.analysis}")
+                if chat_session.last_analysis.suggestions:
+                    context_parts.append(
+                        f"改进建议: {chat_session.last_analysis.suggestions}")
+
+            # 添加最近的对话历史
+            if chat_session.messages:
+                recent_messages = []
+                for msg in chat_session.messages[-4:]:  # 只取最近4条消息
+                    if msg.role == "user":
+                        recent_messages.append(f"用户: {msg.content}")
+                    else:
+                        # 对助手消息进行简化，只保留关键信息
+                        content = msg.content.split(
+                            '\n')[0] if '\n' in msg.content else msg.content
+                        recent_messages.append(f"助手: {content}")
+                if recent_messages:
+                    context_parts.append("最近的对话:")
+                    context_parts.extend(recent_messages)
+
+        # 构建完整输入
+        if context_parts:
+            full_input = "历史上下文:\n" + \
+                "\n".join(context_parts) + "\n\n当前输入:\n" + user_input
+        else:
+            full_input = user_input
+
+        logger.debug(f"完整输入上下文: {full_input}")
         command_analysis = llm_client.analyze_command(
-            state["user_input"],
+            full_input,
             state["kubectl_help"]
         )
         logger.info(f"命令分析完成: {command_analysis}")
@@ -225,6 +271,90 @@ def prepare_retry(state: AgentState) -> AgentState:
         return {"error": error_msg}
 
 
+def handle_followup(state: AgentState) -> AgentState:
+    """处理追问"""
+    logger.info("开始处理追问...")
+    try:
+        # 获取用户输入和会话状态
+        user_input = state["user_input"]
+        chat_session = state["chat_session"]
+
+        # 生成回答
+        try:
+            answer = llm_client.answer_followup(
+                user_input,
+                chat_session.last_command,
+                chat_session.last_result,
+                chat_session.last_analysis
+            )
+        except Exception as e:
+            logger.error(f"生成回答失败: {str(e)}")
+            answer = "抱歉，我暂时无法回答这个问题。请稍后再试或换个方式提问。"
+
+        # 更新会话状态
+        chat_session.messages.append(
+            ChatMessage(role="user", content=user_input))
+        chat_session.messages.append(
+            ChatMessage(role="assistant", content=answer))
+
+        return {
+            "chat_session": chat_session,
+            "followup_answer": answer
+        }
+
+    except Exception as e:
+        error_msg = f"处理追问失败: {str(e)}\n{traceback.format_exc()}"
+        logger.error(error_msg)
+        return {"error": error_msg}
+
+
+def update_chat_session(state: AgentState) -> AgentState:
+    """更新会话状态"""
+    logger.info("开始更新会话状态...")
+    try:
+        # 获取当前状态
+        user_input = state["user_input"]
+        command_analysis = state.get("command_analysis")
+        execution_result = state.get("execution_result")
+        result_analysis = state.get("result_analysis")
+
+        # 获取或创建会话
+        chat_session = state.get("chat_session") or ChatSession(messages=[])
+
+        # 更新会话状态
+        chat_session.last_command = command_analysis.command if command_analysis else None
+        chat_session.last_result = execution_result
+        chat_session.last_analysis = result_analysis
+
+        # 添加消息记录
+        chat_session.messages.append(
+            ChatMessage(role="user", content=user_input))
+
+        # 构建助手回复
+        if command_analysis and result_analysis:
+            try:
+                assistant_content = (
+                    f"命令: {command_analysis.command}\n"
+                    f"分析: {result_analysis.analysis}\n"
+                    f"建议: {result_analysis.suggestions}"
+                )
+            except Exception as e:
+                logger.error(f"构建助手回复失败: {str(e)}")
+                assistant_content = "抱歉，处理结果时出现错误。请重试或换个方式提问。"
+        else:
+            assistant_content = "抱歉，无法处理这个命令。请重试或换个方式提问。"
+
+        chat_session.messages.append(
+            ChatMessage(role="assistant", content=assistant_content))
+
+        return {"chat_session": chat_session}
+
+    except Exception as e:
+        error_msg = f"更新会话状态失败: {str(e)}\n{traceback.format_exc()}"
+        logger.error(error_msg)
+        return {"error": error_msg}
+
+
 def create_workflow() -> StateGraph:
     """创建工作流图"""
     logger.info("开始创建工作流...")
@@ -239,12 +369,13 @@ def create_workflow() -> StateGraph:
         workflow.add_node("execute", execute_command)
         workflow.add_node("analyze_result", analyze_result)
         workflow.add_node("prepare_retry", prepare_retry)
+        workflow.add_node("update_chat_session", update_chat_session)
+        workflow.add_node("handle_followup", handle_followup)
 
         # 设置边和条件
         workflow.add_edge("analyze", "check_safety")
         workflow.add_edge("check_safety", "validate")
 
-        # 添加条件路由
         workflow.add_conditional_edges(
             "validate",
             should_execute,
@@ -255,24 +386,26 @@ def create_workflow() -> StateGraph:
         )
 
         workflow.add_edge("execute", "analyze_result")
+        workflow.add_edge("analyze_result", "update_chat_session")
 
-        # 添加重试条件路由
-        workflow.add_conditional_edges(
-            "analyze_result",
-            should_retry,
-            {
-                "retry": "prepare_retry",
-                "end": END
-            }
-        )
+        # workflow.add_conditional_edges(
+        #     "analyze_result",
+        #     should_retry,
+        #     {
+        #         "retry": "prepare_retry",
+        #         "end": END
+        #     }
+        # )
 
         workflow.add_edge("prepare_retry", "analyze")
+        workflow.add_edge("handle_followup", END)
 
         # 设置入口
         workflow.set_entry_point("analyze")
 
         logger.info("工作流创建完成")
         return workflow.compile()
+
     except Exception as e:
         error_msg = f"工作流创建失败: {str(e)}\n{traceback.format_exc()}"
         logger.error(error_msg)

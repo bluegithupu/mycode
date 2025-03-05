@@ -7,8 +7,10 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.text import Text
 from rich.table import Table
+from rich.prompt import Prompt
 
 from src.core.nodes import create_workflow, k8s_client
+from src.core.types import ChatSession
 from src.utils.logger import setup_logger
 
 # 设置日志记录器
@@ -41,7 +43,44 @@ def run(command):
     asyncio.run(_run_async(command))
 
 
-async def _run_async(command):
+@cli.command()
+def chat():
+    """进入交互式对话模式"""
+    console.print(Panel(
+        Text("进入交互式对话模式\n输入 exit 退出", style="bold blue"),
+        title="K8s-Agent Chat",
+        border_style="blue"
+    ))
+
+    # 创建会话
+    chat_session = ChatSession(messages=[])
+
+    while True:
+        try:
+            # 获取用户输入
+            user_input = Prompt.ask("\n[bold blue]>>[/bold blue]")
+
+            # 检查是否退出
+            if user_input.lower() == "exit":
+                console.print("[bold blue]再见！[/bold blue]")
+                break
+
+            # 执行命令
+            asyncio.run(_run_async(user_input, chat_session))
+
+        except KeyboardInterrupt:
+            console.print("\n[bold blue]再见！[/bold blue]")
+            break
+        except Exception as e:
+            logger.exception("对话过程中发生错误")
+            console.print(Panel(
+                Text(str(e), style="bold red"),
+                title="错误",
+                border_style="red"
+            ))
+
+
+async def _run_async(command: str, chat_session: ChatSession = None):
     """异步执行Kubernetes运维命令"""
     logger.info(f"接收到命令执行请求: {command}")
     try:
@@ -53,7 +92,8 @@ async def _run_async(command):
             "user_input": command,
             "kubectl_help": k8s_client.kubectl_help,
             "metadata": {},
-            "error": None
+            "error": None,
+            "chat_session": chat_session
         }
 
         # 执行工作流
@@ -66,6 +106,16 @@ async def _run_async(command):
                 Text(result["error"], style="bold red"),
                 title="执行失败",
                 border_style="red"
+            ))
+            return
+
+        # 如果是追问，显示回答
+        if result.get("followup_answer"):
+            logger.info("显示追问回答")
+            console.print(Panel(
+                Text(result["followup_answer"], style="bold green"),
+                title="回答",
+                border_style="blue"
             ))
             return
 
