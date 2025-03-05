@@ -46,7 +46,8 @@ class K8sClient:
             command = command[7:].strip()
 
         # 构建完整命令
-        full_command = f"kubectl {command} --kubeconfig {self.kubeconfig}"
+        # full_command = f"kubectl {command} --kubeconfig {self.kubeconfig}"
+        full_command = f"kubectl {command}"
 
         try:
             # 执行命令

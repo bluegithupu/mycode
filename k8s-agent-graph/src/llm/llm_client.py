@@ -47,6 +47,9 @@ class LLMClient:
 
         {kubectl_help}
 
+        注意:
+        1. 对于get类命令,未明确namespace的用户输入,默认使用 --all-namespaces 参数,并使用grep命令来筛查，eg： kubectl get pods --all-namespaces | grep "[pod_name]"
+
         直接返回一个JSON对象（不要包含markdown格式），格式如下：
         {{
             "command": "具体的kubectl命令",

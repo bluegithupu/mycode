@@ -48,3 +48,7 @@ class AgentState(TypedDict):
 
     # 元数据
     metadata: Dict
+
+    # 重试相关
+    retry_count: Optional[int]
+    max_retries: Optional[int]

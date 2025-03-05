@@ -170,6 +170,61 @@ def should_execute(state: AgentState) -> str:
     return "execute"
 
 
+def should_retry(state: AgentState) -> str:
+    """决定是否需要重试"""
+    logger.debug("检查是否需要重试...")
+
+    # 获取结果分析
+    result_analysis = state.get("result_analysis")
+    if not result_analysis:
+        logger.warning("未找到结果分析，终止执行")
+        return "end"
+
+    # 检查执行状态
+    if result_analysis.status != "error":
+        logger.info("执行成功或警告，无需重试")
+        return "end"
+
+    # 检查重试次数
+    retry_count = state.get("retry_count", 0)
+    max_retries = state.get("max_retries", 3)
+
+    if retry_count >= max_retries:
+        logger.warning(f"已达到最大重试次数 {max_retries}，终止执行")
+        return "end"
+
+    logger.info(f"准备进行第 {retry_count + 1} 次重试")
+    return "retry"
+
+
+def prepare_retry(state: AgentState) -> AgentState:
+    """准备重试状态"""
+    logger.info("准备重试状态...")
+    try:
+        # 增加重试计数
+        retry_count = state.get("retry_count", 0) + 1
+
+        # 获取原始用户输入和建议
+        original_input = state.get("user_input", "")
+        suggestions = state.get("result_analysis").suggestions
+        analysis = state.get("result_analysis").analysis
+
+        # 构建新的用户输入
+        new_input = f"{original_input}\n[重试 {retry_count}] 根据建议: {suggestions}\n[分析结果] {analysis}"
+
+        # 更新状态
+        return {
+            "user_input": new_input,
+            "kubectl_help": state["kubectl_help"],
+            "retry_count": retry_count,
+            "max_retries": state.get("max_retries", 3)
+        }
+    except Exception as e:
+        error_msg = f"准备重试状态失败: {str(e)}\n{traceback.format_exc()}"
+        logger.error(error_msg)
+        return {"error": error_msg}
+
+
 def create_workflow() -> StateGraph:
     """创建工作流图"""
     logger.info("开始创建工作流...")
@@ -183,6 +238,7 @@ def create_workflow() -> StateGraph:
         workflow.add_node("validate", validate_command)
         workflow.add_node("execute", execute_command)
         workflow.add_node("analyze_result", analyze_result)
+        workflow.add_node("prepare_retry", prepare_retry)
 
         # 设置边和条件
         workflow.add_edge("analyze", "check_safety")
@@ -199,7 +255,18 @@ def create_workflow() -> StateGraph:
         )
 
         workflow.add_edge("execute", "analyze_result")
-        workflow.add_edge("analyze_result", END)
+
+        # 添加重试条件路由
+        workflow.add_conditional_edges(
+            "analyze_result",
+            should_retry,
+            {
+                "retry": "prepare_retry",
+                "end": END
+            }
+        )
+
+        workflow.add_edge("prepare_retry", "analyze")
 
         # 设置入口
         workflow.set_entry_point("analyze")
